@@ -27,20 +27,230 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        <title>Hello MacJack</title>
+        <style>
+          canvas {
+            transform-origin: 0 0;
+            transform: scale(0.5,0.5);
+            /* a double-sized pixi canvas scaled to the screen looks better
+             * than a normal-sized canvas with no scaling */
+          }
+        </style>
     </head>
     <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+        <script src="cordova.js"></script>
+        <!-- <script type="text/javascript" src="js/index.js"></script> -->
+
+        <script src="js/lib/pixi.js"></script>
+        <script>
+//app.initialize();
+
+function Card(rank, suit) {
+  var card = this;
+  this.rank = rank;
+  this.suit = suit;
+  this.texture = PIXI.Texture.fromImage("img/minCards/"+rank+"_"+suit+".png");
+  this.sprite = new PIXI.Sprite(this.texture);
+  this.sprite.anchor.x = 0.5;
+  this.sprite.anchor.y = 0.5;
+  this.sprite.scale.x = 0.5;
+  this.sprite.scale.y = 0.5;
+
+  // null, hand, board, etc.
+  this.boardLocation = "null";
+  this.sprite.visible = false;
+
+  this.moveToHand = function() {
+    this.boardLocation = "hand";
+    this.sprite.visible = true;
+    this.sprite.scale.x = 0.5;
+    this.sprite.scale.y = 0.5;
+    this.sprite.interactive = true; // todo: only on player turn
+
+  }
+
+  this.moveToBoard = function() {
+    this.boardLocation = "board";
+    this.sprite.visible = true;
+    this.sprite.anchor.x = 0.5;
+    this.sprite.anchor.y = 0.5;
+    this.sprite.position.x = window.innerWidth*0.750;
+    this.sprite.position.y = window.innerHeight*0.200;
+    this.sprite.scale.x = 0.3;
+    this.sprite.scale.y = 0.3;
+    this.sprite.rotation = 0;
+    this.sprite.interactive = false;
+  }
+
+  this.moveToNull = function() {
+    this.boardLocation = "null";
+    this.sprite.visible = false;
+    this.sprite.interactive = false;
+  }
+
+  this.sprite.tap = function(touchData){
+    console.log("TAP!");
+    console.log(card);
+    socket.emit("playCard", {rank: card.rank,suit: card.suit});
+  }
+
+  this.toString = function() {
+    return this.rank + " of " + this.suit;
+  }
+
+}
+
+var allCards = [];
+var playerHand = [];
+var topCard = null;
+var stage = null;
+var socket = null;
+
+function findCard(rank, suit) {
+  //search for card
+  for(c = 0; c < allCards.length; c++) {
+    if (allCards[c].rank === rank && allCards[c].suit === suit) {
+      return allCards[c];
+    }
+  }
+};
+
+function handPosRecalc(hand) {
+  //posInitial = window.innerWidth*0.20;
+  //posOffset = window.innerWidth*0.15;
+
+  rotInitial = -0.25;
+  rotOffset = 0.08;
+
+  cardWidth = hand[0].sprite.width;
+  cardHeight = hand[0].sprite.height;
+
+  for(c = 0; c < hand.length; c++) {
+
+    //remove and re-add sprite to ensure it's rendered last
+    stage.removeChild(hand[c].sprite);
+    stage.addChild(hand[c].sprite);
+
+    hand[c].sprite.anchor.x = 0;
+    hand[c].sprite.anchor.y = 2;
+
+    hand[c].sprite.position.x = cardWidth*0.75;
+    hand[c].sprite.position.y = window.innerHeight+cardHeight;
+
+    hand[c].sprite.rotation = rotInitial+(c*rotOffset);
+  }
+};
+
+
+document.addEventListener('deviceready', function() {
+
+  // create an new instance of a pixi stage
+  var interactive = true
+  stage = new PIXI.Stage(0x66FF99, interactive);
+
+  // create a renderer instance.
+  var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {resolution:2});
+
+  // add the renderer view element to the DOM
+  document.body.appendChild(renderer.view);
+
+  requestAnimFrame( animate );
+
+  suits = ["spades", "clubs", "hearts", "diamonds"];
+  ranks = ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"];
+
+  // create all the cards
+  for (s = 0; s < suits.length; s++) {
+    for (r = 0; r < ranks.length; r++) {
+      card = new Card(ranks[r], suits[s])
+      allCards.push(card);
+      stage.addChild(card.sprite);
+    }
+  }
+
+  socket.on('drawnCard', function(drawnCard) {
+    console.log(drawnCard);
+    card = findCard(drawnCard.rank, drawnCard.suit);
+    card.moveToHand();
+    playerHand.push(card);
+    handPosRecalc(playerHand);
+  });
+
+
+  socket.on('playedCard', function(playedCard) {
+    console.log("playedCard:" + playedCard);
+    card = findCard(playedCard.rank, playedCard.suit);
+    console.log("card found");
+    card.moveToBoard();
+    idx = playerHand.indexOf(card);
+    if (idx > -1) {
+      // card found
+      playerHand.splice(idx, 1);
+
+      if (topCard) {
+        topCard.moveToNull(); // hide previous top card
+      }
+      topCard = card;
+    }
+  });
+
+
+  socket.on("Error", function(message) {
+    console.log("Error: " + message);
+  });
+
+  // create button to draw new cards
+  deckButtonTexture = PIXI.Texture.fromImage("img/minCards/card_back.png");
+  deckButtonSprite = new PIXI.Sprite(deckButtonTexture);
+
+  deckButtonSprite.scale.x = 0.3;
+  deckButtonSprite.scale.y = 0.3;
+
+  deckButtonSprite.anchor.x = 0.5;
+  deckButtonSprite.anchor.y = 0.5;
+
+  deckButtonSprite.position.x = window.innerWidth*0.250;
+  deckButtonSprite.position.y = window.innerHeight*0.200;
+
+  deckButtonSprite.interactive = true;
+  stage.addChild(deckButtonSprite);
+
+  /*
+  deckButtonSprite.touchstart = function(touchData){
+    console.log("TOUCH START!");
+  }
+
+  deckButtonSprite.touchend = function(touchData){
+    console.log("TOUCH END!");
+  }
+  */
+
+  deckButtonSprite.tap = function(touchData){
+    console.log("TAP!");
+    socket.emit("draw");
+  }
+
+
+
+  function animate() {
+
+    requestAnimFrame( animate );
+
+    // put anything that needs to be animated in here
+
+    // render the stage
+    renderer.render(stage);
+  }
+
+});
+
+
+</script>
+
+<script src="js/lib/socket.io-1.2.1.js"></script>
+<script>
+  // create a socket object pointing to an instance of macjack-server
+  socket = io('http://141.140.175.105:8080');
+</script>
+</body>
 </html>
