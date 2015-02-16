@@ -12,3 +12,6 @@ gen
 out
 # Gradle builds
 /build
+
+# Generated assets
+/assets/www
