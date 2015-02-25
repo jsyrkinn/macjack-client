@@ -32,58 +32,24 @@
 
     </head>
     <body>
-        <script src="cordova.js"></script>
+        <script src="cordova.js"></script> 
         <!-- <script type="text/javascript" src="js/index.js"></script> -->
         <script src="js/models/card.js"></script>
         <script src="js/models/gameState.js"></script>
 
+
         <script src="js/lib/pixi.js"></script>
+        <script src="js/views/playerHand.js"></script>
+        <script src="js/views/init.js"></script>
+        <script src="js/controllers/moves.js"></script>
+
         <script>
 //app.initialize();
 
-var stage = null;
-
-function handPosRecalc(hand) {
-  //posInitial = window.innerWidth*0.20;
-  //posOffset = window.innerWidth*0.15;
-
-  rotInitial = -0.25;
-  rotOffset = 0.08;
-
-  cardWidth = hand[0].sprite.width;
-  cardHeight = hand[0].sprite.height;
-
-  for(c = 0; c < hand.length; c++) {
-
-    //remove and re-add sprite to ensure it's rendered last
-    stage.removeChild(hand[c].sprite);
-    stage.addChild(hand[c].sprite);
-
-    hand[c].sprite.anchor.x = 0;
-    hand[c].sprite.anchor.y = 2;
-
-    hand[c].sprite.position.x = cardWidth*0.75;
-    hand[c].sprite.position.y = window.innerHeight+cardHeight;
-
-    hand[c].sprite.rotation = rotInitial+(c*rotOffset);
-  }
-};
 
 
-document.addEventListener('deviceready', function() {
 
-  // create an new instance of a pixi stage
-  var interactive = true
-  stage = new PIXI.Stage(0x66FF99, interactive);
-
-  // create a renderer instance.
-  var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {resolution:2});
-
-  // add the renderer view element to the DOM
-  document.body.appendChild(renderer.view);
-
-  requestAnimFrame( animate );
-
+//change to number code later
   suits = ["spades", "clubs", "hearts", "diamonds"];
   ranks = ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"];
 
@@ -96,53 +62,7 @@ document.addEventListener('deviceready', function() {
     }
   }
 
-  socket.on('drawnCard', function(drawnCard) {
-    console.log(drawnCard);
-    card = findCard(drawnCard.rank, drawnCard.suit);
-    card.moveToHand();
-    playerHand.push(card);
-    handPosRecalc(playerHand);
-  });
-
-
-  socket.on('playedCard', function(playedCard) {
-    console.log("playedCard:" + playedCard);
-    card = findCard(playedCard.rank, playedCard.suit);
-    console.log("card found");
-    card.moveToBoard();
-    idx = playerHand.indexOf(card);
-    if (idx > -1) {
-      // card found
-      playerHand.splice(idx, 1);
-
-      if (topCard) {
-        topCard.moveToNull(); // hide previous top card
-      }
-      topCard = card;
-    }
-  });
-
-
-  socket.on("Error", function(message) {
-    console.log("Error: " + message);
-  });
-
-  // create button to draw new cards
-  deckButtonTexture = PIXI.Texture.fromImage("img/minCards/card_back.png");
-  deckButtonSprite = new PIXI.Sprite(deckButtonTexture);
-
-  deckButtonSprite.scale.x = 0.3;
-  deckButtonSprite.scale.y = 0.3;
-
-  deckButtonSprite.anchor.x = 0.5;
-  deckButtonSprite.anchor.y = 0.5;
-
-  deckButtonSprite.position.x = window.innerWidth*0.250;
-  deckButtonSprite.position.y = window.innerHeight*0.200;
-
-  deckButtonSprite.interactive = true;
-  stage.addChild(deckButtonSprite);
-
+ 
   /*
   deckButtonSprite.touchstart = function(touchData){
     console.log("TOUCH START!");
@@ -178,7 +98,7 @@ document.addEventListener('deviceready', function() {
 <script src="js/lib/socket.io-1.2.1.js"></script>
 <script>
   // create a socket object pointing to an instance of macjack-server
-  socket = io('http://141.140.179.117:8080');
+  socket = io('http://141.140.159.120:8080');
 </script>
 </body>
 </html>
