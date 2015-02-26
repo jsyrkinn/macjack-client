@@ -32,13 +32,18 @@
 
     </head>
     <body>
-        <script src="cordova.js"></script> 
+        <script src="cordova.js"></script>
+        <script src="js/lib/socket.io-1.2.1.js"></script>
+        <script>
+          // create a socket object pointing to an instance of macjack-server
+          socket = io('http://141.140.159.120:8080');
+        </script>
+
+        <script src="js/lib/pixi.js"></script>
         <!-- <script type="text/javascript" src="js/index.js"></script> -->
         <script src="js/models/card.js"></script>
         <script src="js/models/gameState.js"></script>
 
-
-        <script src="js/lib/pixi.js"></script>
         <script src="js/views/playerHand.js"></script>
         <script src="js/views/init.js"></script>
         <script src="js/controllers/moves.js"></script>
@@ -62,7 +67,7 @@
     }
   }
 
- 
+
   /*
   deckButtonSprite.touchstart = function(touchData){
     console.log("TOUCH START!");
@@ -72,33 +77,8 @@
     console.log("TOUCH END!");
   }
   */
-
-  deckButtonSprite.tap = function(touchData){
-    console.log("TAP!");
-    socket.emit("draw");
-  }
-
-
-
-  function animate() {
-
-    requestAnimFrame( animate );
-
-    // put anything that needs to be animated in here
-
-    // render the stage
-    renderer.render(stage);
-  }
-
-});
-
-
+  
 </script>
 
-<script src="js/lib/socket.io-1.2.1.js"></script>
-<script>
-  // create a socket object pointing to an instance of macjack-server
-  socket = io('http://141.140.159.120:8080');
-</script>
 </body>
 </html>

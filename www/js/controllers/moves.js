@@ -33,7 +33,7 @@
 
   // create button to draw new cards
   deckButtonTexture = PIXI.Texture.fromImage("img/minCards/card_back.png");
-  deckButtonSprite = new PIXI.Sprite(deckButtonTexture);
+  var deckButtonSprite = new PIXI.Sprite(deckButtonTexture);
 
   deckButtonSprite.scale.x = 0.3;
   deckButtonSprite.scale.y = 0.3;
@@ -46,3 +46,8 @@
 
   deckButtonSprite.interactive = true;
   stage.addChild(deckButtonSprite);
+
+  deckButtonSprite.tap = function(touchData){
+    console.log("TAP!");
+    socket.emit("draw");
+  }

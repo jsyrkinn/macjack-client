@@ -2,7 +2,7 @@
 
 var stage = null;
 
-document.addEventListener('deviceready', function() {
+// document.addEventListener('deviceready', function() {
 
   // create an new instance of a pixi stage
   var interactive = true
@@ -15,3 +15,16 @@ document.addEventListener('deviceready', function() {
   document.body.appendChild(renderer.view);
 
   requestAnimFrame( animate );
+
+
+  function animate() {
+
+    requestAnimFrame( animate );
+
+    // put anything that needs to be animated in here
+
+    // render the stage
+    renderer.render(stage);
+  }
+
+//});
