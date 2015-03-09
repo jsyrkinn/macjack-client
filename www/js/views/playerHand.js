@@ -1,5 +1,11 @@
 
 
+
+
+
+
+
+
 function handPosRecalc(hand) {
   //posInitial = window.innerWidth*0.20;
   //posOffset = window.innerWidth*0.15;
