@@ -8,13 +8,6 @@ function TouchHandler() {
 
   stage.addChild(this.touchHandler);
 
-/*
-  this.touchHandler.tap = function(touchData) {
-    console.log(touchData);
-    console.log("OMG hit")
-  }
-*/
-
   this.touchHandler.touchstart = function(touchData) {
     this.startX = touchData.global.x;
     this.startY = touchData.global.y;
