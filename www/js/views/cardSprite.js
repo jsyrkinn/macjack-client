@@ -1,18 +1,17 @@
-function Card(rank, suit) {
-  var card = this;
-  this.rank = rank;
-  this.suit = suit;
-  this.texture = PIXI.Texture.fromImage("img/minCards/" + rank + "_" + suit + ".png");
-  this.sprite = new PIXI.Sprite(this.texture);
+function CardSprite(card) {
+  this.rank = card.rank;
+  this.suit = card.suit;
+  this.sprite = new PIXI.Sprite.fromImage("img/minCards/" + this.rank + "_" + this.suit + ".png");
   this.sprite.anchor.x = 0.5;
   this.sprite.anchor.y = 0.5;
   this.sprite.scale.x = 0.5;
   this.sprite.scale.y = 0.5;
 
-  // null, hand, board, etc.
-  this.boardLocation = "null";
-  this.sprite.visible = false;
+  this.sprite.visible = true;
 
+  stage.addChild(this.sprite);
+
+/*
   this.moveToHand = function() {
     this.boardLocation = "hand";
     this.sprite.visible = true;
@@ -40,6 +39,7 @@ function Card(rank, suit) {
     this.sprite.visible = false;
     this.sprite.interactive = false;
   }
+  */
 
   this.sprite.tap = function(touchData){
     console.log("TAP!");
@@ -47,6 +47,7 @@ function Card(rank, suit) {
     socket.emit("playCard", {rank: card.rank,suit: card.suit});
   }
 
+  //TODO: change this after ranks are changed to integers
   this.toString = function() {
     return this.rank + " of " + this.suit;
   }
