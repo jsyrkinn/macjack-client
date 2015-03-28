@@ -21,6 +21,9 @@ function TouchHandler() {
     var dist = Math.abs(endX-this.startX);
     if (dist < 10) {
       console.log("OMG hit")
+      playerPile.push(deck.drawCard());
+      player.renderPile();
+      text.setText("Sum: " + playerPile.sumTotal());
     }
     else if (dist > 60) {
       console.log("OMG stay")

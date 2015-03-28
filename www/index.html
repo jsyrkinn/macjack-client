@@ -41,9 +41,11 @@
 
         <script src="js/lib/pixi.js"></script>
         <!-- <script type="text/javascript" src="js/index.js"></script> -->
+
+        <script src="js/models/deck.js"></script>
         <script src="js/models/card.js"></script>
         <script src="js/models/cardPile.js"></script>
-        <script src="js/models/gameState.js"></script>
+        <!-- <script src="js/models/gameState.js"></script>-->
 
         <script src="js/controllers/touchEvents.js"></script>
 
@@ -58,18 +60,7 @@
 
 
 
-//change to number code later
-  suits = ["spades", "clubs", "hearts", "diamonds"];
-  ranks = ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"];
 
-  // create all the cards
-  for (s = 0; s < suits.length; s++) {
-    for (r = 0; r < ranks.length; r++) {
-      card = new Card(ranks[r], suits[s])
-      allCards.push(card);
-      stage.addChild(card.sprite);
-    }
-  }
 
 
   /*

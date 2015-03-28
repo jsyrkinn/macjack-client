@@ -1,11 +1,13 @@
 function CardSprite(card) {
   this.rank = card.rank;
   this.suit = card.suit;
-  this.sprite = new PIXI.Sprite.fromImage("img/minCards/" + this.rank + "_" + this.suit + ".png");
+  this.sprite = new PIXI.Sprite.fromImage("img/minCards/" + this.suit + this.rank + ".png");
+
   this.sprite.anchor.x = 0.5;
   this.sprite.anchor.y = 0.5;
-  this.sprite.scale.x = 0.5;
-  this.sprite.scale.y = 0.5;
+
+  this.sprite.scale.x = 0.25;
+  this.sprite.scale.y = 0.25;
 
   this.sprite.visible = true;
 

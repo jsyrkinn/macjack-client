@@ -22,3 +22,8 @@ canvas {
   /* a double-sized pixi canvas scaled to the screen looks better
    * than a normal-sized canvas with no scaling */
 }
+
+@font-face {
+  font-family: 'RalewayTest';
+  src: url('./fonts/Raleway/Raleway-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
+}

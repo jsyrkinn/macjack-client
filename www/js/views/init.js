@@ -2,7 +2,7 @@
 
 // create an new instance of a pixi stage
 var interactive = true
-var stage = new PIXI.Stage(0x66FF99, interactive);
+var stage = new PIXI.Stage(0x476A34, interactive);
 
 // create a renderer instance.
 var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {resolution:2});
@@ -10,8 +10,10 @@ var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {r
 // add the renderer view element to the DOM
 document.body.appendChild(renderer.view);
 
+deck = new Deck();
+
 //TODO: function to calculate xy position for player and dealer
-dealer = new Dealer(50,100);
+dealer = new Dealer(100,150);
 
 /*
 player = new Player();
@@ -20,36 +22,30 @@ betText = new BetText();
 totalText = new TotalText();
 */
 
-card1 = new Card("ace", "spades");
-card2 = new Card("two", "diamonds");
-card3 = new Card("three", "hearts");
-
-
 dealerPile = dealer.pile.cards;
 
-dealerPile.push(card1);
-dealerPile.push(card2);
-dealerPile.push(card3);
+dealerPile.push(deck.drawCard());
 
 dealer.renderPile();
 
 
 
-player = new Player(50,window.innerHeight - 200);
-card1 = new Card("ace", "diamonds");
-card2 = new Card("two", "hearts");
-card3 = new Card("four", "hearts");
+player = new Player(80,window.innerHeight - 150);
 
+playerPile = player.pile;
 
-playerPile = player.pile.cards;
-
-playerPile.push(card1);
-playerPile.push(card2);
-playerPile.push(card3);
+playerPile.push(deck.drawCard());
+playerPile.push(deck.drawCard());
 
 player.renderPile();
 
 touchHandler = new TouchHandler();
+
+
+text = new PIXI.Text("Sum: " + playerPile.sumTotal(), {font:"24px RalewayTest", fill:"black", stroke:"white", strokeThickness:"2"});
+text.position.x = 10;
+text.position.y = window.innerHeight - 50;
+stage.addChild(text);
 
 
 /*

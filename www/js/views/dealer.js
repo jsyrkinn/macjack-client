@@ -7,8 +7,8 @@ function Dealer(x,y) {
   this.pile = new CardPile();
 
   this.hiddenCardSprite = new PIXI.Sprite.fromImage("img/minCards/card_back.png");
-  this.hiddenCardSprite.scale.x = 0.3;
-  this.hiddenCardSprite.scale.y = 0.3;
+  this.hiddenCardSprite.scale.x = 0.25;
+  this.hiddenCardSprite.scale.y = 0.25;
 
   this.hiddenCardSprite.anchor.x = 0.5;
   this.hiddenCardSprite.anchor.y = 0.5;
@@ -23,17 +23,21 @@ function Dealer(x,y) {
 
     var cards = this.pile.cards;
 
+    if (cards.length == 1) {
+      this.hiddenCardSprite.visible = true;
+
+    } else {
+      this.hiddenCardSprite.visible = false;
+    }
+
     for (var i = 0; i < cards.length; i++) {
       var cardSprite = new CardSprite(cards[i]);
 
-      cardSprite.sprite.scale.x = 0.3;
-      cardSprite.sprite.scale.y = 0.3;
-
-      cardSprite.sprite.anchor.x = 0.5;
-      cardSprite.sprite.anchor.y = 0.5;
+      cardSprite.sprite.scale.x = 0.25;
+      cardSprite.sprite.scale.y = 0.25;
 
       //TODO: refine logic to space out the cards
-      cardSprite.sprite.position.x = x+(i*50)+50;
+      cardSprite.sprite.position.x = x + (i*100) + (this.hiddenCardSprite.visible ? 100 : 0);
       cardSprite.sprite.position.y = y;
 
       this.cardSprites.push(cardSprite);
@@ -46,10 +50,5 @@ function Dealer(x,y) {
     //Do this to pile itself, don't call updatePile
     // show face down card if there is only one face up card
 
-    if (newPile.length == 1) {
-      this.hiddenCardSprite.visible = true;
-    } else {
-      this.hiddenCardSprite.visible = false;
-    }
   }
 }
