@@ -27,20 +27,18 @@ function TouchHandler() {
 
       var totals = playerPile.sumTotal();
 
-      for (var i=0; i < totals.length; i++) {
+      for (var i=totals.length-1; i >= 0; i--) {
         //console.log("inside for loop")
         console.log('total: ' + totals[i]);
         if (totals[i] > 21) {
-          var index = totals.indexOf(total[i]);
-          totals.splice(index,1);
-          i = 0;
+          totals.splice(i,1);
         }
       }
-      text.setText("Sum: " + totals); 
+      text.setText("Sum: " + totals);
       if (totals.length === 0) {
         console.log("BUST!");
          window.alert("BUST!");
-         //location.reload();
+         location.reload();
       }
     }
 
