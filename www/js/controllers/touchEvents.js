@@ -17,16 +17,36 @@ function TouchHandler() {
     console.log("hi");
     var endX = touchData.global.x;
     var endY = touchData.global.y;
-
     var dist = Math.abs(endX-this.startX);
-    if (dist < 10) {
-      console.log("OMG hit")
+
+    if (dist < 10) { //player tapped
+      //checking of sums move to its own function
+      console.log("Hit");
       playerPile.push(deck.drawCard());
       player.renderPile();
-      text.setText("Sum: " + playerPile.sumTotal());
+
+      var totals = playerPile.sumTotal();
+
+      for (var i=0; i < totals.length; i++) {
+        //console.log("inside for loop")
+        console.log('total: ' + totals[i]);
+        if (totals[i] > 21) {
+          var index = totals.indexOf(total[i]);
+          totals.splice(index,1);
+          i = 0;
+        }
+      }
+      text.setText("Sum: " + totals); 
+      if (totals.length === 0) {
+        console.log("BUST!");
+         window.alert("BUST!");
+         //location.reload();
+      }
     }
+
     else if (dist > 60) {
-      console.log("OMG stay")
+      console.log("Stay")
+      //window.alert("Your turn is over!");
     }
   }
 }
