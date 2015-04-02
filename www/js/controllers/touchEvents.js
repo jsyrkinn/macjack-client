@@ -18,11 +18,12 @@ function TouchHandler() {
     var endX = touchData.global.x;
     var endY = touchData.global.y;
     var dist = Math.abs(endX-this.startX);
+    var tot21 = 0;
 
     if (dist < 10) { //player tapped
       //checking of sums move to its own function
       console.log("Hit");
-      playerPile.push(deck.drawCard());
+      playerPile.push(deck.drawCard()); // draw a new card into player hand
       player.renderPile();
 
       var totals = playerPile.sumTotal();
@@ -31,20 +32,25 @@ function TouchHandler() {
         //console.log("inside for loop")
         console.log('total: ' + totals[i]);
         if (totals[i] > 21) {
+          tot21 = totals[i];
           totals.splice(i,1);
         }
       }
       text.setText("Sum: " + totals);
+
       if (totals.length === 0) {
         console.log("BUST!");
-         window.alert("BUST!");
-         location.reload();
+        text.setText("BUSTED: " + tot21);
+
+      } else {
+        text.setText("Sum: " + totals);
       }
     }
 
     else if (dist > 60) {
       console.log("Stay")
-      //window.alert("Your turn is over!");
+      window.alert("Your turn is over!");
     }
+
   }
 }

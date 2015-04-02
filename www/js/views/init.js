@@ -58,23 +58,15 @@ doneButton = new ActionButton("done");
 
 
 
-
-
-
-
-
-
-
-
-
-
 requestAnimFrame( animate );
 
 function animate() {
   requestAnimFrame( animate );
   // put anything that needs to be animated in here
   // render the stage
+
   renderer.render(stage);
+
 }
 
 //});
