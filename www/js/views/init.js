@@ -1,5 +1,3 @@
-//init views
-
 // create an new instance of a pixi stage
 var interactive = true
 var stage = new PIXI.Stage(0x476A34, interactive);
