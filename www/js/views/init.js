@@ -47,6 +47,11 @@ text.position.x = 10;
 text.position.y = window.innerHeight - 50;
 stage.addChild(text);
 
+// turnOver = new PIXI.Text("YOUR TURN IS OVER!", {font:"50px RalewayTest", fill:"black", stroke:"white", strokeThickness:"5"});
+// turnOver.possition.x = 50;
+// turnOver.position.y = window.innerHeight - 10;
+// stage.addChild(turnOver);
+
 
 /*
 // buttons

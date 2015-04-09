@@ -1,4 +1,7 @@
 function TouchHandler() {
+  var turnOver = new PIXI.Text("Your turn is over!", {font:"50px Raleway", fill:"white"});
+  turnOver.position.x = window.innerWidth - 600;
+  turnOver.position.y = window.innerHeight - 300;
   this.touchHandler = new PIXI.DisplayObject();
   this.touchHandler.interactive = true;
   this.touchHandler.hitArea = new PIXI.Rectangle(0,0,window.innerWidth,window.innerHeight);
@@ -14,7 +17,6 @@ function TouchHandler() {
   }
 
   this.touchHandler.touchend = function(touchData) {
-    console.log("hi");
     var endX = touchData.global.x;
     var endY = touchData.global.y;
     var dist = Math.abs(endX-this.startX);
@@ -22,35 +24,27 @@ function TouchHandler() {
 
     if (dist < 10) { //player tapped
       //checking of sums move to its own function
-      console.log("Hit");
       playerPile.push(deck.drawCard()); // draw a new card into player hand
       player.renderPile();
-
       var totals = playerPile.sumTotal();
-
-      for (var i=totals.length-1; i >= 0; i--) {
-        //console.log("inside for loop")
-        console.log('total: ' + totals[i]);
-        if (totals[i] > 21) {
-          tot21 = totals[i];
-          totals.splice(i,1);
-        }
-      }
-      text.setText("Sum: " + totals);
-
-      if (totals.length === 0) {
-        console.log("BUST!");
-        text.setText("BUSTED: " + tot21);
-
-      } else {
-        text.setText("Sum: " + totals);
-      }
     }
-
     else if (dist > 60) {
-      console.log("Stay")
-      window.alert("Your turn is over!");
+     stage.addChild(turnOver);   
     }
+    for (var i=totals.length-1; i >= 0; i--) {
+      if (totals[i] > 21) {
+        tot21 = totals[i];
+        totals.splice(i,1);
+      }
+    }
+    text.setText("Sum: " + totals);
 
+    if (totals.length === 0) {
+      text.setText("BUSTED: " + tot21);
+      stage.addChild(turnOver);
+    } 
+    else {
+      text.setText("Sum: " + totals);
+    }
   }
 }
