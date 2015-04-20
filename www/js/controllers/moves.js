@@ -45,7 +45,7 @@
   deckButtonSprite.position.y = window.innerHeight*0.200;
 
   deckButtonSprite.interactive = true;
-  stage.addChild(deckButtonSprite);
+  window.stage.addChild(deckButtonSprite);
 
   deckButtonSprite.tap = function(touchData){
     console.log("TAP!");

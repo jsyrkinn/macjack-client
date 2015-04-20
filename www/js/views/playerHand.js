@@ -1,4 +1,4 @@
-function handPosRecalc(hand) {
+function handPosRecalc(hand) { //DELETE??
   //posInitial = window.innerWidth*0.20;
   //posOffset = window.innerWidth*0.15;
 
@@ -11,8 +11,8 @@ function handPosRecalc(hand) {
   for(c = 0; c < hand.length; c++) {
 
     //remove and re-add sprite to ensure it's rendered last
-    stage.removeChild(hand[c].sprite);
-    stage.addChild(hand[c].sprite);
+    window.stage.removeChild(hand[c].sprite);
+    window.stage.addChild(hand[c].sprite);
 
     hand[c].sprite.anchor.x = 0;
     hand[c].sprite.anchor.y = 2;

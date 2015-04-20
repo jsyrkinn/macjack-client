@@ -39,21 +39,24 @@
             // create a socket object pointing to an instance of macjack-server
             socket = io('http://141.140.159.120:8080');
           </script>
-        --> 
+        -->
 
         <script src="js/lib/pixi.js"></script>
         <!-- <script type="text/javascript" src="js/index.js"></script> -->
 
-        <script src="js/models/deck.js"></script>
-        <script src="js/models/card.js"></script>
-        <script src="js/models/cardPile.js"></script>
-        <!-- <script src="js/models/gameState.js"></script>-->
+        <!-- <script src="js/models/Deck.js"></script> -->
+        <script src="js/models/Card.js"></script>
+        <script src="js/models/CardPile.js"></script>
+        <!--<script src="js/models/Player.js"></script> -->
+        <script src="js/models/ModelGameState.js"></script>
 
         <script src="js/controllers/touchEvents.js"></script>
+        <script src="js/controllers/serverPoll.js"></script>
 
-        <script src="js/views/dealer.js"></script>
-        <script src="js/views/player.js"></script>
-        <script src="js/views/cardSprite.js"></script>
+        <script src="js/views/ViewPlayer.js"></script>
+        <script src="js/views/ViewOpponent.js"></script>
+        <script src="js/views/ViewDealer.js"></script>
+        <script src="js/views/CardSprite.js"></script>
         <script src="js/views/init.js"></script>
 
         <script>

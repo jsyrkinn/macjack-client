@@ -8,29 +8,53 @@ function CardPile() {
 
 
   this.sumTotal = function() {
+    var tot21 = 0;
     var totals = [];
     totals[0] = 0;
 
     for (var i = 0; i < this.cards.length; i++ ) {
-        var card = this.cards[i];
-        var totLength = totals.length;
-        for(var b = 0; b < totLength; b++){
+      var card = this.cards[i];
 
-            if (card.rank != 1 && card.rank <= 10) {
-                totals[b] += card.rank;
-            }
+      var totLength = totals.length;
+      for (var b=totals.length-1; b >= 0; b--) {
 
-            else if (card.rank > 10){
-                totals[b] += 10;
-            }
+        if (card.rank != 1 && card.rank <= 10) {
+          totals[b] += card.rank;
 
-            else {
-                totals.push(totals[b] + 11);
-                totals[b]+=1;
-            }
+        } else if (card.rank > 10){
+          totals[b] += 10;
+
+        } else {
+          totals.push(totals[b] + 11);
+          totals[b]+=1;
         }
+
+        if (totals[b] > 21) {
+          tot21 = totals[b];
+          totals.splice(b,1);
+        }
+      }
     }
-    return totals
-}
+
+    if (totals.length == 0) {
+      totals = tot21
+    }
+
+    return totals;
+  }
+
+  this.thingy = function() {
+
+
+
+    text.setText("Sum: " + totals);
+
+    if (totals.length === 0) {
+      text.setText("BUSTED: " + tot21);
+      window.stage.addChild(turnOver);
+    } else {
+      text.setText("Sum: " + totals);
+    }
+  }
 
 }

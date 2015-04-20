@@ -1,5 +1,5 @@
 function TouchHandler() {
-  var turnOver = new PIXI.Text("Your turn is over!", {font:"50px Raleway", fill:"white"});
+  var turnOver = new PIXI.Text("Your turn is over!", {font:"50px PioretOne", fill:"#f3f3f3"});
   turnOver.position.x = window.innerWidth - 600;
   turnOver.position.y = window.innerHeight - 300;
   this.touchHandler = new PIXI.DisplayObject();
@@ -9,7 +9,7 @@ function TouchHandler() {
   this.startX = null;
   this.startY = null;
 
-  stage.addChild(this.touchHandler);
+  window.stage.addChild(this.touchHandler);
 
   this.touchHandler.touchstart = function(touchData) {
     this.startX = touchData.global.x;
@@ -22,15 +22,15 @@ function TouchHandler() {
     var dist = Math.abs(endX-this.startX);
     var tot21 = 0;
 
-    if (dist < 10) { //player tapped
-      //checking of sums move to its own function
-      playerPile.push(deck.drawCard()); // draw a new card into player hand
-      player.renderPile();
-      var totals = playerPile.sumTotal();
+    if (dist < 10) { //Player Hit
+
+      //request card from server, wait for next poll
+
+    } else if (dist > 60) { // Player Stayed
+      window.stage.addChild(turnOver);
     }
-    else if (dist > 60) {
-     stage.addChild(turnOver);   
-    }
+
+
     for (var i=totals.length-1; i >= 0; i--) {
       if (totals[i] > 21) {
         tot21 = totals[i];
@@ -41,8 +41,8 @@ function TouchHandler() {
 
     if (totals.length === 0) {
       text.setText("BUSTED: " + tot21);
-      stage.addChild(turnOver);
-    } 
+      window.stage.addChild(turnOver);
+    }
     else {
       text.setText("Sum: " + totals);
     }

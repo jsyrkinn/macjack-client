@@ -1,4 +1,4 @@
-function Dealer(x,y) {
+function ViewDealer(x,y) {
   //TODO: Either make dealer and player into one file OR
   //write logic for spacing out cards in both dealer and player files.
   //Dealer object handles visibility vs. invisibility
@@ -16,7 +16,7 @@ function Dealer(x,y) {
   this.hiddenCardSprite.position.x = x;
   this.hiddenCardSprite.position.y = y;
 
-  stage.addChild(this.hiddenCardSprite);
+  window.stage.addChild(this.hiddenCardSprite);
 
   this.renderPile = function() {
     this.cardSprites = [];

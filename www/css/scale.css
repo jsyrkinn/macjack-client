@@ -24,6 +24,6 @@ canvas {
 }
 
 @font-face {
-  font-family: 'RalewayTest';
-  src: url('./fonts/Raleway/Raleway-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
+  font-family: 'PoiretOne';
+  src: url('fonts/Poiret_One/PoiretOne-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
