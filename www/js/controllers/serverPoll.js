@@ -1,7 +1,20 @@
 var serverIP = "141.140.157.1";
 
 
-function getClientAuth() {
+function beginPoll() {
+  // separate all this to other, more relevant functions
+
+  getClientAuth();
+  //setupNewGame();
+  //testHit();
+  poll();
+
+  touchHandler = new TouchHandler();
+
+}
+
+
+function getClientAuth(name) {
   window.clientAuth = window.localStorage.getItem('clientAuth');
   window.clientID = window.localStorage.getItem('clientID');
 
@@ -9,7 +22,7 @@ function getClientAuth() {
     console.log("clientAuth not set, requesting from server...")
 
     var signupRequest = new XMLHttpRequest();
-    signupRequest.open( "POST", 'http://' + serverIP + ':1337/signup.json?name=binny', true );
+    signupRequest.open( "POST", 'http://' + serverIP + ':1337/signup.json?name='+name, true );
 
     signupRequest.onload = function() {
       if (this.status >= 200 && this.status < 400) {
@@ -28,6 +41,7 @@ function getClientAuth() {
     signupRequest.send();
   //}
 };
+
 
 function setupNewGame() {
   var newgameRequest = new XMLHttpRequest();

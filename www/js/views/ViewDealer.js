@@ -6,7 +6,7 @@ function ViewDealer(x,y) {
 
   this.pile = new CardPile();
 
-  this.hiddenCardSprite = new PIXI.Sprite.fromImage("img/minCards/card_back.png");
+  this.hiddenCardSprite = new PIXI.Sprite.fromImage("img/cards/card_back.jpg");
   this.hiddenCardSprite.scale.x = 0.25;
   this.hiddenCardSprite.scale.y = 0.25;
 

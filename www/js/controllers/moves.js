@@ -32,7 +32,7 @@
   });
 
   // create button to draw new cards
-  deckButtonTexture = PIXI.Texture.fromImage("img/minCards/card_back.png");
+  deckButtonTexture = PIXI.Texture.fromImage("img/cards/card_back.jpg");
   var deckButtonSprite = new PIXI.Sprite(deckButtonTexture);
 
   deckButtonSprite.scale.x = 0.3;

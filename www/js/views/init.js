@@ -22,38 +22,99 @@ dealerPile.push(deck.drawCard());
 dealer.renderPile();
 */
 
-touchHandler = new TouchHandler();
 
+function addLogo() {
+  var logoSprite = new PIXI.Sprite.fromImage("img/logosIcons/logoHome.png");
 
+  logoSprite.scale.x = 1.0;
+  logoSprite.scale.y = 1.0;
+  logoSprite.anchor.x = 0.5;
+  logoSprite.anchor.y = 0.5;
+  logoSprite.position.x = window.innerWidth/2;
+  logoSprite.position.y = window.innerHeight/4;
 
-var newGameRequest = new XMLHttpRequest();
+  window.stage.addChild(logoSprite);
+}
 
-newGameRequest.open( "GET", 'http://' + serverIP + ':1337/games/1/state.json', true );
-newGameRequest.setRequestHeader('X-auth-code', 1);  //replace with actual client auth
+addLogo();
 
-newGameRequest.onload = function() {
-  //call the next poll
+var signUpButton = new PIXI.Sprite.fromImage("img/buttons/signUpButton.png");
 
-  if (this.status >= 200 && this.status < 400) {
-    // Success!
-    console.log("success!");
-    var serverGameState = JSON.parse(this.response);
-    if (serverGameState.moveNumber != gameState.moveNumber) {
-      gameState = serverGameState;
-      var modelGameState = new ModelGameState(gameState);
-      createGameStateView(modelGameState);
-    }
+signUpButton.scale.x = 1.0;
+signUpButton.scale.y = 1.0;
+signUpButton.anchor.x = 0.5;
+signUpButton.anchor.y = 0.0;
+signUpButton.position.x = window.innerWidth/2;
+signUpButton.position.y = window.innerHeight/2;
+
+signUpButton.interactive = true;
+
+signUpButton.tap = function(touchData){
+  console.log("signUp!");
+
+  window.stage.removeChildren(); // remove all sprites from stage
+
+  addLogo();
+
+  var firstNameBox = document.createElement("input");
+  firstNameBox.type = "textbox";
+  firstNameBox.id = "firstName"
+
+  firstNameBox.style.position = "fixed";
+  firstNameBox.style.top = "50%";
+  firstNameBox.style.left = "50%";
+  firstNameBox.style.width = "60%";
+  firstNameBox.style.border = "2px solid f6b26b"; // FIXME
+  firstNameBox.style.borderRadius = "10px";
+  firstNameBox.style.background = "transparent";
+  firstNameBox.style.transform = "translate(-50%, -50%)";
+
+  document.body.appendChild(firstNameBox);
+
+  var submitButton = new PIXI.Sprite.fromImage("img/buttons/signUpButton.png");
+
+  submitButton.scale.x = 1.0;
+  submitButton.scale.y = 1.0;
+  submitButton.anchor.x = 0.5;
+  submitButton.anchor.y = 0.5;
+  submitButton.position.x = window.innerWidth/2;
+  submitButton.position.y = window.innerHeight*0.75;
+
+  submitButton.interactive = true;
+
+  submitButton.tap = function(touchData){
+    firstName = document.getElementById("firstName").value;
+    console.log(firstName);
+    getClientAuth(firstName);
   }
-};
 
-newGameRequest.onerror = function() {
-  //call the next poll
-  poll();
+  window.stage.addChild(submitButton);
 
-  console.log('Connection Failed');
-};
+}
 
-newGameRequest.send();
+
+
+
+window.stage.addChild(signUpButton);
+
+
+var aboutUsButton = new PIXI.Sprite.fromImage("img/buttons/aboutUsButton.png");
+
+aboutUsButton.scale.x = 1.0;
+aboutUsButton.scale.y = 1.0;
+aboutUsButton.anchor.x = 0.5;
+aboutUsButton.anchor.y = 0.5;
+aboutUsButton.position.x = window.innerWidth/2;
+aboutUsButton.position.y = window.innerHeight*0.75;
+
+aboutUsButton.interactive = true;
+
+aboutUsButton.tap = function(touchData){
+  console.log("aboutUs!");
+
+}
+
+window.stage.addChild(aboutUsButton);
 
 
 
@@ -115,7 +176,6 @@ function makeNewViewOpponent(opponent, x, y) {
 }
 
 
-playerClient = new ViewPlayer(80,window.innerHeight - 150); // somewhere
 
 allPlayers = [];
 
@@ -135,12 +195,6 @@ function createGameStateView(modelGameState) {
 
 };
 
-
-
-getClientAuth();
-//setupNewGame();
-//testHit();
-poll();
 
 
 requestAnimFrame( animate );
