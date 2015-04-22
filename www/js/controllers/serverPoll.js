@@ -1,24 +1,8 @@
 var serverIP = "141.140.157.1";
 
 
-function beginPoll() {
-  // separate all this to other, more relevant functions
-
-  getClientAuth();
-  //setupNewGame();
-  //testHit();
-  poll();
-
-  touchHandler = new TouchHandler();
-
-}
-
-
 function getClientAuth(name) {
-  window.clientAuth = window.localStorage.getItem('clientAuth');
-  window.clientID = window.localStorage.getItem('clientID');
 
-  //if (!clientAuth) {
     console.log("clientAuth not set, requesting from server...")
 
     var signupRequest = new XMLHttpRequest();
@@ -33,14 +17,18 @@ function getClientAuth(name) {
         window.localStorage.setItem('clientAuth', clientAuth);
         window.localStorage.setItem('clientID', clientID);
       }
+
+      checkHomeScreen();
     };
 
     signupRequest.onerror = function() {
       console.log('Connection Failed');
+
+      checkHomeScreen();
     };
     signupRequest.send();
-  //}
 };
+
 
 
 function setupNewGame() {
@@ -63,10 +51,10 @@ function setupNewGame() {
 };
 
 
-function testBet() {
 
+function testBet() {
   var betRequest = new XMLHttpRequest();
-  betRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/bet.json?amount=1500', true );
+  betRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/bet.json?amount=10', true );
   betRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   betRequest.onerror = function() {
@@ -76,8 +64,9 @@ function testBet() {
   betRequest.send();
 };
 
-function testHit() {
 
+
+function testHit() {
   var hitRequest = new XMLHttpRequest();
   hitRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/hit.json', true );
   hitRequest.setRequestHeader('X-auth-code', window.clientAuth);
@@ -88,9 +77,6 @@ function testHit() {
 
   hitRequest.send();
 };
-
-
-
 
 
 
@@ -118,6 +104,9 @@ function updateGame() {
         window.gameState = gameState // DEBUG
         var modelGameState = new ModelGameState(gameState);
         createGameStateView(modelGameState);
+        if (!window.touchHandler) {
+          window.touchHandler = new TouchHandler();
+        }
       //}
     }
   };

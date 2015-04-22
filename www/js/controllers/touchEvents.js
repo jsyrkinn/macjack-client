@@ -25,12 +25,13 @@ function TouchHandler() {
     if (dist < 10) { //Player Hit
 
       //request card from server, wait for next poll
+      testHit();
 
     } else if (dist > 60) { // Player Stayed
       window.stage.addChild(turnOver);
     }
 
-
+    /*
     for (var i=totals.length-1; i >= 0; i--) {
       if (totals[i] > 21) {
         tot21 = totals[i];
@@ -46,5 +47,6 @@ function TouchHandler() {
     else {
       text.setText("Sum: " + totals);
     }
+    */
   }
 }

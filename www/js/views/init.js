@@ -9,112 +9,20 @@ var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {r
 document.body.appendChild(renderer.view);
 
 
-/*
-deck = new Deck();
+function checkHomeScreen() {
 
-//TODO: function to calculate xy position for player and dealer
-dealer = new ViewDealer(100,150);
+  window.clientAuth = window.localStorage.getItem('clientAuth');
+  window.clientID = window.localStorage.getItem('clientID');
 
-dealerPile = dealer.pile.cards;
-
-dealerPile.push(deck.drawCard());
-
-dealer.renderPile();
-*/
-
-
-function addLogo() {
-  var logoSprite = new PIXI.Sprite.fromImage("img/logosIcons/logoHome.png");
-
-  logoSprite.scale.x = 1.0;
-  logoSprite.scale.y = 1.0;
-  logoSprite.anchor.x = 0.5;
-  logoSprite.anchor.y = 0.5;
-  logoSprite.position.x = window.innerWidth/2;
-  logoSprite.position.y = window.innerHeight/4;
-
-  window.stage.addChild(logoSprite);
-}
-
-addLogo();
-
-var signUpButton = new PIXI.Sprite.fromImage("img/buttons/signUpButton.png");
-
-signUpButton.scale.x = 1.0;
-signUpButton.scale.y = 1.0;
-signUpButton.anchor.x = 0.5;
-signUpButton.anchor.y = 0.0;
-signUpButton.position.x = window.innerWidth/2;
-signUpButton.position.y = window.innerHeight/2;
-
-signUpButton.interactive = true;
-
-signUpButton.tap = function(touchData){
-  console.log("signUp!");
-
-  window.stage.removeChildren(); // remove all sprites from stage
-
-  addLogo();
-
-  var firstNameBox = document.createElement("input");
-  firstNameBox.type = "textbox";
-  firstNameBox.id = "firstName"
-
-  firstNameBox.style.position = "fixed";
-  firstNameBox.style.top = "50%";
-  firstNameBox.style.left = "50%";
-  firstNameBox.style.width = "60%";
-  firstNameBox.style.border = "2px solid f6b26b"; // FIXME
-  firstNameBox.style.borderRadius = "10px";
-  firstNameBox.style.background = "transparent";
-  firstNameBox.style.transform = "translate(-50%, -50%)";
-
-  document.body.appendChild(firstNameBox);
-
-  var submitButton = new PIXI.Sprite.fromImage("img/buttons/signUpButton.png");
-
-  submitButton.scale.x = 1.0;
-  submitButton.scale.y = 1.0;
-  submitButton.anchor.x = 0.5;
-  submitButton.anchor.y = 0.5;
-  submitButton.position.x = window.innerWidth/2;
-  submitButton.position.y = window.innerHeight*0.75;
-
-  submitButton.interactive = true;
-
-  submitButton.tap = function(touchData){
-    firstName = document.getElementById("firstName").value;
-    console.log(firstName);
-    getClientAuth(firstName);
+  if (!window.clientAuth) {
+    makeHomeScreenFirstTime();
+  } else {
+    makeHomeScreenReturning();
   }
 
-  window.stage.addChild(submitButton);
-
 }
 
-
-
-
-window.stage.addChild(signUpButton);
-
-
-var aboutUsButton = new PIXI.Sprite.fromImage("img/buttons/aboutUsButton.png");
-
-aboutUsButton.scale.x = 1.0;
-aboutUsButton.scale.y = 1.0;
-aboutUsButton.anchor.x = 0.5;
-aboutUsButton.anchor.y = 0.5;
-aboutUsButton.position.x = window.innerWidth/2;
-aboutUsButton.position.y = window.innerHeight*0.75;
-
-aboutUsButton.interactive = true;
-
-aboutUsButton.tap = function(touchData){
-  console.log("aboutUs!");
-
-}
-
-window.stage.addChild(aboutUsButton);
+checkHomeScreen();
 
 
 
@@ -192,6 +100,24 @@ function createGameStateView(modelGameState) {
   allPlayers[player.playerID] = makeNewViewPlayer(player, 80,window.innerHeight - 150);
 
   // repositionAllHands();
+
+  var deleteStoreButton = new PIXI.Sprite.fromImage("img/buttons/exitButtonBlue.png");
+
+  deleteStoreButton.scale.x = 0.3;
+  deleteStoreButton.scale.y = 0.3;
+  deleteStoreButton.anchor.x = 0.0;
+  deleteStoreButton.anchor.y = 0.0;
+  deleteStoreButton.position.x = 0.0;
+  deleteStoreButton.position.y = 0.0;
+
+  deleteStoreButton.interactive = true;
+
+  deleteStoreButton.tap = function(touchData){
+    console.log("Bet!");
+    testBet();
+  }
+
+  window.stage.addChild(deleteStoreButton);
 
 };
 
