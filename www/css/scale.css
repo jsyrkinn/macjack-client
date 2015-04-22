@@ -23,6 +23,21 @@ canvas {
    * than a normal-sized canvas with no scaling */
 }
 
+.macjacktextbox {
+  -webkit-appearance:none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 50px;
+  border: 2px solid #f6b26b;
+  border-radius: 10px;
+  background: transparent;
+  transform: translate(-50%, -50%);
+}
+
+
+
 @font-face {
   font-family: 'PoiretOne';
   src: url('fonts/Poiret_One/PoiretOne-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
