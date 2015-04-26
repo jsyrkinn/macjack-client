@@ -1,4 +1,4 @@
-var serverIP = "141.140.157.1";
+var serverIP = "141.140.175.233";
 
 
 function getClientAuth(name) {
@@ -23,8 +23,6 @@ function getClientAuth(name) {
 
     signupRequest.onerror = function() {
       console.log('Connection Failed');
-
-      checkHomeScreen();
     };
     signupRequest.send();
 };
@@ -52,13 +50,13 @@ function setupNewGame() {
 
 
 
-function testBet() {
+function sendBet(amount) {
   var betRequest = new XMLHttpRequest();
-  betRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/bet.json?amount=10', true );
+  betRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/bet.json?amount='+amount, true );
   betRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   betRequest.onerror = function() {
-    console.log('Connection Failed');
+    console.log('Connection Failed - Bet not sent');
   };
 
   betRequest.send();
@@ -66,20 +64,30 @@ function testBet() {
 
 
 
-function testHit() {
+function sendHit() {
   var hitRequest = new XMLHttpRequest();
   hitRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/hit.json', true );
   hitRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   hitRequest.onerror = function() {
-    console.log('Connection Failed');
+    console.log('Connection Failed - Hit not sent');
   };
 
   hitRequest.send();
 };
 
 
+function sendStay() {
+  var hitRequest = new XMLHttpRequest();
+  hitRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/stay.json', true );
+  hitRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
+  hitRequest.onerror = function() {
+    console.log('Connection Failed - Stay not sent');
+  };
+
+  hitRequest.send();
+};
 
 
 

@@ -22,31 +22,16 @@ function TouchHandler() {
     var dist = Math.abs(endX-this.startX);
     var tot21 = 0;
 
-    if (dist < 10) { //Player Hit
+    if (dist < 10) {
+      //Player Hit
 
       //request card from server, wait for next poll
-      testHit();
+      sendHit();
 
-    } else if (dist > 60) { // Player Stayed
+    } else if (dist > 60) {
+      // Player Stayed
+      sendStay();
       window.stage.addChild(turnOver);
     }
-
-    /*
-    for (var i=totals.length-1; i >= 0; i--) {
-      if (totals[i] > 21) {
-        tot21 = totals[i];
-        totals.splice(i,1);
-      }
-    }
-    text.setText("Sum: " + totals);
-
-    if (totals.length === 0) {
-      text.setText("BUSTED: " + tot21);
-      window.stage.addChild(turnOver);
-    }
-    else {
-      text.setText("Sum: " + totals);
-    }
-    */
   }
 }

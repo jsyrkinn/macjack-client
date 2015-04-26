@@ -9,19 +9,6 @@ var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {r
 document.body.appendChild(renderer.view);
 
 
-function checkHomeScreen() {
-
-  window.clientAuth = window.localStorage.getItem('clientAuth');
-  window.clientID = window.localStorage.getItem('clientID');
-
-  if (!window.clientAuth) {
-    makeHomeScreenFirstTime();
-  } else {
-    makeHomeScreenReturning();
-  }
-
-}
-
 checkHomeScreen();
 
 
@@ -114,7 +101,7 @@ function createGameStateView(modelGameState) {
 
   deleteStoreButton.tap = function(touchData){
     console.log("Bet!");
-    testBet();
+    sendBet(10);
   }
 
   window.stage.addChild(deleteStoreButton);
