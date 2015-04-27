@@ -1,0 +1,22 @@
+{
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/apache/cordova-plugin-whitelist.git",
+            "subdir": ".",
+            "ref": "r1.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-crosswalk-webview": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/MobileChromeApps/cordova-plugin-crosswalk-webview.git",
+            "subdir": ".",
+            "ref": "1.0.0"
+        },
+        "is_top_level": true,
+        "variables": {}
+    }
+}
