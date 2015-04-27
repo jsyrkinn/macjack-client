@@ -12,7 +12,7 @@ function addLogo() {
 }
 
 
-function addMenuButton(placement, imagePath, tapFunction) {
+function addButton(placement, imagePath, tapFunction) {
     var button = new PIXI.Sprite.fromImage(imagePath);
 
     button.scale = placement.scale || {x:0.9, y:0.9}
@@ -31,7 +31,7 @@ function makeHomeScreenReturning() {
   addLogo();
 
   // New Game Button
-  addMenuButton(
+  addButton(
     {  anchor: {x:0.5, y:0.0},
      position: {x:window.innerWidth/2, y:window.innerHeight/2}  },
     "img/buttons/newGame.png",
@@ -43,7 +43,7 @@ function makeHomeScreenReturning() {
   );
 
   // Join Game Button
-  addMenuButton(
+  addButton(
     {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
     "img/buttons/joinGame.png",
     function(touchData){
@@ -52,7 +52,7 @@ function makeHomeScreenReturning() {
   );
 
   // Delete LocalStorage Button -- DEBUG
-  addMenuButton(
+  addButton(
     {   scale: {x:0.3, y:0.3},
        anchor: {x:0.0, y:0.0},
      position: {x:0.0, y:0.0}  },
@@ -75,7 +75,7 @@ function makeHomeScreenFirstTime() {
   addLogo();
 
   // Sign up Button
-  addMenuButton(
+  addButton(
     {  anchor: {x:0.5, y:0.0},
      position: {x:window.innerWidth/2, y:window.innerHeight/2}  },
     "img/buttons/signUp.png",
@@ -86,7 +86,7 @@ function makeHomeScreenFirstTime() {
   );
 
   // About Button
-  addMenuButton(
+  addButton(
     {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
     "img/buttons/about.png",
     function(touchData){
@@ -116,7 +116,7 @@ function makeSignUpScreen() {
 
 
   // Submit Button
-  addMenuButton(
+  addButton(
     {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
     "img/buttons/submit.png",
     function(touchData){
