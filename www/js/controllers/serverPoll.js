@@ -24,6 +24,7 @@ function getClientAuth(name) {
     signupRequest.onerror = function() {
       console.log('Connection Failed');
     };
+
     signupRequest.send();
 };
 
@@ -39,8 +40,12 @@ function setupNewGame() {
       // Success!
       var res = JSON.parse(this.response);
       window.gameID = res.gameID;
+      displayGameId();
+    } else {
+      console.log("Setup New Game - Error");
     }
   };
+
   newgameRequest.onerror = function() {
     console.log('Connection Failed');
   };
@@ -97,7 +102,7 @@ function updateGame() {
 
   var updateRequest = new XMLHttpRequest();
 
-  updateRequest.open( "GET", 'http://' + serverIP + ':1337/games/'+window.gameID+'/state.json', true );
+  updateRequest.open("GET", 'http://' + serverIP + ':1337/games/'+window.gameID+'/state.json', true );
   updateRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   updateRequest.onload = function() {
@@ -112,7 +117,12 @@ function updateGame() {
         window.gameState = gameState // DEBUG
         var modelGameState = new ModelGameState(gameState);
         createGameStateView(modelGameState);
-        if (!window.touchHandler) {
+        if (window.touchHandler) {
+          if (window.stage.children.indexOf(window.touchHandler) < 0) {
+            // touchHandler was removed, add it back...
+            window.stage.addChild(window.touchHandler);
+          }
+        } else {
           window.touchHandler = new TouchHandler();
         }
       //}

@@ -1,7 +1,7 @@
 function CardSprite(card) {
   this.rank = card.rank;
   this.suit = card.suit;
-  this.sprite = new PIXI.Sprite.fromImage("img/cards/" + this.suit.toLowerCase() + this.rank + ".jpg");
+  this.sprite = new PIXI.Sprite.fromImage("img/cards/" + this.suit.toLowerCase() + this.rank + ".png");
 
   this.sprite.anchor.x = 0.5;
   this.sprite.anchor.y = 0.5;

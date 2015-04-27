@@ -109,14 +109,50 @@ function createGameStateView(modelGameState) {
 };
 
 
+function stopSpinner() {
+  window.showSpinner = false;
+  window.spinners.forEach(function(spinner) {
+    window.stage.removeChild(spinner);
+  });
+}
+
+
+function startSpinner() {
+  window.showSpinner = true;
+  window.spinners.forEach(function(spinner) {
+    window.stage.addChild(spinner);
+  });
+}
+
+window.spinners = [];
+var numSpinners = 5;
+
+for (i = 0; i < numSpinners; i++) {
+  var spinner = new PIXI.Sprite.fromImage("img/buttons/exitButtonBlue.png");
+  spinner.position = {x: window.innerWidth/2, y: window.innerHeight/2}
+  spinner.anchor = {x: 0.5, y: 0.5}
+  spinner.scale = {x: 0.5, y:0.5}
+  window.spinners.push(spinner);
+}
 
 requestAnimFrame( animate );
 
 function animate() {
   requestAnimFrame( animate );
   // put anything that needs to be animated in here
-  // render the stage
 
+  if (window.showSpinner) {
+    for (i = 0; i < window.spinners.length; i++) {
+      window.spinners[i].rotation += 0.009*i+0.01;
+    }
+
+    if (window.stage.children.indexOf(window.spinners[0]) < 0) {
+      // spinner was removed by some other method than stopSpinner
+      stopSpinner();
+    }
+  }
+
+  // render the stage
   renderer.render(window.stage);
 
 }

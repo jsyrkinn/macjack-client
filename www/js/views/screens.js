@@ -1,29 +1,64 @@
-function addLogo() {
-  var logoSprite = new PIXI.Sprite.fromImage("img/logosIcons/logoHome.png");
+function checkHomeScreen() {
+  // checks to see if user is already signed up
 
-  logoSprite.scale.x = 0.8;
-  logoSprite.scale.y = 0.8;
-  logoSprite.anchor.x = 0.5;
-  logoSprite.anchor.y = 0.5;
-  logoSprite.position.x = window.innerWidth/2;
-  logoSprite.position.y = window.innerHeight/4;
+  window.clientAuth = window.localStorage.getItem('clientAuth');
+  window.clientID = window.localStorage.getItem('clientID');
 
-  window.stage.addChild(logoSprite);
+  if (!window.clientAuth) {
+    makeHomeScreenFirstTime();
+  } else {
+    makeHomeScreenReturning();
+  }
 }
 
 
-function addMenuButton(placement, imagePath, tapFunction) {
-    var button = new PIXI.Sprite.fromImage(imagePath);
+//---- HOME MENU - FIRST TIME ----//
 
-    button.scale = placement.scale || {x:0.9, y:0.9}
-    button.anchor = placement.anchor || {x:0.5, y:0.5};
-    button.position = placement.position || {x:0.0, y: 0.0};
-    button.interactive = true;
-    window.stage.addChild(button);
+function makeHomeScreenFirstTime() {
 
-    button.tap = tapFunction
+  window.stage.removeChildren(); // remove all sprites from stage
+  addLogo();
+
+  // Sign up Button
+  addMenuButton(
+    {  anchor: {x:0.5, y:0.0},
+     position: {x:window.innerWidth/2, y:window.innerHeight/2}  },
+    "img/buttons/signUp.png",
+    function(touchData){
+      console.log("Sign Up!");
+      makeSignUpScreen();
+    }
+  );
+
+  // About Button
+  addMenuButton(
+    {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
+    "img/buttons/about.png",
+    function(touchData){
+      console.log("About Us!");
+    }
+  );
 }
 
+
+function makeSignUpScreen() {
+  window.stage.removeChildren(); // remove all sprites from stage
+  addLogo();
+  createFormBox("firstName");
+
+  // Submit Button
+  addMenuButton(
+    {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
+    "img/buttons/submit.png",
+    function(touchData) {
+      console.log("Submit!")
+      validateAndSubmitName();
+    }
+  );
+}
+
+
+//---- HOME MENU - RETURNING (HAS AUTH) ----//
 
 function makeHomeScreenReturning() {
 
@@ -38,7 +73,6 @@ function makeHomeScreenReturning() {
     function(touchData){
       console.log("New Game!");
       setupNewGame();
-      updateGame(); // start polling
     }
   );
 
@@ -68,81 +102,72 @@ function makeHomeScreenReturning() {
 }
 
 
+//---- GAME ID DISPLAY ----//
 
-function makeHomeScreenFirstTime() {
+function displayGameId() {
+  window.stage.removeChildren();
 
-  window.stage.removeChildren(); // remove all sprites from stage
-  addLogo();
+  console.log("Display Game Id!")
 
-  // Sign up Button
-  addMenuButton(
-    {  anchor: {x:0.5, y:0.0},
-     position: {x:window.innerWidth/2, y:window.innerHeight/2}  },
-    "img/buttons/signUp.png",
-    function(touchData){
-      console.log("Sign Up!");
-      makeSignUpScreen();
-    }
-  );
+  var text = new PIXI.Text(window.gameID, {font:"100px PoiretOne", fill:"#f3f3f3"});
+  text.position = {x: window.innerWidth/2, y: window.innerHeight/2};
+  text.anchor = {x: 0.5, y: 0.5};
+  window.stage.addChild(text);
 
-  // About Button
-  addMenuButton(
-    {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
-    "img/buttons/about.png",
-    function(touchData){
-      console.log("About Us!");
-    }
-  );
-
-}
-
-
-function createTextBox(id) {
-    var textbox = document.createElement("input");
-    textbox.type = "textbox";
-    textbox.id = id;
-    textbox.className = "macjacktextbox";
-    document.body.appendChild(textbox);
-    return textbox
-}
-
-
-
-function makeSignUpScreen() {
-  window.stage.removeChildren(); // remove all sprites from stage
-  addLogo();
-
-  nameBox = createTextBox("firstName");
-
-
-  // Submit Button
   addMenuButton(
     {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
     "img/buttons/submit.png",
-    function(touchData){
-      console.log("Submit!")
-      if (nameBox.value != "") {
-        name = nameBox.value;
-        nameBox.remove();
-        getClientAuth(name);
-      }
+    function(touchData) {
+      console.log("Start!")
+      updateGame(); // start polling
     }
   );
-
 }
 
 
+//--- HELPER FUNCTIONS ----//
 
-function checkHomeScreen() {
-  // checks to see if user is already signed up
+function addLogo() {
+  var logoSprite = new PIXI.Sprite.fromImage("img/logosIcons/logoHome.png");
 
-  window.clientAuth = window.localStorage.getItem('clientAuth');
-  window.clientID = window.localStorage.getItem('clientID');
+  logoSprite.scale.x = 0.8;
+  logoSprite.scale.y = 0.8;
+  logoSprite.anchor.x = 0.5;
+  logoSprite.anchor.y = 0.5;
+  logoSprite.position.x = window.innerWidth/2;
+  logoSprite.position.y = window.innerHeight/4;
+  window.stage.addChild(logoSprite);
+}
 
-  if (!window.clientAuth) {
-    makeHomeScreenFirstTime();
-  } else {
-    makeHomeScreenReturning();
+function addMenuButton(placement, imagePath, tapCallback) {
+  var button = new PIXI.Sprite.fromImage(imagePath);
+
+  button.scale = placement.scale || {x:0.9, y:0.9}
+  button.anchor = placement.anchor || {x:0.5, y:0.5};
+  button.position = placement.position || {x:0.0, y: 0.0};
+  button.interactive = true;
+  button.tap = tapCallback;
+  window.stage.addChild(button);
+}
+
+
+function createFormBox(id) {
+  var form = document.createElement("form");
+  form.onsubmit = validateAndSubmitName;
+  document.body.appendChild(form);
+
+  window.nameBox = document.createElement("input");
+  window.nameBox.type = "textbox";
+  window.nameBox.id = id;
+  window.nameBox.className = "macjacktextbox";
+  form.appendChild(window.nameBox);
+}
+
+
+function validateAndSubmitName() {
+  if (window.nameBox.value != "") {
+    name = window.nameBox.value;
+    window.nameBox.parentNode.remove(); // should remove form
+    getClientAuth(name);
   }
-
 }
