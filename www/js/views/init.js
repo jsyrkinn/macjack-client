@@ -71,42 +71,69 @@ function makeNewViewOpponent(opponent, x, y) {
 }
 
 
+function makeNewViewDealer(dealerHand, x, y) {
+  viewDealer = new ViewDealer(x, y);
+
+  // change to display multiple hands
+  dealerHand.cards.forEach(function(card) {
+     viewDealer.pile.push(card);
+  });
+
+  viewDealer.renderPile();
+
+  return viewDealer
+}
+
+
+function addTouchHandlerToStage() {
+  if (window.touchHandler) {
+    if (window.stage.children.indexOf(window.touchHandler.touchHandler) < 0) {
+      // touchHandler was removed, add it back...
+      window.stage.addChild(window.touchHandler.touchHandler);
+    }
+  } else {
+    window.touchHandler = new TouchHandler();
+  }
+}
+
 
 allPlayers = [];
 
 function createGameStateView(modelGameState) {
 
-  window.stage.removeChildren(); // remove all sprites from stage
+  if (modelGameState.betting) {
+    if (window.betGoing) {
+      startSpinner();
+    } else {
+      makeBetScreen();
+    }
+  } else {
+    window.betGoing = false;
+    stopSpinner();
 
-  modelGameState.opponents.forEach(function(opponent) {
-    allPlayers[opponent.playerID] = makeNewViewPlayer(opponent, 100, 100);
-  });
+    if (window.formBox) {
+      window.formBox.parentNode.remove(); // should remove form
+      window.formBox = null;
+    }
 
-  var player = modelGameState.player
+    window.stage.removeChildren(); // remove all sprites from stage
 
-  allPlayers[player.playerID] = makeNewViewPlayer(player, 80,window.innerHeight - 150);
+    addTouchHandlerToStage();
 
-  // repositionAllHands();
+    makeNewViewDealer(modelGameState.dealerHand, 100, 100);
 
-  var deleteStoreButton = new PIXI.Sprite.fromImage("img/buttons/exitButtonBlue.png");
+    modelGameState.opponents.forEach(function(opponent) {
+      allPlayers[opponent.playerID] = makeNewViewOpponent(opponent, 100, 500);
+    });
 
-  deleteStoreButton.scale.x = 0.3;
-  deleteStoreButton.scale.y = 0.3;
-  deleteStoreButton.anchor.x = 0.0;
-  deleteStoreButton.anchor.y = 0.0;
-  deleteStoreButton.position.x = 0.0;
-  deleteStoreButton.position.y = 0.0;
+    var player = modelGameState.player
 
-  deleteStoreButton.interactive = true;
+    allPlayers[player.playerID] = makeNewViewPlayer(player, 80,window.innerHeight - 150);
 
-  deleteStoreButton.tap = function(touchData){
-    console.log("Bet!");
-    sendBet(10);
+    // repositionAllHands();
   }
-
-  window.stage.addChild(deleteStoreButton);
-
 };
+
 
 
 function stopSpinner() {
@@ -134,6 +161,8 @@ for (i = 0; i < numSpinners; i++) {
   spinner.scale = {x: 0.5, y:0.5}
   window.spinners.push(spinner);
 }
+
+
 
 requestAnimFrame( animate );
 

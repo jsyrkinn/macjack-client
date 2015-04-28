@@ -1,4 +1,4 @@
-var serverIP = "141.140.175.233";
+var serverIP = "141.140.192.7";
 
 
 function getClientAuth(name) {
@@ -40,7 +40,7 @@ function setupNewGame() {
       // Success!
       var res = JSON.parse(this.response);
       window.gameID = res.gameID;
-      displayGameId();
+      makeGameIdScreen();
     } else {
       console.log("Setup New Game - Error");
     }
@@ -56,6 +56,7 @@ function setupNewGame() {
 
 
 function sendBet(amount) {
+  window.betGoing = true;
   var betRequest = new XMLHttpRequest();
   betRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/bet.json?amount='+amount, true );
   betRequest.setRequestHeader('X-auth-code', window.clientAuth);
@@ -100,6 +101,9 @@ var gameState = {movenumber: -1};
 
 function updateGame() {
 
+  // if betting is false and we're the showing numberBox, remove it
+  // if betting is true and we're not showing numberBox, add it
+
   var updateRequest = new XMLHttpRequest();
 
   updateRequest.open("GET", 'http://' + serverIP + ':1337/games/'+window.gameID+'/state.json', true );
@@ -117,14 +121,6 @@ function updateGame() {
         window.gameState = gameState // DEBUG
         var modelGameState = new ModelGameState(gameState);
         createGameStateView(modelGameState);
-        if (window.touchHandler) {
-          if (window.stage.children.indexOf(window.touchHandler) < 0) {
-            // touchHandler was removed, add it back...
-            window.stage.addChild(window.touchHandler);
-          }
-        } else {
-          window.touchHandler = new TouchHandler();
-        }
       //}
     }
   };
@@ -140,5 +136,6 @@ function updateGame() {
 }
 
 function poll() {
-   setTimeout(updateGame, 1000);
+  console.log("poll");
+  setTimeout(updateGame, 100);
 };

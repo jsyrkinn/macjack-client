@@ -6,17 +6,14 @@ function ViewDealer(x,y) {
 
   this.pile = new CardPile();
 
-  this.hiddenCardSprite = new PIXI.Sprite.fromImage("img/cards/card_back.jpg");
-  this.hiddenCardSprite.scale.x = 0.25;
-  this.hiddenCardSprite.scale.y = 0.25;
-
-  this.hiddenCardSprite.anchor.x = 0.5;
-  this.hiddenCardSprite.anchor.y = 0.5;
-
+  this.hiddenCardSprite = new PIXI.Sprite.fromImage("img/cards/cardBack.jpg");
+  this.hiddenCardSprite.scale = {x:0.25, y: 0.25};
+  this.hiddenCardSprite.anchor = {x:0.5, y: 0.5};
   this.hiddenCardSprite.position.x = x;
   this.hiddenCardSprite.position.y = y;
 
   window.stage.addChild(this.hiddenCardSprite);
+
 
   this.renderPile = function() {
     this.cardSprites = [];
@@ -44,6 +41,7 @@ function ViewDealer(x,y) {
 
     }
   }
+
 
   this.updatePile = function(newPile) {
     //TODO: check for updates and update when there is a change - take this function out?

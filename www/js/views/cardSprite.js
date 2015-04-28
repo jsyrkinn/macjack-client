@@ -16,7 +16,6 @@ function CardSprite(card) {
   this.sprite.tap = function(touchData){
     console.log("TAP!");
     console.log(card);
-    // socket.emit("playCard", {rank: card.rank, suit: card.suit});
   }
 
   //TODO: change this after ranks are changed to integers

@@ -2,14 +2,12 @@ function TouchHandler() {
   var turnOver = new PIXI.Text("Your turn is over!", {font:"50px PioretOne", fill:"#f3f3f3"});
   turnOver.position.x = window.innerWidth - 600;
   turnOver.position.y = window.innerHeight - 300;
-  this.touchHandler = new PIXI.DisplayObject();
+  this.touchHandler = new PIXI.Sprite();
   this.touchHandler.interactive = true;
   this.touchHandler.hitArea = new PIXI.Rectangle(0,0,window.innerWidth,window.innerHeight);
 
   this.startX = null;
   this.startY = null;
-
-  window.stage.addChild(this.touchHandler);
 
   this.touchHandler.touchstart = function(touchData) {
     this.startX = touchData.global.x;
