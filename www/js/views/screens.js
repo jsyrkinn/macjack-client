@@ -44,7 +44,7 @@ function makeFirstTimeHomeScreen() {
 function makeSignUpScreen() {
   window.stage.removeChildren(); // remove all sprites from stage
   addLogo();
-  addFormBox("name", validateAndSubmitName);
+  addNameBox("name", validateAndSubmitName);
 
   // Submit Button
   addButton(
@@ -129,7 +129,7 @@ function makeGameIdScreen() {
 
 function makeBetScreen() {
 
-  if (!window.formBox) {
+  if (!window.nameBox) {
     window.stage.removeChildren();
 
     console.log("Make Bet Screen!")
@@ -176,16 +176,21 @@ function addButton(placement, imagePath, tapCallback) {
 }
 
 
-function addFormBox(id, submitCallback) {
+function addNameBox(id, submitCallback) {
   var form = document.createElement("form");
   form.onsubmit = submitCallback;
   document.body.appendChild(form);
 
-  window.formBox = document.createElement("input");
-  window.formBox.type = "textbox";
-  window.formBox.id = id;
-  window.formBox.className = "macjacktextbox";
-  form.appendChild(window.formBox);
+  window.nameBox = document.createElement("input");
+  window.nameBox.type = "textbox";
+  window.nameBox.id = id;
+  window.nameBox.className = "macjacktextbox";
+  window.nameBox.style.width = "200px";
+
+  window.nameBox.style.left = window.innerWidth-200/2; // TODO fix so text box is centered on all devices 
+  window.nameBox.style.right = window.innerWidth-200/2;
+
+  form.appendChild(window.nameBox);
 }
 
 // change name
@@ -194,32 +199,32 @@ function addNumberBox(id, submitCallback) {
   form.onsubmit = submitCallback;
   document.body.appendChild(form);
 
-  window.formBox = document.createElement("input");
-  window.formBox.type = "number";
-  window.formBox.id = id;
-  window.formBox.className = "macjacktextbox";
-  form.appendChild(window.formBox);
+  window.nameBox = document.createElement("input");
+  window.nameBox.type = "number";
+  window.nameBox.id = id;
+  window.nameBox.className = "macjacktextbox";
+  form.appendChild(window.nameBox);
 }
 
 function validateAndSubmitName() {
-  if (window.formBox.id != "name") {
-    console.log("formBox incorrect!")
-  } else if (window.formBox.value != "") {
-    name = window.formBox.value;
-    window.formBox.parentNode.remove(); // should remove form
-    window.formBox = null;
+  if (window.nameBox.id != "name") {
+    console.log("nameBox incorrect!")
+  } else if (window.nameBox.value != "") {
+    name = window.nameBox.value;
+    window.nameBox.parentNode.remove(); // should remove form
+    window.nameBox = null;
     getClientAuth(name);
   }
 }
 
 
 function validateAndSubmitBet() {
-  if (window.formBox.id != "bet") {
-    console.log("formBox incorrect!")
-  } else if (window.formBox.value != 0) {
-    bet = window.formBox.value;
-    window.formBox.parentNode.remove(); // should remove form
-    window.formBox = null;
+  if (window.nameBox.id != "bet") {
+    console.log("nameBox incorrect!")
+  } else if (window.nameBox.value != 0) {
+    bet = window.nameBox.value;
+    window.nameBox.parentNode.remove(); // should remove form
+    window.nameBox = null;
     console.log(bet);
     sendBet(bet);
   }
