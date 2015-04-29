@@ -41,8 +41,13 @@ function ViewDealer(x,y) {
 
     }
   }
-
-
+    this.renderDealerSumText = function() {
+      text = new PIXI.Text("Sum: " + this.pile.sumTotal(), {font:"24px PoiretOne", fill:"#f3f3f3"});
+      text.position.x = window.innerWidth/2;
+      text.position.y = window.innerHeight/3.5
+      window.stage.addChild(text);
+  }
+  
   this.updatePile = function(newPile) {
     //TODO: check for updates and update when there is a change - take this function out?
     //Do this to pile itself, don't call updatePile

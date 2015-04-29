@@ -80,6 +80,7 @@ function makeNewViewDealer(dealerHand, x, y) {
   });
 
   viewDealer.renderPile();
+  viewDealer.renderDealerSumText();
 
   return viewDealer
 }

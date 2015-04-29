@@ -16,10 +16,13 @@ function ViewPlayer(x,y) {
 
       cardSprite.sprite.scale.x = 0.25;
       cardSprite.sprite.scale.y = 0.25;
+//TODO centering with anchor position.
+      // this.cardsSprite.sprite.anchor.x = 1;
+      // this.cardsSprite.sprite.anchor.y = 1;
 
       //TODO: refine logic to space out the cards
       cardSprite.sprite.position.x = x+(i*50);
-      cardSprite.sprite.position.y = y;
+       cardSprite.sprite.position.y = y;
 
       this.cardSprites.push(cardSprite);
 
@@ -31,6 +34,10 @@ function ViewPlayer(x,y) {
       text.position.x = 10;
       text.position.y = window.innerHeight - 50;
       window.stage.addChild(text);
+  }
+
+  this.renderBetText = function(){
+    text = new PIXI.Text("$" + thi)
   }
 
   this.movePile = function(x, y) {

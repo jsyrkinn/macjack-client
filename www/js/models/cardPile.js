@@ -42,19 +42,4 @@ function CardPile() {
 
     return totals;
   }
-
-  this.thingy = function() {
-
-
-
-    text.setText("Sum: " + totals);
-
-    if (totals.length === 0) {
-      text.setText("BUSTED: " + tot21);
-      window.stage.addChild(turnOver);
-    } else {
-      text.setText("Sum: " + totals);
-    }
-  }
-
 }
