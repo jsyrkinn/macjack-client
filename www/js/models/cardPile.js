@@ -2,6 +2,7 @@
 function CardPile() {
   this.cards = [];
 
+//TODO: Rename this input.
   this.push = function(thing) {
     this.cards.push(thing);
   }
