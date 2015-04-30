@@ -18,6 +18,8 @@ function repositionAllHands(player, dealer, opponents) {
 
 }
 
+
+//TODO: Create code to position opponents
 function repositionOpponents(opponentList) {
   var len = opponentList.length;
 
