@@ -178,7 +178,10 @@ function addButton(placement, imagePath, tapCallback) {
 
 function addNameBox(id, submitCallback) {
   var form = document.createElement("form");
-  form.onsubmit = submitCallback;
+  form.onsubmit = function(event) {
+    event.preventDefault();
+    submitCallback();
+  };
   document.body.appendChild(form);
 
   window.nameBox = document.createElement("input");
@@ -193,7 +196,10 @@ function addNameBox(id, submitCallback) {
 // change name
 function addNumberBox(id, submitCallback) {
   var form = document.createElement("form");
-  form.onsubmit = submitCallback;
+  form.onsubmit = function(event) {
+    event.preventDefault();
+    submitCallback();
+  };
   document.body.appendChild(form);
 
   window.nameBox = document.createElement("input");
@@ -206,8 +212,7 @@ function addNumberBox(id, submitCallback) {
 }
 
 
-function validateAndSubmitName(event) {
-  event.preventDefault();
+function validateAndSubmitName() {
   if (window.nameBox.id != "name") {
     console.log("nameBox incorrect!")
   } else if (window.nameBox.value != "") { //TODO: add validation to server
@@ -219,8 +224,7 @@ function validateAndSubmitName(event) {
 }
 
 
-function validateAndSubmitBet(event) {
-  event.preventDefault();
+function validateAndSubmitBet() {
   if (window.nameBox.id != "bet") {
     console.log("nameBox incorrect!")
   } else if (window.nameBox.value != 0) {
