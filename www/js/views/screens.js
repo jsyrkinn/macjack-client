@@ -138,7 +138,7 @@ function makeBetScreen() {
 
     addButton(
       {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
-      "img/buttons/submit.png",
+      "img/buttons/start.png",
       function(touchData) {
         console.log("Submit Bet!");
         validateAndSubmitBet();
@@ -208,9 +208,9 @@ function addNumberBox(id, submitCallback) {
 function validateAndSubmitName() {
   if (window.nameBox.id != "name") {
     console.log("nameBox incorrect!")
-  } else if (window.nameBox.value != "") {
+  } else if (window.nameBox.value != "") { //TODO: add validation to server
     name = window.nameBox.value;
-    window.nameBox.parentNode.remove(); // should remove form
+    window.nameBox.parentNode.remove(); // remove form
     window.nameBox = null;
     getClientAuth(name);
   }
@@ -222,9 +222,8 @@ function validateAndSubmitBet() {
     console.log("nameBox incorrect!")
   } else if (window.nameBox.value != 0) {
     bet = window.nameBox.value;
-    window.nameBox.parentNode.remove(); // should remove form
+    window.nameBox.parentNode.remove(); // remove form
     window.nameBox = null;
-    console.log(bet);
     sendBet(bet);
   }
 }

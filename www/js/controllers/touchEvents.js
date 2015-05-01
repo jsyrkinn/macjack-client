@@ -22,14 +22,14 @@ function TouchHandler() {
 
     if (dist < 10) {
       //Player Hit
-
       //request card from server, wait for next poll
       sendHit();
 
     } else if (dist > 60) {
       // Player Stayed
+      
       sendStay();
-      window.stage.addChild(turnOver);
+      // window.stage.addChild(turnOver);
     }
   }
 }

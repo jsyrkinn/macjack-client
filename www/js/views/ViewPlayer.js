@@ -22,7 +22,7 @@ function ViewPlayer(x,y) {
 
       //TODO: refine logic to space out the cards
       cardSprite.sprite.position.x = x+(i*50);
-       cardSprite.sprite.position.y = y;
+      cardSprite.sprite.position.y = y;
 
       this.cardSprites.push(cardSprite);
 

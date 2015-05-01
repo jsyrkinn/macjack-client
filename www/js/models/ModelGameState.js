@@ -8,6 +8,7 @@ function ModelGameState(gameState) {
   this.player = null;
 
   this.betting = gameState.betting;
+  this.finished = gameState.finished;
 
   model = this;
 

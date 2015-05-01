@@ -97,6 +97,8 @@ function addTouchHandlerToStage() {
   } else {
     window.touchHandler = new TouchHandler();
   }
+
+
 }
 
 
@@ -121,8 +123,6 @@ function createGameStateView(modelGameState) {
 
     window.stage.removeChildren(); // remove all sprites from stage
 
-    addTouchHandlerToStage();
-
     makeNewViewDealer(modelGameState.dealerHand, 100, 100);
 
     modelGameState.opponents.forEach(function(opponent) {
@@ -130,9 +130,21 @@ function createGameStateView(modelGameState) {
     });
 
     var player = modelGameState.player
-
     allPlayers[player.playerID] = makeNewViewPlayer(player, 80,window.innerHeight - 150);
 
+    //TODO move this button elsewhere
+    if (modelGameState.finished) {
+      addButton(
+        {  position: {x:window.innerWidth/2, y:window.innerHeight/2}  },
+        "img/buttons/start.png",
+        function(touchData) {
+          console.log("New Round!");
+          sendContinue();
+        }
+      );
+    } else {
+      addTouchHandlerToStage();
+    }
     // repositionAllHands();
   }
 };

@@ -1,4 +1,4 @@
-var serverIP = "141.140.193.122";
+var serverIP = "141.140.157.1";
 
 
 function getClientAuth(name) {
@@ -96,6 +96,18 @@ function sendStay() {
 };
 
 
+function sendContinue() {
+  var continueRequest = new XMLHttpRequest();
+  continueRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/continue.json', true );
+  continueRequest.setRequestHeader('X-auth-code', window.clientAuth);
+
+  continueRequest.onerror = function() {
+    console.log('Connection Failed - Continue not sent');
+  };
+
+  continueRequest.send();
+};
+
 
 var gameState = {movenumber: -1};
 
@@ -137,5 +149,5 @@ function updateGame() {
 
 function poll() {
   console.log("poll");
-  setTimeout(updateGame, 100);
+  setTimeout(updateGame, 200);
 };
