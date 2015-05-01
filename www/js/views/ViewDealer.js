@@ -34,7 +34,7 @@ function ViewDealer(x,y) {
       cardSprite.sprite.scale.y = 0.25;
 
       //TODO: refine logic to space out the cards
-      cardSprite.sprite.position.x = x + (i*100) + (this.hiddenCardSprite.visible ? 100 : 0);
+      cardSprite.sprite.position.x = x + (i*50) + (this.hiddenCardSprite.visible ? 50 : 0);
       cardSprite.sprite.position.y = y;
 
       this.cardSprites.push(cardSprite);
@@ -47,7 +47,7 @@ function ViewDealer(x,y) {
       text.position.y = window.innerHeight/3.5
       window.stage.addChild(text);
   }
-  
+
   this.updatePile = function(newPile) {
     //TODO: check for updates and update when there is a change - take this function out?
     //Do this to pile itself, don't call updatePile
