@@ -185,10 +185,7 @@ function addNameBox(id, submitCallback) {
   window.nameBox.type = "textbox";
   window.nameBox.id = id;
   window.nameBox.className = "macjacktextbox";
-  window.nameBox.style.width = "200px";
-
-  window.nameBox.style.left = window.innerWidth-200/2; // TODO fix so text box is centered on all devices 
-  window.nameBox.style.right = window.innerWidth-200/2;
+  window.nameBox.onblur = function() {window.scrollTo(0,0)};
 
   form.appendChild(window.nameBox);
 }
@@ -203,6 +200,8 @@ function addNumberBox(id, submitCallback) {
   window.nameBox.type = "number";
   window.nameBox.id = id;
   window.nameBox.className = "macjacktextbox";
+  window.nameBox.onblur = function() {window.scrollTo(0,0)};
+
   form.appendChild(window.nameBox);
 }
 
