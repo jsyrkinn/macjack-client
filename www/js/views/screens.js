@@ -133,7 +133,10 @@ function makeBetScreen() {
     window.stage.removeChildren();
 
     console.log("Make Bet Screen!")
-
+    var text = new PIXI.Text("Place Bet:", {font:"100px PoiretOne", fill:"#f3f3f3"});
+    text.position = {x: window.innerWidth/2, y: window.innerHeight/3};
+    text.anchor = {x: 0.5, y: 0.5};
+    window.stage.addChild(text);
     addNumberBox("bet", validateAndSubmitBet);
 
     addButton(
@@ -187,7 +190,7 @@ function addNameBox(id, submitCallback) {
   window.nameBox.className = "macjacktextbox";
   window.nameBox.style.width = "200px";
 
-  window.nameBox.style.left = window.innerWidth-200/2; // TODO fix so text box is centered on all devices 
+  window.nameBox.style.left = window.innerWidth-200/2; // TODO fix so text box is centered on all devices
   window.nameBox.style.right = window.innerWidth-200/2;
 
   form.appendChild(window.nameBox);
