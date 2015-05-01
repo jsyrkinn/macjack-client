@@ -205,7 +205,9 @@ function addNumberBox(id, submitCallback) {
   form.appendChild(window.nameBox);
 }
 
-function validateAndSubmitName() {
+
+function validateAndSubmitName(event) {
+  event.preventDefault();
   if (window.nameBox.id != "name") {
     console.log("nameBox incorrect!")
   } else if (window.nameBox.value != "") { //TODO: add validation to server
@@ -217,7 +219,8 @@ function validateAndSubmitName() {
 }
 
 
-function validateAndSubmitBet() {
+function validateAndSubmitBet(event) {
+  event.preventDefault();
   if (window.nameBox.id != "bet") {
     console.log("nameBox incorrect!")
   } else if (window.nameBox.value != 0) {
