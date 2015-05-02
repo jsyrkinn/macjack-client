@@ -1,3 +1,4 @@
+
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
@@ -37,9 +38,3 @@ canvas {
   -webkit-transform: translate(-50%, -50%);
 }
 
-
-
-@font-face {
-  font-family: 'PoiretOne';
-  src: url('fonts/Poiret_One/PoiretOne-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
-}
