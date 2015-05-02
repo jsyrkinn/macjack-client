@@ -9,6 +9,7 @@ function getClientAuth(name) {
     signupRequest.open( "POST", 'http://' + serverIP + ':1337/signup.json?name='+name, true );
 
     signupRequest.onload = function() {
+      stopSpinner();
       if (this.status >= 200 && this.status < 400) {
         // Success!
         var res = JSON.parse(this.response);
@@ -22,10 +23,12 @@ function getClientAuth(name) {
     };
 
     signupRequest.onerror = function() {
+      stopSpinner();
       console.log('Connection Failed');
     };
 
     signupRequest.send();
+    startSpinner();
 };
 
 
@@ -36,6 +39,7 @@ function setupNewGame() {
   newgameRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   newgameRequest.onload = function() {
+    stopSpinner();
     if (this.status >= 200 && this.status < 400) {
       // Success!
       var res = JSON.parse(this.response);
@@ -47,12 +51,39 @@ function setupNewGame() {
   };
 
   newgameRequest.onerror = function() {
+    stopSpinner();
     console.log('Connection Failed');
   };
 
   newgameRequest.send();
+  startSpinner();
 };
 
+
+function sendJoinGame(gameID) {
+  var joinGameRequest = new XMLHttpRequest();
+  joinGameRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+gameID+'/join.json', true );
+  joinGameRequest.setRequestHeader('X-auth-code', window.clientAuth);
+
+  joinGameRequest.onload = function() {
+    stopSpinner();
+    if (this.status >= 200 && this.status < 400) {
+      // Success!
+      window.gameID = gameID;
+      updateGame();
+    } else {
+      console.log("Join Game - Error");
+    }
+  };
+
+  joinGameRequest.onerror = function() {
+    stopSpinner();
+    console.log('Connection Failed');
+  };
+
+  joinGameRequest.send();
+  startSpinner();
+};
 
 
 function sendBet(amount) {
@@ -60,6 +91,16 @@ function sendBet(amount) {
   var betRequest = new XMLHttpRequest();
   betRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/bet.json?amount='+amount, true );
   betRequest.setRequestHeader('X-auth-code', window.clientAuth);
+
+  betRequest.onload = function() {
+    stopSpinner();
+    if (this.status >= 200 && this.status < 400) {
+      // do nothing
+    } else {
+      window.betGoing = false;
+      console.log("Bet - Error");
+    }
+  };
 
   betRequest.onerror = function() {
     console.log('Connection Failed - Bet not sent');

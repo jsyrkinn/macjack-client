@@ -82,6 +82,7 @@ function makeReturningHomeScreen() {
     "img/buttons/joinGame.png",
     function(touchData){
       console.log("Join Game!");
+      makeJoinScreen();
     }
   );
 
@@ -125,16 +126,35 @@ function makeGameIdScreen() {
 }
 
 
+//---- JOIN GAME DISPLAY ----//
+
+function makeJoinScreen() {
+  window.stage.removeChildren(); // remove all sprites from stage
+  addLogo();
+  addNameBox("gameid", validateAndSubmitGameId);
+
+  // Submit Button
+  addButton(
+    {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
+    "img/buttons/submit.png",
+    function(touchData) {
+      console.log("Submit!")
+      validateAndSubmitGameId();
+    }
+  );
+}
+
+
 //---- BETTING DISPLAY ----//
 
 function makeBetScreen() {
 
-  if (!window.nameBox) {
+  if (!window.betBox) {
     window.stage.removeChildren();
 
     console.log("Make Bet Screen!")
 
-    addNumberBox("bet", validateAndSubmitBet);
+    addBetBox("bet", validateAndSubmitBet);
 
     addButton(
       {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
@@ -188,13 +208,14 @@ function addNameBox(id, submitCallback) {
   window.nameBox.type = "textbox";
   window.nameBox.id = id;
   window.nameBox.className = "macjacktextbox";
+  window.nameBox.style.top = "60%";
   window.nameBox.onblur = function() {window.scrollTo(0,0)};
 
   form.appendChild(window.nameBox);
 }
 
 // change name
-function addNumberBox(id, submitCallback) {
+function addBetBox(id, submitCallback) {
   var form = document.createElement("form");
   form.onsubmit = function(event) {
     event.preventDefault();
@@ -202,13 +223,14 @@ function addNumberBox(id, submitCallback) {
   };
   document.body.appendChild(form);
 
-  window.nameBox = document.createElement("input");
-  window.nameBox.type = "number";
-  window.nameBox.id = id;
-  window.nameBox.className = "macjacktextbox";
-  window.nameBox.onblur = function() {window.scrollTo(0,0)};
+  window.betBox = document.createElement("input");
+  window.betBox.type = "number";
+  window.betBox.id = id;
+  window.betBox.className = "macjacktextbox";
+  window.betBox.style.top = "50%";
+  window.betBox.onblur = function() {window.scrollTo(0,0)};
 
-  form.appendChild(window.nameBox);
+  form.appendChild(window.betBox);
 }
 
 
@@ -225,12 +247,29 @@ function validateAndSubmitName() {
 
 
 function validateAndSubmitBet() {
-  if (window.nameBox.id != "bet") {
+  if (window.betBox.id != "bet") {
+    console.log("betBox id incorrect, is: " + window.betBox.id);
+    console.log("betBox incorrect!")
+  } else if (window.betBox.value != 0) {
+    bet = window.betBox.value;
+    window.betBox.parentNode.remove(); // remove form
+    window.betBox = null;
+    sendBet(bet);
+  } else {
+    console.log("HI: " + window.betBox.value); // TODO: so many forms
+  }
+}
+
+
+function validateAndSubmitGameId() {
+  if (window.nameBox.id != "gameid") {
     console.log("nameBox incorrect!")
-  } else if (window.nameBox.value != 0) {
-    bet = window.nameBox.value;
+  } else if (window.nameBox.value.length == 4) {
+    gameid = window.nameBox.value;
     window.nameBox.parentNode.remove(); // remove form
     window.nameBox = null;
-    sendBet(bet);
+    sendJoinGame(gameid);
+  } else {
+    console.log("Game Id length should be 4, is actually: " + window.nameBox.value.length)
   }
 }
