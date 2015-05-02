@@ -23,6 +23,7 @@ function ViewOpponent(x,y) {
       this.cardSprites.push(cardSprite);
     }
   }
+
 //TODO: JAMEY- This should call some function such as 'getPlayerName()' from cardPile.js and print the opponent's name
   this.renderOpponentName = function() {
     nameText = new PIXI.Text(this.pile.getPlayerName(), {font:"20px PoiretOne", fill:"#f3f3f3"});
@@ -33,10 +34,10 @@ function ViewOpponent(x,y) {
 
 //TODO: JAMEY- This should call bet() from cardPile.js and print the bet
   this.renderOpponentBet = function() {
-    nameText = new PIXI.Text(this.pile.getBet(), {font:"20px PoiretOne", fill:"#f3f3f3"});
-    // nameText.position.x = window.innerWidth/2;
-    // nameText.position.y = window.innerHeight - 200;
-    // window.stage.addChild(nameText);
+    betText = new PIXI.Text(this.pile.getBet(), {font:"20px PoiretOne", fill:"#f3f3f3"});
+    // betText.position.x = window.innerWidth/2;
+    // betText.position.y = window.innerHeight - 200;
+    // window.stage.addChild(betText);
   }
 
   this.movePile = function(x, y) {

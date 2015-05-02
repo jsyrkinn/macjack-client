@@ -70,6 +70,9 @@ function makeNewViewOpponent(opponent, x, y) {
   });
 
   viewOpponent.renderPile();
+  //viewOpponent.renderOpponentSum();
+  viewOpponent.renderOpponentName();
+  viewOpponent.renderOpponentBet();
 
   return viewOpponent
 }
