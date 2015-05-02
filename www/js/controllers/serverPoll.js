@@ -97,7 +97,7 @@ function sendBet(amount) {
     if (this.status >= 200 && this.status < 400) {
       // do nothing
     } else {
-      // window.betGoing = false;
+      window.betGoing = false;
       console.log("Bet - Error");
     }
   };
