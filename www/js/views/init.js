@@ -113,12 +113,13 @@ function createGameStateView(modelGameState) {
       makeBetScreen();
     }
   } else {
+    //betting is finished
     window.betGoing = false;
     stopSpinner();
 
-    if (window.formBox) {
-      window.formBox.parentNode.remove(); // should remove form
-      window.formBox = null;
+    if (window.betBox) {
+      window.betBox.parentNode.remove(); // should remove form
+      window.betBox = null;
     }
 
     window.stage.removeChildren(); // remove all sprites from stage
