@@ -2,11 +2,13 @@
 function CardPile() {
   this.cards = [];
 
-//TODO: Rename this input.
-  this.push = function(thing) {
-    this.cards.push(thing);
+  this.push = function(card) {
+    this.cards.push(card);
   }
+//TODO: JAMEY- This function should return the hand's bet
+  this.bet = function() {
 
+  }
 
   this.sumTotal = function() {
     var tot21 = 0;

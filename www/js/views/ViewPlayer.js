@@ -29,15 +29,26 @@ function ViewPlayer(x,y) {
     }
   }
 
-  this.renderSumText = function() {
-      text = new PIXI.Text("Sum: " + this.pile.sumTotal(), {font:"24px PoiretOne", fill:"#f3f3f3"});
+  this.renderPlayerSumText = function() {
+      text = new PIXI.Text(this.pile.sumTotal(), {font:"20px PoiretOne", fill:"#f3f3f3"});
       text.position.x = 10;
       text.position.y = window.innerHeight - 50;
       window.stage.addChild(text);
   }
 
-  this.renderBetText = function(){
-    text = new PIXI.Text("$" + thi)
+//TODO: JAMEY- This should call bet() from cardPile.js and print the bet
+  this.renderPlayerBetText = function(){
+    betText = new PIXI.Text("$" + this.pile.bet(), {font:"20px PoiretOne", fill:"#f3f3f3"}); 
+    //betText.position.x = ;
+    //betText.position.y = ;
+    //window.stage.addChild(betText);
+  }
+//TODO: JAMEY- This should print the player name. Not set up yet.
+  this.renderPlayerName = function(){
+    nameText = new PIXI.Text("YOU", {font:"20px PoiretOne", fill:"#f3f3f3"});
+    nameText.position.x = window.innerWidth/2;
+    nameText.position.y = window.innerHeight - 200;
+    window.stage.addChild(nameText);
   }
 
   this.movePile = function(x, y) {

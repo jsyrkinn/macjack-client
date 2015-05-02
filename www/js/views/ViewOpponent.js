@@ -17,19 +17,31 @@ function ViewOpponent(x,y) {
       cardSprite.sprite.scale.x = 0.25;
       cardSprite.sprite.scale.y = 0.25;
 
-      //TODO: refine logic to space out the cards
       cardSprite.sprite.position.x = x+(i*50);
       cardSprite.sprite.position.y = y;
 
       this.cardSprites.push(cardSprite);
-
     }
+  }
+//TODO: JAMEY- This should call some function such as 'getPlayerName()' from cardPile.js and print the opponent's name
+  this.renderOpponentName = function() {
+    nameText = new PIXI.Text(this.pile.getPlayerName(), {font:"20px PoiretOne", fill:"#f3f3f3"});
+    // nameText.position.x = window.innerWidth/2;
+    // nameText.position.y = window.innerHeight - 200;
+    // window.stage.addChild(nameText);
+  }
+
+//TODO: JAMEY- This should call bet() from cardPile.js and print the bet
+  this.renderOpponentBet = function() {
+    nameText = new PIXI.Text(this.pile.getBet(), {font:"20px PoiretOne", fill:"#f3f3f3"});
+    // nameText.position.x = window.innerWidth/2;
+    // nameText.position.y = window.innerHeight - 200;
+    // window.stage.addChild(nameText);
   }
 
   this.movePile = function(x, y) {
     for (var i = 0; i < cardSprites.length; i++) {
 
-      //TODO: refine logic to space out the cards
       cardSprites[i].sprite.position.x = x+(i*50);
       cardSprites[i].sprite.position.y = y;
     }

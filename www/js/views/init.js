@@ -53,7 +53,9 @@ function makeNewViewPlayer(player, x, y) {
   });
 
   viewPlayer.renderPile();
-  viewPlayer.renderSumText();
+  viewPlayer.renderPlayerSumText();
+  viewPlayer.renderPlayerBetText();
+  viewPlayer.renderPlayerName();
 
   return viewPlayer
 }
