@@ -188,6 +188,7 @@ function addNameBox(id, submitCallback) {
   window.nameBox.type = "textbox";
   window.nameBox.id = id;
   window.nameBox.className = "macjacktextbox";
+  window.nameBox.style.top = "60%";
   window.nameBox.onblur = function() {window.scrollTo(0,0)};
 
   form.appendChild(window.nameBox);
