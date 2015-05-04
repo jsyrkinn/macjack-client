@@ -1,4 +1,6 @@
 
+@import url(http://fonts.googleapis.com/css?family=Poiret+One);
+
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
@@ -35,5 +37,6 @@ canvas {
   background: transparent;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
+  font-family: "Poiret One";
+  font-size:24px;
 }
-

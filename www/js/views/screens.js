@@ -110,7 +110,7 @@ function makeGameIdScreen() {
 
   console.log("Display Game ID!")
 
-  var text = new PIXI.Text(window.gameID, {font:"100px PoiretOne", fill:"#f3f3f3"});
+  var text = new PIXI.Text(window.gameID, {font:"100px 'Poiret One'", fill:"#f3f3f3"});
   text.position = {x: window.innerWidth/2, y: window.innerHeight/2};
   text.anchor = {x: 0.5, y: 0.5};
   window.stage.addChild(text);

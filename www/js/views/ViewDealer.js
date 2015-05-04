@@ -42,14 +42,14 @@ function ViewDealer(x,y) {
     }
   }
     this.renderDealerSumText = function() {
-      dealerSumText = new PIXI.Text(this.pile.sumTotal(), {font:"20px PoiretOne", fill:"#f3f3f3"});
+      dealerSumText = new PIXI.Text(this.pile.sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
       dealerSumText.position.x = window.innerWidth/1.5;
       dealerSumText.position.y = window.innerHeight/3.5;
       
       window.stage.addChild(dealerSumText);
   }
     this.renderDealerNameText = function() {
-      dealerName = new PIXI.Text("DEALER", {font:"20px PoiretOne", fill:"#f3f3f3"});
+      dealerName = new PIXI.Text("DEALER", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
       dealerName.position.x = window.innerWidth/3.2;
       dealerName.position.y = window.innerHeight/45;
 
