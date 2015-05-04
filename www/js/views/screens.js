@@ -106,6 +106,8 @@ function makeReturningHomeScreen() {
 //---- GAME ID DISPLAY ----//
 
 function makeGameIdScreen() {
+
+  //TODO: Add back button
   window.stage.removeChildren();
 
   console.log("Display Game ID!")
@@ -156,6 +158,14 @@ function makeBetScreen() {
 
     addBetBox("bet", validateAndSubmitBet);
 
+    //move to a separate function:
+    betText = new PIXI.Text("Place your bet below!", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+    betText.anchor.x = 0.5;
+    betText.anchor.y = 0.5;
+    betText.position.x = window.innerWidth/2;
+    betText.position.y = window.innerHeight/3;
+    window.stage.addChild(betText);
+
     addButton(
       {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
       "img/buttons/start.png",
@@ -165,6 +175,7 @@ function makeBetScreen() {
       }
     );
   }
+
 }
 
 
