@@ -1,14 +1,9 @@
 
-function CardPile() {
-  this.cards = [];
-
-  this.push = function(card) {
-    this.cards.push(card);
-  }
-//TODO: JAMEY- This function should return the hand's bet
-  this.bet = function() {
-
-  }
+function CardPile(hand) {
+  this.cards = hand.cards;
+  this.bet = hand.bet;
+  this.busted = hand.busted;
+  this.finished = hand.finished;
 
   this.sumTotal = function() {
     var tot21 = 0;

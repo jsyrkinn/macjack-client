@@ -1,10 +1,10 @@
-function ViewDealer(x,y) {
+function ViewDealer(x,y,dealerHand) {
   //TODO: Either make dealer and player into one file OR
   //write logic for spacing out cards in both dealer and player files.
   //Dealer object handles visibility vs. invisibility
   //Player object handles double tap, swipe right, swipe up (for betting)
 
-  this.pile = new CardPile();
+  this.pile = new CardPile(dealerHand);
 
   this.hiddenCardSprite = new PIXI.Sprite.fromImage("img/cards/cardBack.png");
   this.hiddenCardSprite.scale = {x:0.25, y: 0.25};
@@ -45,7 +45,7 @@ function ViewDealer(x,y) {
       dealerSumText = new PIXI.Text(this.pile.sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
       dealerSumText.position.x = window.innerWidth/1.5;
       dealerSumText.position.y = window.innerHeight/3.5;
-      
+
       window.stage.addChild(dealerSumText);
   }
     this.renderDealerNameText = function() {

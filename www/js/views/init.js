@@ -45,12 +45,7 @@ function repositionOpponents(opponentList) {
 
 
 function makeNewViewPlayer(player, x, y) {
-  viewPlayer = new ViewPlayer(x, y);
-
-  // change to display multiple hands
-  player.hands[0].cards.forEach(function(card) {
-     viewPlayer.pile.push(card);
-  });
+  viewPlayer = new ViewPlayer(x, y, player);
 
   viewPlayer.renderPile();
   viewPlayer.renderPlayerSumText();
@@ -62,12 +57,7 @@ function makeNewViewPlayer(player, x, y) {
 
 
 function makeNewViewOpponent(opponent, x, y) {
-  viewOpponent = new ViewOpponent(x, y);
-
-  // change to display multiple hands
-  opponent.hands[0].cards.forEach(function(card) {
-     viewOpponent.pile.push(card);
-  });
+  viewOpponent = new ViewOpponent(x, y, opponent);
 
   viewOpponent.renderPile();
   //viewOpponent.renderOpponentSum();
@@ -79,12 +69,7 @@ function makeNewViewOpponent(opponent, x, y) {
 
 
 function makeNewViewDealer(dealerHand, x, y) {
-  viewDealer = new ViewDealer(x, y);
-
-  // change to display multiple hands
-  dealerHand.cards.forEach(function(card) {
-     viewDealer.pile.push(card);
-  });
+  viewDealer = new ViewDealer(x, y, dealerHand);
 
   viewDealer.renderPile();
   viewDealer.renderDealerSumText();

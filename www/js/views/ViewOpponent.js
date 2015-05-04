@@ -1,15 +1,24 @@
-function ViewOpponent(x,y) {
+function ViewOpponent(x,y, opponent) {
   //TODO: Either make dealer and player into one file OR
   //write logic for spacing out cards in both dealer and player files.
   //Dealer object handles visibility vs. invisibility
   //Player object handles double tap, swipe right, swipe up (for betting)
 
-  this.pile = new CardPile();
+  this.playerName = opponent.playerName;
+  this.totalMoney = opponent.totalMoney;
+  this.piles = [];
+
+  viewOpponent = this;
+
+  opponent.hands.forEach(function(hand) {
+    cardPile = new CardPile(hand)
+    viewOpponent.piles.push(cardPile);
+  });
 
   this.renderPile = function() {
     this.cardSprites = [];
 
-    var cards = this.pile.cards;
+    var cards = this.piles[0].cards;
 
     for (var i = 0; i < cards.length; i++) {
       var cardSprite = new CardSprite(cards[i]);
@@ -24,17 +33,15 @@ function ViewOpponent(x,y) {
     }
   }
 
-//TODO: JAMEY- This should call some function such as 'getPlayerName()' from cardPile.js and print the opponent's name
   this.renderOpponentName = function() {
-    nameText = new PIXI.Text(this.pile.getPlayerName(), {font:'Poiret One', size:'20px', fill:"#f3f3f3"});
+    nameText = new PIXI.Text(this.playerName, {font:'Poiret One', size:'20px', fill:"#f3f3f3"});
     // nameText.position.x = window.innerWidth/2;
     // nameText.position.y = window.innerHeight - 200;
     // window.stage.addChild(nameText);
   }
 
-//TODO: JAMEY- This should call bet() from cardPile.js and print the bet
   this.renderOpponentBet = function() {
-    betText = new PIXI.Text(this.pile.getBet(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    betText = new PIXI.Text(this.piles[0].bet, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
     // betText.position.x = window.innerWidth/2;
     // betText.position.y = window.innerHeight - 200;
     // window.stage.addChild(betText);
