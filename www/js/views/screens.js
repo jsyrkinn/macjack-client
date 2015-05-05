@@ -39,7 +39,7 @@ function makeSignUpScreen() {
 
   //add text: "All we need is your first name!"
   signUpText = new PIXI.Text("Enter your first name below", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
-  positionAndAddText(signUpText, window.innerWidth/2, window.innerHeight/2.1);
+  positionAndAddText(signUpText, window.stage, window.innerWidth/2, window.innerHeight/2.1);
 
   // Submit Button
   addButton(
@@ -108,10 +108,10 @@ function makeGameIdScreen() {
   console.log("Display Game ID!")
 
   gameIDInstructions = new PIXI.Text("Here is your game code. \n Share this with your friends \n so that they can join your game!", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
-  positionAndAddText(gameIDInstructions, window.innerWidth/2, window.innerHeight/3);
+  positionAndAddText(gameIDInstructions, window.stage, window.innerWidth/2, window.innerHeight/3);
 
   var gameIDText = new PIXI.Text(window.gameID, {font:"100px 'Poiret One'", fill:"#f3f3f3"});
-  positionAndAddText(gameIDText, window.innerWidth/2, window.innerHeight/2);
+  positionAndAddText(gameIDText, window.stage, window.innerWidth/2, window.innerHeight/2);
 
   addButton(
     {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
@@ -198,12 +198,11 @@ function addButton(placement, imagePath, tapCallback) {
   window.stage.addChild(button);
 }
 
-function positionAndAddText(text, x, y){
-  text.anchor.x = 0.5;
-  text.anchor.y = 0.5;
+function positionAndAddText(text, parent, x, y) {
+  text.anchor = {x: 0.5, y:0.5};
   text.position.x = x;
   text.position.y = y;
-  window.stage.addChild(text);
+  parent.addChild(text);
 }
 
 

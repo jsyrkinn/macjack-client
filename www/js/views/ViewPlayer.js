@@ -40,22 +40,22 @@ function ViewPlayer(x,y, player) {
 
   this.renderPlayerSum = function() {
     sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(sumText, window.innerWidth/1.5, window.innerHeight - 45);
+    positionAndAddText(sumText, PARENTADD, window.innerWidth/1.5, window.innerHeight - 45);
   }
 
   this.renderPlayerBet = function() {
     betText = new PIXI.Text("$" + this.piles[0].bet, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(betText, window.innerWidth/3.2, window.innerHeight - 45)
+    positionAndAddText(betText, PARENTADD, window.innerWidth/3.2, window.innerHeight - 45)
   }
 
   this.renderPlayerName = function() {
     nameText = new PIXI.Text("YOU", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(nameText, window.innerWidth/2, window.innerHeight/1.55)
+    positionAndAddText(nameText, PARENTADD, window.innerWidth/2, window.innerHeight/1.55)
   }
 
   this.renderPlayerMoney = function() {
     moneyText = new PIXI.Text("TOTAL: $" + this.money, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(moneyText, window.innerWidth/2, window.innerHeight - 10 )
+    positionAndAddText(moneyText, PARENTADD, window.innerWidth/2, window.innerHeight - 10 )
   }
 
   this.movePile = function(x, y) {
