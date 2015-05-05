@@ -64,14 +64,14 @@ function repositionOpponents(opponentList) {
 
   if (len == 1) {
     makeNewViewOpponent(opponentList[0],innerWidth/2.45,innerHeight/2);
-  } 
+  }
   // else if (len == 2) {
 
   // } else if (len == 3) {
 
   // } else if (len == 4) {
 
-  // } 
+  // }
   else {
      console.log("too many players!")
   }
@@ -90,12 +90,12 @@ function createGameStateView(modelGameState) {
     window.betGoing = false;
     stopSpinner();
 
-    if (window.betBox) {
-      window.betBox.parentNode.remove(); // should remove form
-      window.betBox = null;
+    if (window.textBox) { // bet textbox already exists
+      window.textBox.parentNode.remove(); // should remove form
+      window.textBox = null;
     }
 
-    window.stage.removeChildren(); 
+    window.stage.removeChildren();
 
     makeNewViewDealer(modelGameState.dealerHand, window.innerWidth/2.4, window.innerHeight/5.5);
 
@@ -105,14 +105,14 @@ function createGameStateView(modelGameState) {
     var player = modelGameState.player
     makeNewViewPlayer(player, window.innerWidth/2.4, window.innerHeight-125);
 
-    //TODO: This if statement should call functions- 
-    //1. displays text for end of round 
+    //TODO: This if statement should call functions-
+    //1. displays text for end of round
     //2. displays two buttons (quit or new round)
     //Both of these need to be displayed on a pop up box that is darker than the rest of the game so it's visible
     if (modelGameState.finished) {
       newRoundText = new PIXI.Text("End of round. \n Would you like to play again?", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
       positionAndAddText(newRoundText, window.innerWidth/2, window.innerHeight/2.5)
-  
+
       addButton(
         {  position: {x:window.innerWidth/2, y:window.innerHeight/2}  },
         "img/buttons/newRound.png",
