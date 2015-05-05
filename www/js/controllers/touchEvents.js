@@ -1,6 +1,4 @@
 function TouchHandler() {
-  turnOver.position.x = window.innerWidth - 600;
-  turnOver.position.y = window.innerHeight - 300;
   this.touchHandler = new PIXI.Sprite();
   this.touchHandler.interactive = true;
   this.touchHandler.hitArea = new PIXI.Rectangle(0,0,window.innerWidth,window.innerHeight);
