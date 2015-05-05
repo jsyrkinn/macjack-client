@@ -35,16 +35,17 @@ function ViewOpponent(x,y, opponent) {
 
   this.renderOpponentName = function() {
     nameText = new PIXI.Text(this.playerName, {font:'Poiret One', size:'20px', fill:"#f3f3f3"});
-    // nameText.position.x = window.innerWidth/2;
-    // nameText.position.y = window.innerHeight - 200;
-    // window.stage.addChild(nameText);
+    nameText = new PIXI.Text(this.playerName, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    nameText.position.x = (window.innerWidth/2)-100;
+    nameText.position.y = window.innerHeight/2;
+    window.stage.addChild(nameText);
   }
 
   this.renderOpponentBet = function() {
     betText = new PIXI.Text(this.piles[0].bet, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    // betText.position.x = window.innerWidth/2;
-    // betText.position.y = window.innerHeight - 200;
-    // window.stage.addChild(betText);
+    betText.position.x = (window.innerWidth/2)+100;
+    betText.position.y = window.innerHeight/2;
+    window.stage.addChild(betText);
   }
 
   this.movePile = function(x, y) {
