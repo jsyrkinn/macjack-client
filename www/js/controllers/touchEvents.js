@@ -1,11 +1,9 @@
 function TouchHandler() {
-  var turnOver = new PIXI.Text("Your turn is over!", {font:"50px PioretOne", fill:"#f3f3f3"});
   turnOver.position.x = window.innerWidth - 600;
   turnOver.position.y = window.innerHeight - 300;
   this.touchHandler = new PIXI.Sprite();
   this.touchHandler.interactive = true;
   this.touchHandler.hitArea = new PIXI.Rectangle(0,0,window.innerWidth,window.innerHeight);
-
   this.startX = null;
   this.startY = null;
 
@@ -19,17 +17,10 @@ function TouchHandler() {
     var endY = touchData.global.y;
     var dist = Math.abs(endX-this.startX);
     var tot21 = 0;
-
-    if (dist < 10) {
-      //Player Hit
-      //request card from server, wait for next poll
+    if (dist < 10) { //Player Hit
       sendHit();
-
-    } else if (dist > 60) {
-      // Player Stayed
-      
+    } else if (dist > 60) { // Player Stayed
       sendStay();
-      // window.stage.addChild(turnOver);
     }
   }
 }
