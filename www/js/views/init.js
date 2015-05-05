@@ -8,11 +8,7 @@ var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {r
 // add the renderer view element to the DOM
 document.body.appendChild(renderer.view);
 
-
 checkHomeScreen();
-
-
-
 
 function repositionAllHands(player, dealer, opponents) {
 

@@ -22,20 +22,11 @@ function makeFirstTimeHomeScreen() {
   // Sign up Button
   addButton(
     {  anchor: {x:0.5, y:0.0},
-     position: {x:window.innerWidth/2, y:window.innerHeight/2}  },
-    "img/buttons/signUp.png",
+     position: {x:window.innerWidth/2, y:window.innerHeight/1.7}  },
+    "img/buttons/begin.png",
     function(touchData){
       console.log("Sign Up!");
       makeSignUpScreen();
-    }
-  );
-
-  // About Button
-  addButton(
-    {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
-    "img/buttons/about.png",
-    function(touchData){
-      console.log("About Us!");
     }
   );
 }
