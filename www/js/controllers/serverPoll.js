@@ -1,4 +1,4 @@
-var serverIP = "141.140.195.207";
+var serverIP = "192.168.0.25";
 
 
 function getClientAuth(name) {

@@ -17,12 +17,10 @@ function ViewDealer(x,y,dealerHand) {
 
   this.renderPile = function() {
     this.cardSprites = [];
-
     var cards = this.pile.cards;
 
     if (cards.length == 1) {
       this.hiddenCardSprite.visible = true;
-
     } else {
       this.hiddenCardSprite.visible = false;
     }
@@ -32,28 +30,26 @@ function ViewDealer(x,y,dealerHand) {
 
       cardSprite.sprite.scale.x = 0.25;
       cardSprite.sprite.scale.y = 0.25;
-
-      //TODO: refine logic to space out the cards
+      cardSprite.sprite.anchor.x = 0.5;
+      cardSprite.sprite.anchor.y = 0.5;
+      
+      //Spreading out of cards
       cardSprite.sprite.position.x = x + (i*50) + (this.hiddenCardSprite.visible ? 50 : 0);
       cardSprite.sprite.position.y = y;
 
       this.cardSprites.push(cardSprite);
-
     }
   }
+
     this.renderDealerSumText = function() {
       dealerSumText = new PIXI.Text(this.pile.sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-      dealerSumText.position.x = window.innerWidth/1.5;
-      dealerSumText.position.y = window.innerHeight/3.5;
-
-      window.stage.addChild(dealerSumText);
+      positionAndAddText(dealerSumText, window.innerWidth/1.5, window.innerHeight/3.1);
   }
+
     this.renderDealerNameText = function() {
       dealerName = new PIXI.Text("DEALER", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-      dealerName.position.x = window.innerWidth/3.2;
-      dealerName.position.y = window.innerHeight/45;
+      positionAndAddText(dealerName, window.innerWidth/2, window.innerHeight/18);
 
-      window.stage.addChild(dealerName);
   }
 
   this.updatePile = function(newPile) {

@@ -46,6 +46,8 @@ function makeSignUpScreen() {
   addLogo();
   addNameBox("name", validateAndSubmitName);
 
+  //add text: "All we need is your first name!"
+
   // Submit Button
   addButton(
     {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
@@ -149,24 +151,19 @@ function makeJoinScreen() {
 
 //---- BETTING DISPLAY ----//
 
-function makeBetScreen() {
+function makeBetText() {
+  betText = new PIXI.Text("Place your bet below.", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+  positionAndAddText(betText, window.innerWidth/2, window.innerHeight/3);
+}
 
+function makeBetScreen() {
   if (!window.betBox) {
     window.stage.removeChildren();
-
     console.log("Make Bet Screen!")
 
-    addBetBox("bet", validateAndSubmitBet);
+    makeBetText();
 
-    //move to a separate function:
-    this.makeBetText = function(){
-    betText = new PIXI.Text("Place your bet below!", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
-    betText.anchor.x = 0.5;
-    betText.anchor.y = 0.5;
-    betText.position.x = window.innerWidth/2;
-    betText.position.y = window.innerHeight/3;
-    window.stage.addChild(betText);
-    }
+    addBetBox("bet", validateAndSubmitBet);
     addButton(
       {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
       "img/buttons/start.png",
@@ -176,12 +173,7 @@ function makeBetScreen() {
       }
     );
   }
-  makeBetText();
-
 }
-
-
-
 
 //--- HELPER FUNCTIONS ----//
 
@@ -206,6 +198,14 @@ function addButton(placement, imagePath, tapCallback) {
   button.interactive = true;
   button.tap = tapCallback;
   window.stage.addChild(button);
+}
+
+function positionAndAddText(text, x, y){
+  text.anchor.x = 0.5;
+  text.anchor.y = 0.5;
+  text.position.x = x;
+  text.position.y = y;
+  window.stage.addChild(text);
 }
 
 
