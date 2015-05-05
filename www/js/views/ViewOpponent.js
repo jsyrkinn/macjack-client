@@ -34,20 +34,17 @@ function ViewOpponent(x,y, opponent) {
   }
 
   this.renderOpponentName = function() {
-    nameText = new PIXI.Text(this.playerName, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(nameText, window.innerWidth/2, window.innerHeight/2)
+    nameText = new PIXI.Text(this.playerName.toUpperCase(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    positionAndAddText(nameText, window.innerWidth/2, window.innerHeight/2.7);
   }
 
   this.renderOpponentBet = function() {
-    betText = new PIXI.Text(this.piles[0].bet, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(betText, window.innerWidth/2, window.innerHeight/2)
+    betText = new PIXI.Text("$" + this.piles[0].bet, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    positionAndAddText(betText, window.innerWidth/3.2, window.innerHeight/1.5);
   }
 
-  this.movePile = function(x, y) {
-    for (var i = 0; i < cardSprites.length; i++) {
-
-      cardSprites[i].sprite.position.x = x+(i*50);
-      cardSprites[i].sprite.position.y = y;
-    }
+  this.renderOpponentSum = function() {
+    sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    positionAndAddText(betText, window.innerWidth/1.5, window.innerHeight/1.5);
   }
 }

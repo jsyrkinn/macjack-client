@@ -10,42 +10,13 @@ document.body.appendChild(renderer.view);
 
 checkHomeScreen();
 
-function repositionAllHands(player, dealer, opponents) {
-
-}
-
-
-//TODO: Create code to position opponents
-function repositionOpponents(opponentList) {
-  var len = opponentList.length;
-
-  if (len == 0) {
-
-  } else if (len == 1) {
-
-  } else if (len == 2) {
-
-  } else if (len == 3) {
-
-  } else if (len == 4) {
-
-  } else {
-     console.log("too many players!")
-  }
-
-  allPlayers.forEach(function(player) {
-    player.movePile(x, y);
-  });
-
-}
-
 
 function makeNewViewPlayer(player, x, y) {
   viewPlayer = new ViewPlayer(x, y, player);
 
   viewPlayer.renderPile();
-  viewPlayer.renderPlayerSumText();
-  viewPlayer.renderPlayerBetText();
+  viewPlayer.renderPlayerSum();
+  viewPlayer.renderPlayerBet();
   viewPlayer.renderPlayerName();
   viewPlayer.renderPlayerMoney()
 
@@ -57,7 +28,7 @@ function makeNewViewOpponent(opponent, x, y) {
   viewOpponent = new ViewOpponent(x, y, opponent);
 
   viewOpponent.renderPile();
-  //viewOpponent.renderOpponentSum();
+  viewOpponent.renderOpponentSum();
   viewOpponent.renderOpponentName();
   viewOpponent.renderOpponentBet();
 
@@ -69,8 +40,8 @@ function makeNewViewDealer(dealerHand, x, y) {
   viewDealer = new ViewDealer(x, y, dealerHand);
 
   viewDealer.renderPile();
-  viewDealer.renderDealerSumText();
-  viewDealer.renderDealerNameText();
+  viewDealer.renderDealerSum();
+  viewDealer.renderDealerName();
 
   return viewDealer
 }
@@ -85,11 +56,26 @@ function addTouchHandlerToStage() {
   } else {
     window.touchHandler = new TouchHandler();
   }
-
-
 }
 
+//TODO: Create code to position opponents
+function repositionOpponents(opponentList) {
+  var len = opponentList.length;
 
+  if (len == 1) {
+    makeNewViewOpponent(opponentList[0],innerWidth/2.45,innerHeight/2);
+  } 
+  // else if (len == 2) {
+
+  // } else if (len == 3) {
+
+  // } else if (len == 4) {
+
+  // } 
+  else {
+     console.log("too many players!")
+  }
+}
 
 function createGameStateView(modelGameState) {
 
@@ -113,9 +99,8 @@ function createGameStateView(modelGameState) {
 
     makeNewViewDealer(modelGameState.dealerHand, window.innerWidth/2.4, window.innerHeight/5.5);
 
-    modelGameState.opponents.forEach(function(opponent) {
-      makeNewViewOpponent(opponent, 100, 500);
-    });
+    opponents = modelGameState.opponents;
+    repositionOpponents(opponents);
 
     var player = modelGameState.player
     makeNewViewPlayer(player, window.innerWidth/2.4, window.innerHeight-125);

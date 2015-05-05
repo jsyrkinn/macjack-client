@@ -38,12 +38,12 @@ function ViewPlayer(x,y, player) {
     }
   }
 
-  this.renderPlayerSumText = function() {
+  this.renderPlayerSum = function() {
     sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
     positionAndAddText(sumText, window.innerWidth/1.5, window.innerHeight - 45);
   }
 
-  this.renderPlayerBetText = function() {
+  this.renderPlayerBet = function() {
     betText = new PIXI.Text("$" + this.piles[0].bet, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
     positionAndAddText(betText, window.innerWidth/3.2, window.innerHeight - 45)
   }
@@ -54,7 +54,7 @@ function ViewPlayer(x,y, player) {
   }
 
   this.renderPlayerMoney = function() {
-    moneyText = new PIXI.Text("TOTAL: " + this.money, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    moneyText = new PIXI.Text("TOTAL: $" + this.money, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
     positionAndAddText(moneyText, window.innerWidth/2, window.innerHeight - 10 )
   }
 
