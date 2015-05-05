@@ -1,10 +1,7 @@
-var serverIP = "141.140.193.128";
-
+var serverIP = "141.140.177.202";
 
 function getClientAuth(name) {
-
     console.log("clientAuth not set, requesting from server...")
-
     var signupRequest = new XMLHttpRequest();
     signupRequest.open( "POST", 'http://' + serverIP + ':1337/signup.json?name='+name, true );
 
@@ -18,20 +15,15 @@ function getClientAuth(name) {
         window.localStorage.setItem('clientAuth', clientAuth);
         window.localStorage.setItem('clientID', clientID);
       }
-
       checkHomeScreen();
     };
-
     signupRequest.onerror = function() {
       stopSpinner();
       console.log('Connection Failed');
     };
-
     signupRequest.send();
     startSpinner();
 };
-
-
 
 function setupNewGame() {
   var newgameRequest = new XMLHttpRequest();
@@ -41,7 +33,6 @@ function setupNewGame() {
   newgameRequest.onload = function() {
     stopSpinner();
     if (this.status >= 200 && this.status < 400) {
-      // Success!
       var res = JSON.parse(this.response);
       window.gameID = res.gameID;
       makeGameIdScreen();
@@ -59,7 +50,6 @@ function setupNewGame() {
   startSpinner();
 };
 
-
 function sendJoinGame(gameID) {
   var joinGameRequest = new XMLHttpRequest();
   joinGameRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+gameID+'/join.json', true );
@@ -68,7 +58,6 @@ function sendJoinGame(gameID) {
   joinGameRequest.onload = function() {
     stopSpinner();
     if (this.status >= 200 && this.status < 400) {
-      // Success!
       window.gameID = gameID;
       updateGame();
     } else {
@@ -80,11 +69,9 @@ function sendJoinGame(gameID) {
     stopSpinner();
     console.log('Connection Failed');
   };
-
   joinGameRequest.send();
   startSpinner();
 };
-
 
 function sendBet(amount) {
   window.betGoing = true;
@@ -95,7 +82,6 @@ function sendBet(amount) {
   betRequest.onload = function() {
     stopSpinner();
     if (this.status >= 200 && this.status < 400) {
-      // do nothing
     } else {
       window.betGoing = false;
       console.log("Bet - Error");
@@ -109,8 +95,6 @@ function sendBet(amount) {
   betRequest.send();
 };
 
-
-
 function sendHit() {
   var hitRequest = new XMLHttpRequest();
   hitRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/hit.json', true );
@@ -123,7 +107,6 @@ function sendHit() {
   hitRequest.send();
 };
 
-
 function sendStay() {
   var hitRequest = new XMLHttpRequest();
   hitRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/stay.json', true );
@@ -132,10 +115,8 @@ function sendStay() {
   hitRequest.onerror = function() {
     console.log('Connection Failed - Stay not sent');
   };
-
   hitRequest.send();
 };
-
 
 function sendContinue() {
   var continueRequest = new XMLHttpRequest();
@@ -145,46 +126,31 @@ function sendContinue() {
   continueRequest.onerror = function() {
     console.log('Connection Failed - Continue not sent');
   };
-
   continueRequest.send();
 };
-
 
 var gameState = {movenumber: -1};
 
 function updateGame() {
-
-  // if betting is false and we're the showing numberBox, remove it
-  // if betting is true and we're not showing numberBox, add it
-
   var updateRequest = new XMLHttpRequest();
-
   updateRequest.open("GET", 'http://' + serverIP + ':1337/games/'+window.gameID+'/state.json', true );
   updateRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   updateRequest.onload = function() {
-    //call the next poll
     poll();
-
     if (this.status >= 200 && this.status < 400) {
-      // Success!
       var serverGameState = JSON.parse(this.response);
-      //if (serverGameState.moveNumber != gameState.moveNumber) {
         gameState = serverGameState;
-        window.gameState = gameState // DEBUG
+        window.gameState = gameState 
         var modelGameState = new ModelGameState(gameState);
         createGameStateView(modelGameState);
-      //}
     }
   };
 
   updateRequest.onerror = function() {
-    //call the next poll
     poll();
-
     console.log('Connection Failed');
   };
-
   updateRequest.send();
 }
 
