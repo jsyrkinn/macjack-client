@@ -1,4 +1,4 @@
-var serverIP = "141.140.177.202";
+var serverIP = "141.140.157.1";
 
 function getClientAuth(name) {
     console.log("clientAuth not set, requesting from server...")
@@ -141,7 +141,6 @@ function updateGame() {
     if (this.status >= 200 && this.status < 400) {
       var serverGameState = JSON.parse(this.response);
         gameState = serverGameState;
-        window.gameState = gameState 
         var modelGameState = new ModelGameState(gameState);
         createGameStateView(modelGameState);
     }

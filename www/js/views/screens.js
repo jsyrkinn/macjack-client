@@ -35,7 +35,7 @@ function makeFirstTimeHomeScreen() {
 function makeSignUpScreen() {
   window.stage.removeChildren(); // remove all sprites from stage
   addLogo();
-  addNameBox("name", validateAndSubmitName);
+  addTextBox("name", "textbox", validateAndSubmitName);
 
   //add text: "All we need is your first name!"
   signUpText = new PIXI.Text("Enter your first name below", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
@@ -129,7 +129,7 @@ function makeGameIdScreen() {
 function makeJoinScreen() {
   window.stage.removeChildren(); // remove all sprites from stage
   addLogo();
-  addNameBox("gameid", validateAndSubmitGameId);
+  addTextBox("gameid", "number", validateAndSubmitGameId);
 
   // Submit Button
   addButton(
@@ -146,22 +146,22 @@ function makeJoinScreen() {
 //---- BETTING DISPLAY ----//
 
 function makeBetText() {
-  //TODO: getting the dealer card displayed 
+  //TODO: getting the dealer card displayed
   //dealerCardShowing = new PIXI.Text("Dealer is showing \n the " + dealerCardLogic {font:"30px 'Poiret One'", fill:"#f3f3f3"});
   //positionAndAddText(dealerCardShowing, window.innerWidth/2, window.innerHeight/2.5);
-  
+
   betText = new PIXI.Text("Place your bet below", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
   positionAndAddText(betText, window.innerWidth/2, window.innerHeight/2.5);
 }
 
 function makeBetScreen() {
-  if (!window.betBox) {
+  if (!window.textBox) {
     window.stage.removeChildren();
     console.log("Make Bet Screen!")
 
     makeBetText();
 
-    addBetBox("bet", validateAndSubmitBet);
+    addTextBox("bet", "number", validateAndSubmitBet);
     addButton(
       {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
       "img/buttons/start.png",
@@ -207,7 +207,7 @@ function positionAndAddText(text, x, y){
 }
 
 
-function addNameBox(id, submitCallback) {
+function addTextBox(id, type, submitCallback) {
   var form = document.createElement("form");
   form.onsubmit = function(event) {
     event.preventDefault();
@@ -215,72 +215,53 @@ function addNameBox(id, submitCallback) {
   };
   document.body.appendChild(form);
 
-  window.nameBox = document.createElement("input");
-  window.nameBox.type = "textbox";
-  window.nameBox.id = id;
-  window.nameBox.className = "macjacktextbox";
-  window.nameBox.style.top = "60%";
-  window.nameBox.onblur = function() {window.scrollTo(0,0)};
+  window.textBox = document.createElement("input");
+  window.textBox.type = type; // "textbox" or "number"
+  window.textBox.id = id;
+  window.textBox.className = "macjacktextbox";
+  window.textBox.style.top = "60%";
+  window.textBox.onblur = function() {window.scrollTo(0,0)};
 
-  form.appendChild(window.nameBox);
-}
-
-// change name
-function addBetBox(id, submitCallback) {
-  var form = document.createElement("form");
-  form.onsubmit = function(event) {
-    event.preventDefault();
-    submitCallback();
-  };
-  document.body.appendChild(form);
-
-  window.betBox = document.createElement("input");
-  window.betBox.type = "number";
-  window.betBox.id = id;
-  window.betBox.className = "macjacktextbox";
-  window.betBox.style.top = "60%";
-  window.betBox.onblur = function() {window.scrollTo(0,0)};
-
-  form.appendChild(window.betBox);
+  form.appendChild(window.textBox);
 }
 
 
 function validateAndSubmitName() {
-  if (window.nameBox.id != "name") {
-    console.log("nameBox incorrect!")
-  } else if (window.nameBox.value != "") { //TODO: add validation to server
-    name = window.nameBox.value;
-    window.nameBox.parentNode.remove(); // remove form
-    window.nameBox = null;
+  if (window.textBox.id != "name") {
+    console.log("textBox incorrect!")
+  } else if (window.textBox.value != "") { //TODO: add validation to server
+    name = window.textBox.value;
+    window.textBox.parentNode.remove(); // remove form
+    window.textBox = null;
     getClientAuth(name);
   }
 }
 
 
 function validateAndSubmitBet() {
-  if (window.betBox.id != "bet") {
-    console.log("betBox id incorrect, is: " + window.betBox.id);
-    console.log("betBox incorrect!")
-  } else if (window.betBox.value != 0) {
-    bet = window.betBox.value;
-    window.betBox.parentNode.remove(); // remove form
-    window.betBox = null;
+  if (window.textBox.id != "bet") {
+    console.log("textBox id incorrect, is: " + window.textBox.id);
+    console.log("textBox incorrect!")
+  } else if (window.textBox.value != 0) {
+    bet = window.textBox.value;
+    window.textBox.parentNode.remove(); // remove form
+    window.textBox = null;
     sendBet(bet);
   } else {
-    console.log("HI: " + window.betBox.value); // TODO: so many forms
+    console.log("HI: " + window.textBox.value);
   }
 }
 
 
 function validateAndSubmitGameId() {
-  if (window.nameBox.id != "gameid") {
-    console.log("nameBox incorrect!")
-  } else if (window.nameBox.value.length == 4) {
-    gameid = window.nameBox.value;
-    window.nameBox.parentNode.remove(); // remove form
-    window.nameBox = null;
+  if (window.textBox.id != "gameid") {
+    console.log("textBox incorrect!")
+  } else if (window.textBox.value.length == 4) {
+    gameid = window.textBox.value;
+    window.textBox.parentNode.remove(); // remove form
+    window.textBox = null;
     sendJoinGame(gameid);
   } else {
-    console.log("Game Id length should be 4, is actually: " + window.nameBox.value.length)
+    console.log("Game Id length should be 4, is actually: " + window.textBox.value.length)
   }
 }
