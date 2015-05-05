@@ -38,6 +38,8 @@ function makeSignUpScreen() {
   addNameBox("name", validateAndSubmitName);
 
   //add text: "All we need is your first name!"
+  signUpText = new PIXI.Text("Enter your first name below", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  positionAndAddText(signUpText, window.innerWidth/2, window.innerHeight/2.1);
 
   // Submit Button
   addButton(
@@ -105,10 +107,11 @@ function makeGameIdScreen() {
 
   console.log("Display Game ID!")
 
-  var text = new PIXI.Text(window.gameID, {font:"100px 'Poiret One'", fill:"#f3f3f3"});
-  text.position = {x: window.innerWidth/2, y: window.innerHeight/2};
-  text.anchor = {x: 0.5, y: 0.5};
-  window.stage.addChild(text);
+  gameIDInstructions = new PIXI.Text("Here is your game code. \n Share this with your friends \n so that they can join your game!", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  positionAndAddText(gameIDInstructions, window.innerWidth/2, window.innerHeight/3);
+
+  var gameIDText = new PIXI.Text(window.gameID, {font:"100px 'Poiret One'", fill:"#f3f3f3"});
+  positionAndAddText(gameIDText, window.innerWidth/2, window.innerHeight/2);
 
   addButton(
     {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
@@ -143,8 +146,12 @@ function makeJoinScreen() {
 //---- BETTING DISPLAY ----//
 
 function makeBetText() {
-  betText = new PIXI.Text("Place your bet below.", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
-  positionAndAddText(betText, window.innerWidth/2, window.innerHeight/3);
+  //TODO: getting the dealer card displayed 
+  //dealerCardShowing = new PIXI.Text("Dealer is showing \n the " + dealerCardLogic {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+  //positionAndAddText(dealerCardShowing, window.innerWidth/2, window.innerHeight/2.5);
+  
+  betText = new PIXI.Text("Place your bet below", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+  positionAndAddText(betText, window.innerWidth/2, window.innerHeight/2.5);
 }
 
 function makeBetScreen() {
@@ -231,7 +238,7 @@ function addBetBox(id, submitCallback) {
   window.betBox.type = "number";
   window.betBox.id = id;
   window.betBox.className = "macjacktextbox";
-  window.betBox.style.top = "50%";
+  window.betBox.style.top = "60%";
   window.betBox.onblur = function() {window.scrollTo(0,0)};
 
   form.appendChild(window.betBox);
