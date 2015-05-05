@@ -45,6 +45,6 @@ function ViewOpponent(x,y, opponent) {
 
   this.renderOpponentSum = function() {
     sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"15px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(betText, window.innerWidth/1.5, window.innerHeight/1.7);
+    positionAndAddText(betText, window.innerWidth/1.2, window.innerHeight/1.7);
   }
 }
