@@ -47,7 +47,7 @@ function makeNewViewPlayer(player, x, y) {
   viewPlayer.renderPlayerSumText();
   viewPlayer.renderPlayerBetText();
   viewPlayer.renderPlayerName();
-  viewPlayer.renderPlayerTotalMoney()
+  viewPlayer.renderPlayerMoney()
 
   return viewPlayer
 }
