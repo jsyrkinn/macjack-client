@@ -5,7 +5,7 @@ function ViewOpponent(x,y, opponent) {
   //Player object handles double tap, swipe right, swipe up (for betting)
 
   this.playerName = opponent.playerName;
-  this.totalMoney = opponent.totalMoney;
+  this.money = opponent.money;
   this.piles = [];
 
   viewOpponent = this;

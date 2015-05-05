@@ -5,7 +5,7 @@ function ViewPlayer(x,y, player) {
   //Player object handles double tap, swipe right, swipe up (for betting)
 
   this.playerName = player.playerName;
-  this.totalMoney = player.totalMoney;
+  this.money = player.money;
   this.piles = [];
 
   viewPlayer = this;
@@ -53,9 +53,9 @@ function ViewPlayer(x,y, player) {
     positionAndAddText(nameText, window.innerWidth/2, window.innerHeight/1.55)
   }
 
-  this.renderPlayerTotalMoney = function() {
-    totalMoneyText = new PIXI.Text("TOTAL: " + this.totalMoney, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(totalMoneyText, window.innerWidth/2, window.innerHeight - 10 )
+  this.renderPlayerMoney = function() {
+    moneyText = new PIXI.Text("TOTAL: " + this.money, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    positionAndAddText(moneyText, window.innerWidth/2, window.innerHeight - 10 )
   }
 
   this.movePile = function(x, y) {

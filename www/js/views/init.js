@@ -47,7 +47,7 @@ function makeNewViewPlayer(player, x, y) {
   viewPlayer.renderPlayerSumText();
   viewPlayer.renderPlayerBetText();
   viewPlayer.renderPlayerName();
-  viewPlayer.renderPlayerTotalMoney()
+  viewPlayer.renderPlayerMoney()
 
   return viewPlayer
 }
@@ -90,7 +90,6 @@ function addTouchHandlerToStage() {
 }
 
 
-allPlayers = [];
 
 function createGameStateView(modelGameState) {
 
@@ -115,11 +114,11 @@ function createGameStateView(modelGameState) {
     makeNewViewDealer(modelGameState.dealerHand, window.innerWidth/2.4, window.innerHeight/5.5);
 
     modelGameState.opponents.forEach(function(opponent) {
-      allPlayers[opponent.playerID] = makeNewViewOpponent(opponent, 100, 500);
+      makeNewViewOpponent(opponent, 100, 500);
     });
 
     var player = modelGameState.player
-    allPlayers[player.playerID] = makeNewViewPlayer(player, window.innerWidth/2.4, window.innerHeight-125);
+    makeNewViewPlayer(player, window.innerWidth/2.4, window.innerHeight-125);
 
     //TODO: This if statement should call functions- 
     //1. displays text for end of round 
