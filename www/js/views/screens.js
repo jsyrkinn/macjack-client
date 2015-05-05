@@ -11,7 +11,6 @@ function checkHomeScreen() {
   }
 }
 
-
 //---- HOME MENU - FIRST TIME ----//
 
 function makeFirstTimeHomeScreen() {
@@ -52,14 +51,11 @@ function makeSignUpScreen() {
   );
 }
 
-
 //---- HOME MENU - RETURNING (HAS AUTH) ----//
 
 function makeReturningHomeScreen() {
-
-  window.stage.removeChildren(); // remove all sprites from stage
+  window.stage.removeChildren(); 
   addLogo();
-
   // New Game Button
   addButton(
     {  anchor: {x:0.5, y:0.0},
@@ -94,9 +90,7 @@ function makeReturningHomeScreen() {
       checkHomeScreen();
     }
   );
-
 }
-
 
 //---- GAME ID DISPLAY ----//
 
@@ -104,9 +98,7 @@ function makeGameIdScreen() {
 
   //TODO: Add back button
   window.stage.removeChildren();
-
   console.log("Display Game ID!")
-
   gameIDInstructions = new PIXI.Text("Here is your game code. \n Share this with your friends \n so that they can join your game!", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
   positionAndAddText(gameIDInstructions, window.stage, window.innerWidth/2, window.innerHeight/3);
 
@@ -122,7 +114,6 @@ function makeGameIdScreen() {
     }
   );
 }
-
 
 //---- JOIN GAME DISPLAY ----//
 
@@ -142,14 +133,9 @@ function makeJoinScreen() {
   );
 }
 
-
 //---- BETTING DISPLAY ----//
 
 function makeBetText() {
-  //TODO: getting the dealer card displayed
-  //dealerCardShowing = new PIXI.Text("Dealer is showing \n the " + dealerCardLogic {font:"30px 'Poiret One'", fill:"#f3f3f3"});
-  //positionAndAddText(dealerCardShowing, window.innerWidth/2, window.innerHeight/2.5);
-
   betText = new PIXI.Text("Place your bet below", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
   positionAndAddText(betText, window.innerWidth/2, window.innerHeight/2.5);
 }
@@ -158,9 +144,7 @@ function makeBetScreen() {
   if (!window.textBox) {
     window.stage.removeChildren();
     console.log("Make Bet Screen!")
-
     makeBetText();
-
     addTextBox("bet", "number", validateAndSubmitBet);
     addButton(
       {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
@@ -177,7 +161,6 @@ function makeBetScreen() {
 
 function addLogo() {
   var logoSprite = new PIXI.Sprite.fromImage("img/logosIcons/logoHome.png");
-
   logoSprite.scale.x = 0.8;
   logoSprite.scale.y = 0.8;
   logoSprite.anchor.x = 0.5;
@@ -189,7 +172,6 @@ function addLogo() {
 
 function addButton(placement, imagePath, tapCallback) {
   var button = new PIXI.Sprite.fromImage(imagePath);
-
   button.scale = placement.scale || {x:0.9, y:0.9}
   button.anchor = placement.anchor || {x:0.5, y:0.5};
   button.position = placement.position || {x:0.0, y: 0.0};
@@ -205,7 +187,6 @@ function positionAndAddText(text, parent, x, y) {
   parent.addChild(text);
 }
 
-
 function addTextBox(id, type, submitCallback) {
   var form = document.createElement("form");
   form.onsubmit = function(event) {
@@ -213,17 +194,14 @@ function addTextBox(id, type, submitCallback) {
     submitCallback();
   };
   document.body.appendChild(form);
-
   window.textBox = document.createElement("input");
   window.textBox.type = type; // "textbox" or "number"
   window.textBox.id = id;
   window.textBox.className = "macjacktextbox";
   window.textBox.style.top = "60%";
   window.textBox.onblur = function() {window.scrollTo(0,0)};
-
   form.appendChild(window.textBox);
 }
-
 
 function validateAndSubmitName() {
   if (window.textBox.id != "name") {
@@ -235,7 +213,6 @@ function validateAndSubmitName() {
     getClientAuth(name);
   }
 }
-
 
 function validateAndSubmitBet() {
   if (window.textBox.id != "bet") {
@@ -250,7 +227,6 @@ function validateAndSubmitBet() {
     console.log("HI: " + window.textBox.value);
   }
 }
-
 
 function validateAndSubmitGameId() {
   if (window.textBox.id != "gameid") {
