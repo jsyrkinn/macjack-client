@@ -8,11 +8,7 @@ var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {r
 // add the renderer view element to the DOM
 document.body.appendChild(renderer.view);
 
-
 checkHomeScreen();
-
-
-
 
 function repositionAllHands(player, dealer, opponents) {
 
@@ -51,6 +47,7 @@ function makeNewViewPlayer(player, x, y) {
   viewPlayer.renderPlayerSumText();
   viewPlayer.renderPlayerBetText();
   viewPlayer.renderPlayerName();
+  viewPlayer.renderPlayerTotalMoney()
 
   return viewPlayer
 }
@@ -113,27 +110,36 @@ function createGameStateView(modelGameState) {
       window.betBox = null;
     }
 
-    window.stage.removeChildren(); // remove all sprites from stage
+    window.stage.removeChildren(); 
 
-    makeNewViewDealer(modelGameState.dealerHand, 100, 100);
+    makeNewViewDealer(modelGameState.dealerHand, window.innerWidth/2.4, window.innerHeight/5.5);
 
     modelGameState.opponents.forEach(function(opponent) {
       allPlayers[opponent.playerID] = makeNewViewOpponent(opponent, 100, 500);
     });
 
     var player = modelGameState.player
-    allPlayers[player.playerID] = makeNewViewPlayer(player, 80,window.innerHeight - 150);
+    allPlayers[player.playerID] = makeNewViewPlayer(player, window.innerWidth/2.4, window.innerHeight-125);
 
-    //TODO move this button elsewhere
+    //TODO: This if statement should call functions- 
+    //1. displays text for end of round 
+    //2. displays two buttons (quit or new round)
+    //Both of these need to be displayed on a pop up box that is darker than the rest of the game so it's visible
     if (modelGameState.finished) {
+      newRoundText = new PIXI.Text("End of round. \n Would you like to play again?", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+      positionAndAddText(newRoundText, window.innerWidth/2, window.innerHeight/2.5)
+  
       addButton(
         {  position: {x:window.innerWidth/2, y:window.innerHeight/2}  },
-        "img/buttons/start.png",
+        "img/buttons/newRound.png",
         function(touchData) {
           console.log("New Round!");
           sendContinue();
         }
       );
+
+      //TODO: add another button: for quitting - going back to home screen (join/new game)
+
     } else {
       addTouchHandlerToStage();
     }

@@ -22,20 +22,11 @@ function makeFirstTimeHomeScreen() {
   // Sign up Button
   addButton(
     {  anchor: {x:0.5, y:0.0},
-     position: {x:window.innerWidth/2, y:window.innerHeight/2}  },
-    "img/buttons/signUp.png",
+     position: {x:window.innerWidth/2, y:window.innerHeight/1.7}  },
+    "img/buttons/begin.png",
     function(touchData){
       console.log("Sign Up!");
       makeSignUpScreen();
-    }
-  );
-
-  // About Button
-  addButton(
-    {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
-    "img/buttons/about.png",
-    function(touchData){
-      console.log("About Us!");
     }
   );
 }
@@ -45,6 +36,10 @@ function makeSignUpScreen() {
   window.stage.removeChildren(); // remove all sprites from stage
   addLogo();
   addNameBox("name", validateAndSubmitName);
+
+  //add text: "All we need is your first name!"
+  signUpText = new PIXI.Text("Enter your first name below", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  positionAndAddText(signUpText, window.innerWidth/2, window.innerHeight/2.1);
 
   // Submit Button
   addButton(
@@ -106,14 +101,17 @@ function makeReturningHomeScreen() {
 //---- GAME ID DISPLAY ----//
 
 function makeGameIdScreen() {
+
+  //TODO: Add back button
   window.stage.removeChildren();
 
   console.log("Display Game ID!")
 
-  var text = new PIXI.Text(window.gameID, {font:"100px 'Poiret One'", fill:"#f3f3f3"});
-  text.position = {x: window.innerWidth/2, y: window.innerHeight/2};
-  text.anchor = {x: 0.5, y: 0.5};
-  window.stage.addChild(text);
+  gameIDInstructions = new PIXI.Text("Here is your game code. \n Share this with your friends \n so that they can join your game!", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  positionAndAddText(gameIDInstructions, window.innerWidth/2, window.innerHeight/3);
+
+  var gameIDText = new PIXI.Text(window.gameID, {font:"100px 'Poiret One'", fill:"#f3f3f3"});
+  positionAndAddText(gameIDText, window.innerWidth/2, window.innerHeight/2);
 
   addButton(
     {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
@@ -147,15 +145,23 @@ function makeJoinScreen() {
 
 //---- BETTING DISPLAY ----//
 
-function makeBetScreen() {
+function makeBetText() {
+  //TODO: getting the dealer card displayed 
+  //dealerCardShowing = new PIXI.Text("Dealer is showing \n the " + dealerCardLogic {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+  //positionAndAddText(dealerCardShowing, window.innerWidth/2, window.innerHeight/2.5);
+  
+  betText = new PIXI.Text("Place your bet below", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+  positionAndAddText(betText, window.innerWidth/2, window.innerHeight/2.5);
+}
 
+function makeBetScreen() {
   if (!window.betBox) {
     window.stage.removeChildren();
-
     console.log("Make Bet Screen!")
 
-    addBetBox("bet", validateAndSubmitBet);
+    makeBetText();
 
+    addBetBox("bet", validateAndSubmitBet);
     addButton(
       {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
       "img/buttons/start.png",
@@ -166,9 +172,6 @@ function makeBetScreen() {
     );
   }
 }
-
-
-
 
 //--- HELPER FUNCTIONS ----//
 
@@ -193,6 +196,14 @@ function addButton(placement, imagePath, tapCallback) {
   button.interactive = true;
   button.tap = tapCallback;
   window.stage.addChild(button);
+}
+
+function positionAndAddText(text, x, y){
+  text.anchor.x = 0.5;
+  text.anchor.y = 0.5;
+  text.position.x = x;
+  text.position.y = y;
+  window.stage.addChild(text);
 }
 
 
@@ -227,7 +238,7 @@ function addBetBox(id, submitCallback) {
   window.betBox.type = "number";
   window.betBox.id = id;
   window.betBox.className = "macjacktextbox";
-  window.betBox.style.top = "50%";
+  window.betBox.style.top = "60%";
   window.betBox.onblur = function() {window.scrollTo(0,0)};
 
   form.appendChild(window.betBox);

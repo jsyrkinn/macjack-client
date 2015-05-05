@@ -26,8 +26,8 @@ function ViewPlayer(x,y, player) {
       cardSprite.sprite.scale.x = 0.25;
       cardSprite.sprite.scale.y = 0.25;
       //TODO centering with anchor position.
-      // this.cardSprite.sprite.anchor.x = 1;
-      // this.cardSprite.sprite.anchor.y = 1;
+      cardSprite.sprite.anchor.x = 0.5;
+      cardSprite.sprite.anchor.y = 0.5;
 
       //TODO: refine logic to space out the cards
       cardSprite.sprite.position.x = x+(i*50);
@@ -39,24 +39,23 @@ function ViewPlayer(x,y, player) {
   }
 
   this.renderPlayerSumText = function() {
-      sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-      sumText.position.x = 10;
-      sumText.position.y = window.innerHeight - 50;
-      window.stage.addChild(sumText);
+    sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    positionAndAddText(sumText, window.innerWidth/1.5, window.innerHeight - 45);
   }
 
-  this.renderPlayerBetText = function(){
+  this.renderPlayerBetText = function() {
     betText = new PIXI.Text("$" + this.piles[0].bet, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    betText.position.x = 100;
-    betText.position.y = window.innerHeight - 50;
-    window.stage.addChild(betText);
+    positionAndAddText(betText, window.innerWidth/3.2, window.innerHeight - 45)
   }
 
-  this.renderPlayerName = function(){
+  this.renderPlayerName = function() {
     nameText = new PIXI.Text("YOU", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    nameText.position.x = window.innerWidth/2;
-    nameText.position.y = window.innerHeight - 240;
-    window.stage.addChild(nameText);
+    positionAndAddText(nameText, window.innerWidth/2, window.innerHeight/1.55)
+  }
+
+  this.renderPlayerTotalMoney = function() {
+    totalMoneyText = new PIXI.Text("TOTAL: " + this.totalMoney, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    positionAndAddText(totalMoneyText, window.innerWidth/2, window.innerHeight - 10 )
   }
 
   this.movePile = function(x, y) {
