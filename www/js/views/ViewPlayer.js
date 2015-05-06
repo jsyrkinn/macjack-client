@@ -43,13 +43,13 @@ function ViewPlayer(x,y, player) {
   }
 
   this.renderPlayerSum = function() {
-  //   sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-  //   positionAndAddText(sumText, this.container, window.innerWidth/1.5, window.innerHeight - 45);
+    sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    positionAndAddText(sumText, this.container, 80, 76);
   }
 
   this.renderPlayerBet = function() {
     betText = new PIXI.Text("$" + this.piles[0].bet, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(betText, this.container, -30, 83);
+    positionAndAddText(betText, this.container, -30, 76);
   }
 
   this.renderPlayerName = function() {
