@@ -6,6 +6,10 @@ function ViewDealer(x,y,dealerHand) {
 
   this.pile = new CardPile(dealerHand);
 
+  this.container = new PIXI.DisplayObjectContainer();
+  window.stage.addChild(this.container);
+  this.container.position = {x: x, y: y};
+  this.container.pivot = {x: 0.5, y: 0.5};
   this.hiddenCardSprite = new PIXI.Sprite.fromImage("img/cards/cardBack.png");
   this.hiddenCardSprite.scale = {x:0.25, y: 0.25};
   this.hiddenCardSprite.anchor = {x:0.5, y: 0.5};
@@ -42,13 +46,13 @@ function ViewDealer(x,y,dealerHand) {
   }
 
   this.renderDealerSum = function() {
-  //     sumText = new PIXI.Text(this.pile.sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-  //     positionAndAddText(sumText, PARENTADD, window.innerWidth/1.5, window.innerHeight/3.1);
+      sumText = new PIXI.Text(this.pile.sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+      positionAndAddText(sumText, this.container, 80, 76);
   }
 
   this.renderDealerName = function() {
-  //     nameText = new PIXI.Text("DEALER", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-  //     positionAndAddText(nameText, PARENTADD, window.innerWidth/2, window.innerHeight/18);
+      nameText = new PIXI.Text("DEALER", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+      positionAndAddText(nameText, this.container, 28, -73);
   }
 
   this.updatePile = function(newPile) {

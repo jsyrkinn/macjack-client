@@ -54,7 +54,7 @@ function ViewPlayer(x,y, player) {
 
   this.renderPlayerName = function() {
     nameText = new PIXI.Text("YOU", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(nameText, this.container, 15, -90);
+    positionAndAddText(nameText, this.container, 28, -73);
   }
 
   this.renderPlayerMoney = function() {
