@@ -61,13 +61,4 @@ function ViewPlayer(x,y, player) {
     moneyText = new PIXI.Text("TOTAL: $" + this.money, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
     positionAndAddText(moneyText, this.container, 25, 110);
   }
-
-  this.movePile = function(x, y) {
-    for (var i = 0; i < cardSprites.length; i++) {
-
-      //TODO: refine logic to space out the cards
-      cardSprites[i].sprite.position.x = x+(i*50);
-      cardSprites[i].sprite.position.y = y;
-    }
-  }
 }

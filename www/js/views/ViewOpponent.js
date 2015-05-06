@@ -11,14 +11,9 @@ function ViewOpponent(opponent, x, y, scaleX, scaleY) {
   viewOpponent = this;
 
   this.container = new PIXI.DisplayObjectContainer();
-  window.stage.addChild(this.container);
-  this.container.position = {x: x, y: y};
   this.container.pivot = {x: 0.5, y: 0.5};
-  this.hiddenCardSprite = new PIXI.Sprite.fromImage("img/cards/cardBack.png");
-  this.hiddenCardSprite.scale = {x:0.25, y: 0.25};
-  this.hiddenCardSprite.anchor = {x:0.5, y: 0.5};
-  this.hiddenCardSprite.position.x = x;
-  this.hiddenCardSprite.position.y = y;
+  this.container.position = {x: x, y: y};
+  window.stage.addChild(this.container);
 
   opponent.hands.forEach(function(hand) {
     cardPile = new CardPile(hand, window.stage);
@@ -26,20 +21,25 @@ function ViewOpponent(opponent, x, y, scaleX, scaleY) {
   });
 
   this.renderPile = function() {
-    this.cardSprites = [];
+    var cardSpritesContainer = new PIXI.DisplayObjectContainer();
+    cardSpritesContainer.anchor = {x: 0.5, y: 0.5}
+    cardSpritesContainer.position = {x: 0, y: 0}
+    this.container.addChild(cardSpritesContainer);
 
     var cards = this.piles[0].cards;
-    var offset = (cards.length*50)/2;
+
     for (var i = 0; i < cards.length; i++) {
-      var cardSprite = new CardSprite(cards[i], window.stage);
+      var cardSprite = new CardSprite(cards[i], cardSpritesContainer);
 
-      cardSprite.sprite.scale.x = scaleX;
-      cardSprite.sprite.scale.y = scaleY;
+      var offset = (((cards.length-1)*50)+cardSprite.sprite.width)/2;
 
-      cardSprite.sprite.position.x = x+(i*50)-offset;
-      cardSprite.sprite.position.y = y;
+      cardSprite.sprite.scale = {x: scaleX, y: scaleY};
 
-      this.cardSprites.push(cardSprite);
+      cardSprite.sprite.anchor = {x: 0, y: 0.5}
+
+      cardSprite.sprite.position.x = (i*50)-offset;
+      cardSprite.sprite.position.y = 0;
+
     }
   }
 

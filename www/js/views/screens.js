@@ -134,6 +134,17 @@ function makeGameIdScreen() {
       updateGame(); // start polling
     }
   );
+
+  // leave game button
+  addButton(
+    {   scale: {x:0.3, y:0.3},
+       anchor: {x:0.0, y:0.0},
+     position: {x:0.0, y:0.0}  },
+    "img/buttons/exitButtonBlue.png",
+    function(touchData){
+      leaveGame();
+    }
+  );
 }
 
 //---- JOIN GAME DISPLAY ----//
