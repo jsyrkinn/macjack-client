@@ -26,7 +26,7 @@ function ViewDealer(x,y,dealerHand) {
     }
 
     for (var i = 0; i < cards.length; i++) {
-      var cardSprite = new CardSprite(cards[i]);
+      var cardSprite = new CardSprite(cards[i], window.stage);
 
       cardSprite.sprite.scale.x = 0.25;
       cardSprite.sprite.scale.y = 0.25;
@@ -41,15 +41,14 @@ function ViewDealer(x,y,dealerHand) {
     }
   }
 
-    this.renderDealerSum = function() {
-      sumText = new PIXI.Text(this.pile.sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-      positionAndAddText(sumText, PARENTADD, window.innerWidth/1.5, window.innerHeight/3.1);
+  this.renderDealerSum = function() {
+  //     sumText = new PIXI.Text(this.pile.sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+  //     positionAndAddText(sumText, PARENTADD, window.innerWidth/1.5, window.innerHeight/3.1);
   }
 
-    this.renderDealerName = function() {
-      nameText = new PIXI.Text("DEALER", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-      positionAndAddText(nameText, PARENTADD, window.innerWidth/2, window.innerHeight/18);
-
+  this.renderDealerName = function() {
+  //     nameText = new PIXI.Text("DEALER", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+  //     positionAndAddText(nameText, PARENTADD, window.innerWidth/2, window.innerHeight/18);
   }
 
   this.updatePile = function(newPile) {

@@ -137,7 +137,7 @@ function makeJoinScreen() {
 
 function makeBetText() {
   betText = new PIXI.Text("Place your bet below", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
-  positionAndAddText(betText, window.innerWidth/2, window.innerHeight/2.5);
+  positionAndAddText(betText, window.stage, window.innerWidth/2, window.innerHeight/2.5);
 }
 
 function makeBetScreen() {
