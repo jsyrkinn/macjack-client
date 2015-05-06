@@ -81,7 +81,7 @@ function makeReturningHomeScreen() {
     }
   );
 
-  // Delete LocalStorage Button -- DEBUG
+  // Delete LocalStorage Button -- FOR DEBUGGING
   addButton(
     {   scale: {x:0.3, y:0.3},
        anchor: {x:0.0, y:0.0},
@@ -139,16 +139,18 @@ function makeJoinScreen() {
 
 //---- BETTING DISPLAY ----//
 
-function makeBetText() {
-  betText = new PIXI.Text("Place your bet below", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
-  positionAndAddText(betText, window.stage, window.innerWidth/2, window.innerHeight/2.5);
+function makeBetText(totalMoney) {
+  betInstructionsText = new PIXI.Text("Place your bet below.", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+  positionAndAddText(betInstructionsText, window.stage, window.innerWidth/2, window.innerHeight/3);
+  betLeftText = new PIXI.Text("You have $" + totalMoney + " left.", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+  positionAndAddText(betLeftText, window.stage, window.innerWidth/2, window.innerHeight/2.45);
 }
 
-function makeBetScreen() {
+function makeBetScreen(totalMoney) {
   if (!window.textBox) {
     window.stage.removeChildren();
     console.log("Make Bet Screen!")
-    makeBetText();
+    makeBetText(totalMoney);
     addTextBox("bet", "number", validateAndSubmitBet);
     addButton(
       {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
@@ -228,7 +230,7 @@ function validateAndSubmitBet() {
     window.textBox = null;
     sendBet(bet);
   } else {
-    console.log("HI: " + window.textBox.value);
+    console.log(window.textBox.value);
   }
 }
 
