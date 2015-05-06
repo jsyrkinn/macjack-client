@@ -7,6 +7,10 @@ function ViewPlayer(x,y, player) {
   this.playerName = player.playerName;
   this.money = player.money;
   this.piles = [];
+  this.container = new PIXI.DisplayObjectContainer();
+  window.stage.addChild(this.container);
+  this.container.position = {x: x, y: y};
+  this.container.pivot = {x: 0.5, y: 0.5};
 
   viewPlayer = this;
 
@@ -21,7 +25,7 @@ function ViewPlayer(x,y, player) {
     var cards = this.piles[0].cards;
 
     for (var i = 0; i < cards.length; i++) {
-      var cardSprite = new CardSprite(cards[i]);
+      var cardSprite = new CardSprite(cards[i], window.stage);
 
       cardSprite.sprite.scale.x = 0.25;
       cardSprite.sprite.scale.y = 0.25;
@@ -39,23 +43,23 @@ function ViewPlayer(x,y, player) {
   }
 
   this.renderPlayerSum = function() {
-    sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(sumText, window.innerWidth/1.5, window.innerHeight - 45);
+  //   sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+  //   positionAndAddText(sumText, this.container, window.innerWidth/1.5, window.innerHeight - 45);
   }
 
   this.renderPlayerBet = function() {
     betText = new PIXI.Text("$" + this.piles[0].bet, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(betText, window.innerWidth/3.2, window.innerHeight - 45)
+    positionAndAddText(betText, this.container, -30, 83);
   }
 
   this.renderPlayerName = function() {
     nameText = new PIXI.Text("YOU", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(nameText, window.innerWidth/2, window.innerHeight/1.55)
+    positionAndAddText(nameText, this.container, 15, -90);
   }
 
   this.renderPlayerMoney = function() {
     moneyText = new PIXI.Text("TOTAL: $" + this.money, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(moneyText, window.innerWidth/2, window.innerHeight - 10 )
+    positionAndAddText(moneyText, this.container, 25, 110);
   }
 
   this.movePile = function(x, y) {

@@ -111,7 +111,7 @@ function createGameStateView(modelGameState) {
     //Both of these need to be displayed on a pop up box that is darker than the rest of the game so it's visible
     if (modelGameState.finished) {
       newRoundText = new PIXI.Text("End of round. \n Would you like to play again?", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
-      positionAndAddText(newRoundText, window.innerWidth/2, window.innerHeight/2.5)
+      positionAndAddText(newRoundText, window.stage, window.innerWidth/2, window.innerHeight/2.5)
 
       addButton(
         {  position: {x:window.innerWidth/2, y:window.innerHeight/2}  },
