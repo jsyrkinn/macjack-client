@@ -1,4 +1,4 @@
-var serverIP = "141.140.193.128";
+var serverIP = "141.140.193.171";
 
 function getClientAuth(name) {
     console.log("clientAuth not set, requesting from server...")

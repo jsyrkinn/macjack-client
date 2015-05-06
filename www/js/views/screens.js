@@ -40,7 +40,6 @@ function makeFirstTimeHomeScreen() {
   );
 }
 
-
 function makeSignUpScreen() {
   window.stage.removeChildren(); // remove all sprites from stage
   addLogo();
@@ -152,6 +151,16 @@ function makeBetText(totalMoney) {
   betLeftText = new PIXI.Text("You have $" + totalMoney + " left.", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
   positionAndAddText(betLeftText, window.stage, window.innerWidth/2, window.innerHeight/2.45);
 }
+
+//TODO: indicate when it is their turn to bet
+// function betTurnSignal(){
+//   if (it is players current turn) {
+//    betTurnText = new PIXI.Text("Your turn!" + totalMoney + " left.", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+//    positionAndAddText(betTurnText, window.stage, window.innerWidth/2, window.innerHeight/2.45);
+//   } else {
+//    startSpinner(), add text that says "Waiting for other players to join and bet game."
+//   }
+// }
 
 function makeBetScreen(totalMoney) {
   if (!window.textBox) {
