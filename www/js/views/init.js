@@ -20,6 +20,10 @@ function makeNewViewPlayer(player, x, y) {
   viewPlayer.renderPlayerName();
   viewPlayer.renderPlayerMoney()
 
+  if (player.isCurrentPlayer){
+    viewPlayer.renderCurrentPlayerSignal();
+  }
+
   return viewPlayer
 }
 

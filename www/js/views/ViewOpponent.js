@@ -59,11 +59,7 @@ function ViewOpponent(opponent, x, y, scaleX, scaleY) {
   }
 
   this.renderCurrentPlayerSignal = function() {
-    var testText = new PIXI.Text("Current player", {font:"15px 'Poiret One'", fill:"#FF9900"});
-    positionAndAddText(testText, this.container, 60, 65);
-    // var rectangle = new PIXI.Graphics();
-    // rectangle.lineStyle(5, 0xFF0000);
-    // rectangle.drawRect(0,0,300,200);
-    // this.addChild(graphics);
+    var currentOpponentNameText = new PIXI.Text(this.playerName.toUpperCase(), {font:"15px Poiret One", fill:"#39c9ff"});
+    positionAndAddText(currentOpponentNameText, this.container, 28, -73);
   }
 }
