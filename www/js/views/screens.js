@@ -3,6 +3,7 @@ function checkHomeScreen() {
 
   window.clientAuth = window.localStorage.getItem('clientAuth');
   window.clientID = window.localStorage.getItem('clientID');
+  window.gameID = window.localStorage.getItem('gameID');
 
   if (window.textBox) {
     window.textBox.parentNode.remove(); // remove form
@@ -12,7 +13,12 @@ function checkHomeScreen() {
   if (!window.clientAuth) {
     makeFirstTimeHomeScreen();
   } else {
-    makeReturningHomeScreen();
+    if (!window.gameID) {
+      makeReturningHomeScreen();
+    } else {
+      // rejoining existing game
+      updateGame();
+    }
   }
 }
 
@@ -91,6 +97,7 @@ function makeReturningHomeScreen() {
       console.log("Delete LocalStorage!");
       window.localStorage.removeItem('clientAuth');
       window.localStorage.removeItem('clientID');
+      window.localStorage.removeItem('gameID');
       checkHomeScreen();
     }
   );

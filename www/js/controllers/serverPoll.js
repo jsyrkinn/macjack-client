@@ -35,6 +35,7 @@ function setupNewGame() {
     if (this.status >= 200 && this.status < 400) {
       var res = JSON.parse(this.response);
       window.gameID = res.gameID;
+      window.localStorage.setItem('gameID', window.gameID);
       makeGameIdScreen();
     } else {
       console.log("Setup New Game - Error");
@@ -59,6 +60,7 @@ function sendJoinGame(gameID) {
     stopSpinner();
     if (this.status >= 200 && this.status < 400) {
       window.gameID = gameID;
+      window.localStorage.setItem('gameID', window.gameID);
       updateGame();
     } else {
       console.log("Join Game - Error");
@@ -147,8 +149,9 @@ function updateGame() {
     } else if (this.status == 406) {
       // client up to date, no changes necessary
     } else {
-      // auth error, return to main screen
+      // auth error, clear game ID and return to main screen
       clearTimeout(window.pollTimeout);
+      window.localStorage.removeItem('gameID');
       checkHomeScreen();
     }
   };
