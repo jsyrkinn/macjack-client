@@ -64,12 +64,13 @@ function repositionOpponents(opponentList) {
 
   if (len == 1) {
     makeNewViewOpponent(opponentList[0],innerWidth/2.45,innerHeight/2);
+  } else if (len == 2) {
+    makeNewViewOpponent(opponentList[0],innerWidth/1.45,innerHeight/2);
+    makeNewViewOpponent(opponentList[0],innerWidth/2.45,innerHeight/2);
   }
-  // else if (len == 2) {
+  //} else if (len == 3) {
 
-  // } else if (len == 3) {
-
-  // } else if (len == 4) {
+  //} else if (len == 4) {
 
   // }
   else {
@@ -83,7 +84,7 @@ function createGameStateView(modelGameState) {
     if (window.betGoing) {
       startSpinner();
     } else {
-      makeBetScreen();
+      makeBetScreen(modelGameState.player.money);
     }
   } else {
     //betting is finished
