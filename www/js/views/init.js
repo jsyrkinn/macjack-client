@@ -117,7 +117,7 @@ function createGameStateView(modelGameState) {
     repositionOpponents(opponents);
 
     var player = modelGameState.player;
-    makeNewViewPlayer(player, window.innerWidth/2.4, window.innerHeight-125);
+    makeNewViewPlayer(player, window.innerWidth/2, window.innerHeight-125);
 
 
 

@@ -35,7 +35,7 @@ function ViewDealer(x,y,dealerHand) {
       cardSprite.sprite.scale.y = 0.25;
       cardSprite.sprite.anchor.x = 0.5;
       cardSprite.sprite.anchor.y = 0.5;
-      
+
       //Spreading out of cards
       cardSprite.sprite.position.x = x + (i*50) + (this.hiddenCardSprite.visible ? 50 : 0);
       cardSprite.sprite.position.y = y;
@@ -46,7 +46,7 @@ function ViewDealer(x,y,dealerHand) {
 
   this.renderDealerSum = function() {
       sumText = new PIXI.Text(this.pile.sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
-      positionAndAddText(sumText, this.container, 80, 76);
+      positionAndAddText(sumText, this.container, 80, 77);
   }
 
   this.renderDealerName = function() {

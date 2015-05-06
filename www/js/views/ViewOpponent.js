@@ -45,21 +45,21 @@ function ViewOpponent(opponent, x, y, scaleX, scaleY) {
 
   this.renderOpponentName = function() {
     var nameText = new PIXI.Text(this.playerName.toUpperCase(), {font:"15px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(nameText, this.container, 28, -73);
+    positionAndAddText(nameText, this.container, 0, -73);
   }
 
   this.renderOpponentBet = function() {
     var betText = new PIXI.Text("$" + this.piles[0].bet, {font:"15px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(betText, this.container, -25, 65);
+    positionAndAddText(betText, this.container, -25-28, 65);
   }
 
   this.renderOpponentSum = function() {
     var sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"15px 'Poiret One'", fill:"#f3f3f3"});
-    positionAndAddText(sumText, this.container, 80, 65);
+    positionAndAddText(sumText, this.container, 80-28, 65);
   }
 
   this.renderCurrentPlayerSignal = function() {
     var currentOpponentNameText = new PIXI.Text(this.playerName.toUpperCase(), {font:"15px Poiret One", fill:"#39c9ff"});
-    positionAndAddText(currentOpponentNameText, this.container, 28, -73);
+    positionAndAddText(currentOpponentNameText, this.container, 0, -73);
   }
 }
