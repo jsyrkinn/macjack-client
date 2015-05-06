@@ -23,7 +23,7 @@ function ViewPlayer(x,y, player) {
     this.cardSprites = [];
 
     var cards = this.piles[0].cards;
-
+    var offset = (cards.length*50)/2;
     for (var i = 0; i < cards.length; i++) {
       var cardSprite = new CardSprite(cards[i], window.stage);
 
@@ -34,7 +34,7 @@ function ViewPlayer(x,y, player) {
       cardSprite.sprite.anchor.y = 0.5;
 
       //TODO: refine logic to space out the cards
-      cardSprite.sprite.position.x = x+(i*50);
+      cardSprite.sprite.position.x = x+(i*50)- offset;
       cardSprite.sprite.position.y = y;
 
       this.cardSprites.push(cardSprite);
