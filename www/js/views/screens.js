@@ -3,18 +3,28 @@ function checkHomeScreen() {
 
   window.clientAuth = window.localStorage.getItem('clientAuth');
   window.clientID = window.localStorage.getItem('clientID');
+  window.gameID = window.localStorage.getItem('gameID');
+
+  if (window.textBox) {
+    window.textBox.parentNode.remove(); // remove form
+    window.textBox = null;
+  }
 
   if (!window.clientAuth) {
     makeFirstTimeHomeScreen();
   } else {
-    makeReturningHomeScreen();
+    if (!window.gameID) {
+      makeReturningHomeScreen();
+    } else {
+      // rejoining existing game
+      updateGame();
+    }
   }
 }
 
 //---- HOME MENU - FIRST TIME ----//
 
 function makeFirstTimeHomeScreen() {
-
   window.stage.removeChildren(); // remove all sprites from stage
   addLogo();
 
@@ -54,7 +64,7 @@ function makeSignUpScreen() {
 //---- HOME MENU - RETURNING (HAS AUTH) ----//
 
 function makeReturningHomeScreen() {
-  window.stage.removeChildren(); 
+  window.stage.removeChildren();
   addLogo();
   // New Game Button
   addButton(
@@ -87,6 +97,7 @@ function makeReturningHomeScreen() {
       console.log("Delete LocalStorage!");
       window.localStorage.removeItem('clientAuth');
       window.localStorage.removeItem('clientID');
+      window.localStorage.removeItem('gameID');
       checkHomeScreen();
     }
   );
