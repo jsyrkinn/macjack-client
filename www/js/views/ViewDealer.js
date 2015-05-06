@@ -18,7 +18,6 @@ function ViewDealer(x,y,dealerHand) {
 
   window.stage.addChild(this.hiddenCardSprite);
 
-
   this.renderPile = function() {
     this.cardSprites = [];
     var cards = this.pile.cards;

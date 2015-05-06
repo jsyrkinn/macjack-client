@@ -226,7 +226,7 @@ function validateAndSubmitBet() {
     window.textBox = null;
     sendBet(bet);
   } else {
-    console.log("HI: " + window.textBox.value);
+    console.log(window.textBox.value);
   }
 }
 

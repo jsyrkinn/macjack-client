@@ -65,8 +65,8 @@ function repositionOpponents(opponentList) {
   if (len == 1) {
     makeNewViewOpponent(opponentList[0],innerWidth/2.45,innerHeight/2);
   } else if (len == 2) {
-    makeNewViewOpponent(opponentList[0],innerWidth/1.45,innerHeight/2);
-    makeNewViewOpponent(opponentList[0],innerWidth/2.45,innerHeight/2);
+    makeNewViewOpponent(opponentList[0],innerWidth/1.1,innerHeight/2);
+    makeNewViewOpponent(opponentList[1],innerWidth/2.5,innerHeight/2);
   }
   //} else if (len == 3) {
 
