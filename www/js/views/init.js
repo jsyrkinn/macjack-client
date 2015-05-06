@@ -24,8 +24,8 @@ function makeNewViewPlayer(player, x, y) {
 }
 
 
-function makeNewViewOpponent(opponent, x, y) {
-  viewOpponent = new ViewOpponent(x, y, opponent);
+function makeNewViewOpponent(opponent, x, y, scaleX, scaleY) {
+  viewOpponent = new ViewOpponent(opponent, x, y, scaleX, scaleY);
 
   viewOpponent.renderPile();
   viewOpponent.renderOpponentName();
@@ -63,10 +63,10 @@ function repositionOpponents(opponentList) {
   var len = opponentList.length;
 
   if (len == 1) {
-    makeNewViewOpponent(opponentList[0],innerWidth/2.45,innerHeight/2);
+    makeNewViewOpponent(opponentList[0], innerWidth/2,innerHeight/2, 0.2, 0.2);
   } else if (len == 2) {
-    makeNewViewOpponent(opponentList[0],innerWidth/1.1,innerHeight/2);
-    makeNewViewOpponent(opponentList[1],innerWidth/2.5,innerHeight/2);
+    makeNewViewOpponent(opponentList[0], innerWidth/5, innerHeight/2, 0.18, 0.18);
+    makeNewViewOpponent(opponentList[1], innerWidth*5/6, innerHeight/2, 0.18, 0.18);
   }
   //} else if (len == 3) {
 

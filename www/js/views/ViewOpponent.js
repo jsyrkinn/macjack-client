@@ -1,4 +1,4 @@
-function ViewOpponent(x,y, opponent) {
+function ViewOpponent(opponent, x, y, scaleX, scaleY) {
   //TODO: Either make dealer and player into one file OR
   //write logic for spacing out cards in both dealer and player files.
   //Dealer object handles visibility vs. invisibility
@@ -33,8 +33,8 @@ function ViewOpponent(x,y, opponent) {
     for (var i = 0; i < cards.length; i++) {
       var cardSprite = new CardSprite(cards[i], window.stage);
 
-      cardSprite.sprite.scale.x = 0.20;
-      cardSprite.sprite.scale.y = 0.20;
+      cardSprite.sprite.scale.x = scaleX;
+      cardSprite.sprite.scale.y = scaleY;
 
       cardSprite.sprite.position.x = x+(i*50);
       cardSprite.sprite.position.y = y;
