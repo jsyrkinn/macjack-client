@@ -4,6 +4,11 @@ function checkHomeScreen() {
   window.clientAuth = window.localStorage.getItem('clientAuth');
   window.clientID = window.localStorage.getItem('clientID');
 
+  if (window.textBox) {
+    window.textBox.parentNode.remove(); // remove form
+    window.textBox = null;
+  }
+
   if (!window.clientAuth) {
     makeFirstTimeHomeScreen();
   } else {
@@ -14,7 +19,6 @@ function checkHomeScreen() {
 //---- HOME MENU - FIRST TIME ----//
 
 function makeFirstTimeHomeScreen() {
-
   window.stage.removeChildren(); // remove all sprites from stage
   addLogo();
 
@@ -54,7 +58,7 @@ function makeSignUpScreen() {
 //---- HOME MENU - RETURNING (HAS AUTH) ----//
 
 function makeReturningHomeScreen() {
-  window.stage.removeChildren(); 
+  window.stage.removeChildren();
   addLogo();
   // New Game Button
   addButton(

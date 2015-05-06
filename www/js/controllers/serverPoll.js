@@ -144,6 +144,12 @@ function updateGame() {
         window.gameState = gameState;
         var modelGameState = new ModelGameState(gameState);
         createGameStateView(modelGameState);
+    } else if (this.status == 406) {
+      // client up to date, no changes necessary
+    } else {
+      // auth error, return to main screen
+      clearTimeout(window.pollTimeout);
+      checkHomeScreen();
     }
   };
 
@@ -156,5 +162,5 @@ function updateGame() {
 
 function poll() {
   console.log("poll");
-  setTimeout(updateGame, 200);
+  window.pollTimeout = setTimeout(updateGame, 200);
 };
