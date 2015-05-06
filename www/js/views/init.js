@@ -114,6 +114,18 @@ function createGameStateView(modelGameState) {
       newRoundText = new PIXI.Text("End of round. \n Would you like to play again?", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
       positionAndAddText(newRoundText, window.stage, window.innerWidth/2, window.innerHeight/2.5)
 
+      // leave game button
+      addButton(
+        {   scale: {x:0.3, y:0.3},
+           anchor: {x:0.0, y:0.0},
+         position: {x:0.0, y:0.0}  },
+        "img/buttons/exitButtonBlue.png",
+        function(touchData){
+          leaveGame();
+        }
+      );
+
+      // add continue button
       addButton(
         {  position: {x:window.innerWidth/2, y:window.innerHeight/2}  },
         "img/buttons/newRound.png",

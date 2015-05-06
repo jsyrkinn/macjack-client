@@ -1,3 +1,13 @@
+function leaveGame() {
+  if (window.pollTimeout) {
+    clearTimeout(window.pollTimeout);
+  }
+  window.gameID = null;
+  window.localStorage.removeItem('gameID');
+  checkHomeScreen();
+}
+
+
 function checkHomeScreen() {
   // checks to see if user is already signed up
 
@@ -33,7 +43,7 @@ function makeFirstTimeHomeScreen() {
     {  anchor: {x:0.5, y:0.0},
      position: {x:window.innerWidth/2, y:window.innerHeight/1.7}  },
     "img/buttons/begin.png",
-    function(touchData){
+    function(touchData) {
       console.log("Sign Up!");
       makeSignUpScreen();
     }
@@ -142,6 +152,17 @@ function makeJoinScreen() {
       validateAndSubmitGameId();
     }
   );
+
+  // leave game button
+  addButton(
+    {   scale: {x:0.3, y:0.3},
+       anchor: {x:0.0, y:0.0},
+     position: {x:0.0, y:0.0}  },
+    "img/buttons/exitButtonBlue.png",
+    function(touchData){
+      leaveGame();
+    }
+  );
 }
 
 //---- BETTING DISPLAY ----//
@@ -165,6 +186,17 @@ function makeBetScreen(totalMoney) {
       function(touchData) {
         console.log("Submit Bet!");
         validateAndSubmitBet();
+      }
+    );
+
+    // leave game button
+    addButton(
+      {   scale: {x:0.3, y:0.3},
+         anchor: {x:0.0, y:0.0},
+       position: {x:0.0, y:0.0}  },
+      "img/buttons/exitButtonBlue.png",
+      function(touchData){
+        leaveGame();
       }
     );
   }

@@ -150,9 +150,7 @@ function updateGame() {
       // client up to date, no changes necessary
     } else {
       // auth error, clear game ID and return to main screen
-      clearTimeout(window.pollTimeout);
-      window.localStorage.removeItem('gameID');
-      checkHomeScreen();
+      leaveGame();
     }
   };
 
