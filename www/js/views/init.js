@@ -28,9 +28,9 @@ function makeNewViewOpponent(opponent, x, y) {
   viewOpponent = new ViewOpponent(x, y, opponent);
 
   viewOpponent.renderPile();
-  viewOpponent.renderOpponentSum();
   viewOpponent.renderOpponentName();
   viewOpponent.renderOpponentBet();
+  viewOpponent.renderOpponentSum();
 
   return viewOpponent
 }

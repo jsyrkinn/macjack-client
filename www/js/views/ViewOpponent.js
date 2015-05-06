@@ -49,12 +49,12 @@ function ViewOpponent(x,y, opponent) {
   }
 
   this.renderOpponentBet = function() {
-  //   betText = new PIXI.Text("$" + this.piles[0].bet, {font:"15px 'Poiret One'", fill:"#f3f3f3"});
-  //   positionAndAddText(betText, this.container, window.innerWidth/3.1, window.innerHeight/1.9);
+    betText = new PIXI.Text("$" + this.piles[0].bet, {font:"15px 'Poiret One'", fill:"#f3f3f3"});
+    positionAndAddText(betText, this.container, -25, 65);
   }
 
   this.renderOpponentSum = function() {
-  //   sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"15px 'Poiret One'", fill:"#f3f3f3"});
-  //   positionAndAddText(betText, this.container, window.innerWidth/1.2, window.innerHeight/1.7);
+    sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"15px 'Poiret One'", fill:"#f3f3f3"});
+    positionAndAddText(betText, this.container, 80, 66);
   }
 }
