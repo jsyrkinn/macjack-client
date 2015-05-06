@@ -48,17 +48,23 @@ function ViewPlayer(x,y, player) {
   }
 
   this.renderPlayerBet = function() {
-    betText = new PIXI.Text("$" + this.piles[0].bet, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    var betText = new PIXI.Text("$" + this.piles[0].bet, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
     positionAndAddText(betText, this.container, -30, 76);
   }
 
   this.renderPlayerName = function() {
-    nameText = new PIXI.Text("YOU", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    var nameText = new PIXI.Text("YOU", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
     positionAndAddText(nameText, this.container, 28, -73);
   }
 
   this.renderPlayerMoney = function() {
-    moneyText = new PIXI.Text("TOTAL: $" + this.money, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    var moneyText = new PIXI.Text("TOTAL: $" + this.money, {font:"20px 'Poiret One'", fill:"#f3f3f3"});
     positionAndAddText(moneyText, this.container, 25, 110);
   }
+
+  this.renderCurrentPlayerSignal = function() {
+    var currentNameText = new PIXI.Text("YOU", {font:"20px 'Poiret One'", fill:"#39c9ff"});
+    positionAndAddText(currentNameText, this.container, 28, -73);
+  }
+
 }

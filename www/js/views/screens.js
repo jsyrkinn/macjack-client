@@ -50,7 +50,6 @@ function makeFirstTimeHomeScreen() {
   );
 }
 
-
 function makeSignUpScreen() {
   window.stage.removeChildren(); // remove all sprites from stage
   addLogo();
@@ -178,18 +177,30 @@ function makeJoinScreen() {
 
 //---- BETTING DISPLAY ----//
 
-function makeBetText(totalMoney) {
-  betInstructionsText = new PIXI.Text("Place your bet below.", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
-  positionAndAddText(betInstructionsText, window.stage, window.innerWidth/2, window.innerHeight/3);
-  betLeftText = new PIXI.Text("You have $" + totalMoney + " left.", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
-  positionAndAddText(betLeftText, window.stage, window.innerWidth/2, window.innerHeight/2.45);
+// function makeBetText(totalMoney) {
+//   betInstructionsText = new PIXI.Text("Place your bet below.", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+//   positionAndAddText(betInstructionsText, window.stage, window.innerWidth/2, window.innerHeight/3);
+//   betLeftText = new PIXI.Text("You have $" + totalMoney + " left.", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+//   positionAndAddText(betLeftText, window.stage, window.innerWidth/2, window.innerHeight/2.45);
+// }
+
+//TODO: indicate when it is their turn to bet
+function betTurnSignal(model){
+  if (model.currentPlayerID == model.player.playerID) { 
+   betTurnText = new PIXI.Text("It's your turn! \n You have $" + model.player.money + " left", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+   positionAndAddText(betTurnText, window.stage, window.innerWidth/2, window.innerHeight/2.45);
+  } else {
+   waitingForBetText = new PIXI.Text("Waiting for other \n players to join \n and bet game...", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+   positionAndAddText(waitingForBetText, window.stage, window.innerWidth/2, window.innerHeight/2.45);  
+  }
 }
 
-function makeBetScreen(totalMoney) {
+function makeBetScreen(model) {
   if (!window.textBox) {
     window.stage.removeChildren();
-    console.log("Make Bet Screen!")
-    makeBetText(totalMoney);
+    console.log("Make Bet Screen!");
+    betTurnSignal(model);
+    //makeBetText(model.player.money);
     addTextBox("bet", "number", validateAndSubmitBet);
     addButton(
       {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },

@@ -44,17 +44,22 @@ function ViewOpponent(opponent, x, y, scaleX, scaleY) {
   }
 
   this.renderOpponentName = function() {
-    nameText = new PIXI.Text(this.playerName.toUpperCase(), {font:"15px 'Poiret One'", fill:"#f3f3f3"});
+    var nameText = new PIXI.Text(this.playerName.toUpperCase(), {font:"15px 'Poiret One'", fill:"#f3f3f3"});
     positionAndAddText(nameText, this.container, 28, -73);
   }
 
   this.renderOpponentBet = function() {
-    betText = new PIXI.Text("$" + this.piles[0].bet, {font:"15px 'Poiret One'", fill:"#f3f3f3"});
+    var betText = new PIXI.Text("$" + this.piles[0].bet, {font:"15px 'Poiret One'", fill:"#f3f3f3"});
     positionAndAddText(betText, this.container, -25, 65);
   }
 
   this.renderOpponentSum = function() {
-    sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"15px 'Poiret One'", fill:"#f3f3f3"});
+    var sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"15px 'Poiret One'", fill:"#f3f3f3"});
     positionAndAddText(sumText, this.container, 80, 65);
+  }
+
+  this.renderCurrentPlayerSignal = function() {
+    var currentOpponentNameText = new PIXI.Text(this.playerName.toUpperCase(), {font:"15px Poiret One", fill:"#39c9ff"});
+    positionAndAddText(currentOpponentNameText, this.container, 28, -73);
   }
 }

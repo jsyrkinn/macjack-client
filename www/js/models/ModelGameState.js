@@ -5,7 +5,8 @@ function ModelGameState(gameState) {
   this.betting = gameState.betting;
   this.finished = gameState.finished;
   model = this;
-  
+  gameState.players[gameState.currentPlayer].isCurrentPlayer = true;
+
   gameState.players.forEach(function(player) {
     if (player.playerID == window.clientID) {
       model.player = player;
