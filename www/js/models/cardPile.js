@@ -27,7 +27,7 @@ function CardPile(hand) {
       }
     });
     if (totals.length == 0) {
-      totals = tot21
+      totals = [tot21];
     }
     return totals.sort();
   }
