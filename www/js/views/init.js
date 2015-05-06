@@ -18,7 +18,7 @@ function makeNewViewPlayer(player, x, y) {
   viewPlayer.renderPlayerSum();
   viewPlayer.renderPlayerBet();
   viewPlayer.renderPlayerName();
-  viewPlayer.renderPlayerMoney()
+  viewPlayer.renderPlayerMoney();
 
   if (player.isCurrentPlayer){
     viewPlayer.renderCurrentPlayerSignal();
@@ -91,7 +91,7 @@ function createGameStateView(modelGameState) {
     if (window.betGoing) {
       startSpinner();
     } else {
-      makeBetScreen(modelGameState.player.money);
+      makeBetScreen(modelGameState);
     }
   } else {
     //betting is finished

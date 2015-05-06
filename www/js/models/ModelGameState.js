@@ -5,11 +5,10 @@ function ModelGameState(gameState) {
   this.betting = gameState.betting;
   this.finished = gameState.finished;
   model = this;
-  var currentPlayerID = gameState.players[gameState.currentPlayer].playerID;
-  console.log("CURRENT PLAYER ID:" + currentPlayerID);
+  this.currentPlayerID = gameState.players[gameState.currentPlayer].playerID;
 
   gameState.players.forEach(function(player) {
-    if (player.playerID == currentPlayerID){
+    if (player.playerID == this.currentPlayerID){
       player.isCurrentPlayer = true;
     } 
     if (player.playerID == window.clientID) {
