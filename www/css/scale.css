@@ -22,8 +22,6 @@ canvas {
 
   transform: scale(0.5,0.5);
   -webkit-transform: scale(0.5, 0.5);
-  /* a double-sized pixi canvas scaled to the screen looks better
-   * than a normal-sized canvas with no scaling */
 }
 
 .macjacktextbox {

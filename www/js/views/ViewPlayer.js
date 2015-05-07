@@ -1,8 +1,4 @@
 function ViewPlayer(x,y, player) {
-  //TODO: Either make dealer and player into one file OR
-  //write logic for spacing out cards in both dealer and player files.
-  //Dealer object handles visibility vs. invisibility
-  //Player object handles double tap, swipe right, swipe up (for betting)
 
   this.playerName = player.playerName;
   this.money = player.money;

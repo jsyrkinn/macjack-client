@@ -1,8 +1,4 @@
 function ViewOpponent(opponent, x, y, scaleX, scaleY) {
-  //TODO: Either make dealer and player into one file OR
-  //write logic for spacing out cards in both dealer and player files.
-  //Dealer object handles visibility vs. invisibility
-  //Player object handles double tap, swipe right, swipe up (for betting)
 
   this.playerName = opponent.playerName;
   this.money = opponent.money;
@@ -31,7 +27,7 @@ function ViewOpponent(opponent, x, y, scaleX, scaleY) {
     for (var i = 0; i < cards.length; i++) {
       var cardSprite = new CardSprite(cards[i], cardSpritesContainer);
 
-      var offset = (((cards.length-1)*50)+cardSprite.sprite.width)/2;
+      var offset = (((cards.length-1)*50)+cardSprite.sprite.width)/1.5;
 
       cardSprite.sprite.scale = {x: scaleX, y: scaleY};
 

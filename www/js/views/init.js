@@ -79,8 +79,8 @@ function repositionOpponents(opponentList) {
   if (len == 1) {
     makeNewViewOpponent(opponentList[0], innerWidth/1.9, innerHeight/2.1, 0.2, 0.2);
   } else if (len == 2) {
-    makeNewViewOpponent(opponentList[0], innerWidth/5, innerHeight/2, 0.18, 0.18);
-    makeNewViewOpponent(opponentList[1], innerWidth*5/6, innerHeight/2, 0.18, 0.18);
+    makeNewViewOpponent(opponentList[0], innerWidth*1/3, innerHeight/2, 0.18, 0.18);
+    makeNewViewOpponent(opponentList[1], innerWidth*2/3, innerHeight/2, 0.18, 0.18);
   }
 }
 
@@ -117,7 +117,7 @@ function createGameStateView(modelGameState) {
 
     //TODO: Add dark pop up box around these buttons and text
     if (modelGameState.finished) {
-      stage.addChild(rectangle(window.innerWidth/11.9, window.innerHeight/2.9, 270, 180, 0x323232, 0x323232, 10));
+      stage.addChild(rectangle(0, window.innerHeight/2.9, 1000, 180, 0x42494E, 0x42494E, 10));
       newRoundText = new PIXI.Text("End of round. \n Would you like to play again?", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
       positionAndAddText(newRoundText, window.stage, window.innerWidth/2, window.innerHeight/2.5)
 
@@ -176,18 +176,14 @@ requestAnimFrame( animate );
 
 function animate() {
   requestAnimFrame( animate );
-  // put anything that needs to be animated in here
 
   if (window.showSpinner) {
     for (i = 0; i < window.spinners.length; i++) {
       window.spinners[i].rotation += 0.009*i+0.01;
     }
-
     if (window.stage.children.indexOf(window.spinners[0]) < 0) {
-      // spinner was removed by some other method than stopSpinner
       stopSpinner();
     }
   }
-  // render the stage
   renderer.render(window.stage);
 }

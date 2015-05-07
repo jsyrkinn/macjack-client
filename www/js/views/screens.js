@@ -43,10 +43,31 @@ function makeFirstTimeHomeScreen() {
     "img/buttons/begin.png",
     function(touchData) {
       console.log("Sign Up!");
+      makeInstructionsScreen();
+    }
+  );
+}
+
+function makeInstructionsScreen() {
+  window.stage.removeChildren(); // remove all sprites from stage
+  addLogo();
+
+  var toPlayText = new PIXI.Text("To play:", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  positionAndAddText(toPlayText, window.stage, window.innerWidth/2, window.innerHeight/2.1);
+  var instructionsText = new PIXI.Text("Tap to hit or \n swipe right to stay.", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  positionAndAddText(instructionsText, window.stage, window.innerWidth/2, window.innerHeight/1.7);
+  // Submit Button
+  addButton(
+    {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
+    "img/buttons/begin.png",
+    function(touchData) {
+      console.log("Start")
       makeSignUpScreen();
     }
   );
 }
+
+
 
 function makeSignUpScreen() {
   window.stage.removeChildren(); // remove all sprites from stage
@@ -63,7 +84,15 @@ function makeSignUpScreen() {
     function(touchData) {
       console.log("Submit!")
       validateAndSubmitName();
-      makeInstructionsScreen();
+    }
+  );
+  addButton(
+    {   scale: {x:0.4, y:0.4},
+       anchor: {x:0.0, y:0.0},
+     position: {x:10, y:25}  },
+  "img/buttons/back.png",
+    function(touchData){
+      leaveGame();
     }
   );
 }
@@ -115,7 +144,6 @@ function makeReturningHomeScreen() {
 
 function makeGameIdScreen() {
 
-  //TODO: Add back button
   window.stage.removeChildren();
   console.log("Display Game ID!")
   gameIDInstructions = new PIXI.Text("Here is your game code. \n Share this with your friends \n so that they can join your game!", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
@@ -129,7 +157,7 @@ function makeGameIdScreen() {
     "img/buttons/start.png",
     function(touchData) {
       console.log("Start!");
-      makeInstructionsScreen(); 
+      updateGame();
     }
   );
 
@@ -176,39 +204,17 @@ function makeJoinScreen() {
 }
 
 
-//---- TO BE SHOWN BEFORE GAME ----//
-
-function makeInstructionsScreen() {
-  window.stage.removeChildren(); // remove all sprites from stage
-  addLogo();
-
-  signUpText = new PIXI.Text("To play: \n Tap to hit. \n Swipe right to stay.", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
-  positionAndAddText(signUpText, window.stage, window.innerWidth/2, window.innerHeight/1.8);
-
-  // Submit Button
-  addButton(
-    {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
-    "img/buttons/begin.png",
-    function(touchData) {
-      console.log("Start")
-      updateGame();
-    }
-  );
-}
-
-
 //TODO: indicate when it is their turn to bet
 function betTurnSignal(model){
   betText = new PIXI.Text("Place your bet below. \n You have $" + model.player.money + " left", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
-  positionAndAddText(betText, window.stage, window.innerWidth/2, window.innerHeight/5);
-  
-  if (model.currentPlayerID == model.player.playerID) { 
-   betTurnText = new PIXI.Text("It's your turn! \n You have $" + model.player.money + " left", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
-   positionAndAddText(betTurnText, window.stage, window.innerWidth/2, window.innerHeight/2.35);
-  } else {
-   waitingForBetText = new PIXI.Text("Waiting for other \n players to join \n and bet game...", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
-   positionAndAddText(waitingForBetText, window.stage, window.innerWidth/2, window.innerHeight/2.5);  
-  }
+  positionAndAddText(betText, window.stage, window.innerWidth/2, window.innerHeight/2.5);
+  // if (model.currentPlayerID == model.player.playerID) { 
+  //  betTurnText = new PIXI.Text("It's your turn! \n You have $" + model.player.money + " left", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  //  positionAndAddText(betTurnText, window.stage, window.innerWidth/2, window.innerHeight/2.35);
+  // } else {
+  //  waitingForBetText = new PIXI.Text("Waiting for other \n players to join \n and bet game...", {font:"30px 'Poiret One'", fill:"#f3f3f3"});
+  //  positionAndAddText(waitingForBetText, window.stage, window.innerWidth/2, window.innerHeight/2.5);  
+  // }
 }
 
 function makeBetScreen(model) {
@@ -276,7 +282,7 @@ function rectangle( x, y, width, height, backgroundColor, borderColor, borderWid
  var box = new PIXI.Graphics();
  box.beginFill(backgroundColor);
  box.lineStyle(borderWidth , borderColor);
- box.drawRoundedRect(0, 0, width - borderWidth, height - borderWidth);
+ box.drawRect(0, 0, width - borderWidth, height - borderWidth);
  box.endFill();
  box.position.x = x + borderWidth/2;
  box.position.y = y + borderWidth/2;
@@ -311,7 +317,7 @@ function validateAndSubmitName() {
     console.log("textBox incorrect!")
   } else if (window.textBox.value != "") { 
     name = window.textBox.value;
-    window.textBox.parentNode.remove(); // remove form
+    window.textBox.parentNode.remove(); 
     window.textBox = null;
     getClientAuth(name);
   }
@@ -323,7 +329,7 @@ function validateAndSubmitBet() {
     console.log("textBox incorrect!")
   } else if (window.textBox.value != 0) {
     bet = window.textBox.value;
-    window.textBox.parentNode.remove(); // remove form
+    window.textBox.parentNode.remove(); 
     window.textBox = null;
     sendBet(bet);
   } else {
@@ -336,7 +342,7 @@ function validateAndSubmitGameId() {
     console.log("textBox incorrect!")
   } else if (window.textBox.value.length == 4) {
     gameid = window.textBox.value;
-    window.textBox.parentNode.remove(); // remove form
+    window.textBox.parentNode.remove(); 
     window.textBox = null;
     sendJoinGame(gameid);
   } else {
