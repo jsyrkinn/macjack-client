@@ -29,10 +29,17 @@ function makeFirstTimeHomeScreen() {
   window.stage.removeChildren(); // remove all sprites from stage
   addLogo();
 
+  introText1 = new PIXI.Text("Welcome!", {font:"40px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  positionAndAddText(introText1, window.stage, window.innerWidth/2, window.innerHeight/2.3);
+  introText2 = new PIXI.Text("This is a Macalester-themed \n blackjack app. You can play \n against the dealer or hook up \n to a game with your friends.", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  positionAndAddText(introText2, window.stage, window.innerWidth/2, window.innerHeight/1.72);
+  introText3 = new PIXI.Text("Have fun!", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  positionAndAddText(introText3, window.stage, window.innerWidth/2, window.innerHeight/1.4);
+
   // Sign up Button
   addButton(
     {  anchor: {x:0.5, y:0.0},
-     position: {x:window.innerWidth/2, y:window.innerHeight/1.7}  },
+     position: {x:window.innerWidth/2, y:window.innerHeight/1.3}  },
     "img/buttons/begin.png",
     function(touchData) {
       console.log("Sign Up!");
@@ -46,7 +53,6 @@ function makeSignUpScreen() {
   addLogo();
   addTextBox("name", "textbox", validateAndSubmitName);
 
-  //add text: "All we need is your first name!"
   signUpText = new PIXI.Text("Enter your first name below", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
   positionAndAddText(signUpText, window.stage, window.innerWidth/2, window.innerHeight/2.1);
 
@@ -57,9 +63,11 @@ function makeSignUpScreen() {
     function(touchData) {
       console.log("Submit!")
       validateAndSubmitName();
+      makeInstructionsScreen();
     }
   );
 }
+
 
 //---- HOME MENU - RETURNING (HAS AUTH) ----//
 
@@ -121,7 +129,7 @@ function makeGameIdScreen() {
     "img/buttons/start.png",
     function(touchData) {
       console.log("Start!");
-      updateGame(); 
+      makeInstructionsScreen(); 
     }
   );
 
@@ -136,6 +144,7 @@ function makeGameIdScreen() {
     }
   );
 }
+
 
 //---- JOIN GAME DISPLAY ----//
 
@@ -166,6 +175,27 @@ function makeJoinScreen() {
   );
 }
 
+
+//---- TO BE SHOWN BEFORE GAME ----//
+
+function makeInstructionsScreen() {
+  window.stage.removeChildren(); // remove all sprites from stage
+  addLogo();
+
+  signUpText = new PIXI.Text("To play: \n Tap to hit. \n Swipe right to stay.", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  positionAndAddText(signUpText, window.stage, window.innerWidth/2, window.innerHeight/1.8);
+
+  // Submit Button
+  addButton(
+    {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
+    "img/buttons/begin.png",
+    function(touchData) {
+      console.log("Start")
+      updateGame();
+    }
+  );
+}
+
 //---- BETTING DISPLAY ----//
 
 // function makeBetText(totalMoney) {
@@ -177,6 +207,9 @@ function makeJoinScreen() {
 
 //TODO: indicate when it is their turn to bet
 function betTurnSignal(model){
+  betText = new PIXI.Text("Place your bet below. \n You have $" + model.player.money + " left", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  positionAndAddText(betText, window.stage, window.innerWidth/2, window.innerHeight/5.5);
+  
   if (model.currentPlayerID == model.player.playerID) { 
    betTurnText = new PIXI.Text("It's your turn! \n You have $" + model.player.money + " left", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
    positionAndAddText(betTurnText, window.stage, window.innerWidth/2, window.innerHeight/2.45);
@@ -285,7 +318,7 @@ function addTextBox(id, type, submitCallback) {
 function validateAndSubmitName() {
   if (window.textBox.id != "name") {
     console.log("textBox incorrect!")
-  } else if (window.textBox.value != "") { //TODO: add validation to server
+  } else if (window.textBox.value != "") { 
     name = window.textBox.value;
     window.textBox.parentNode.remove(); // remove form
     window.textBox = null;
