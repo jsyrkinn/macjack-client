@@ -123,10 +123,7 @@ function createGameStateView(modelGameState) {
 
 
 
-    //TODO: This if statement should call functions-
-    //1. displays text for end of round
-    //2. displays two buttons (quit or new round)
-    //Both of these need to be displayed on a pop up box that is darker than the rest of the game so it's visible
+    //TODO: Add dark pop up box around these buttons and text
     if (modelGameState.finished) {
       newRoundText = new PIXI.Text("End of round. \n Would you like to play again?", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
       positionAndAddText(newRoundText, window.stage, window.innerWidth/2, window.innerHeight/2.5)
@@ -151,13 +148,9 @@ function createGameStateView(modelGameState) {
           sendContinue();
         }
       );
-
-      //TODO: add another button: for quitting - going back to home screen (join/new game)
-
     } else {
       addTouchHandlerToStage();
     }
-    // repositionAllHands();
   }
 };
 

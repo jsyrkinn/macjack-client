@@ -1,15 +1,6 @@
-function leaveGame() {
-  if (window.pollTimeout) {
-    clearTimeout(window.pollTimeout);
-  }
-  window.gameID = null;
-  window.localStorage.removeItem('gameID');
-  checkHomeScreen();
-}
 
-
+//Checks to see if user is already signed up
 function checkHomeScreen() {
-  // checks to see if user is already signed up
 
   window.clientAuth = window.localStorage.getItem('clientAuth');
   window.clientID = window.localStorage.getItem('clientID');
@@ -130,7 +121,7 @@ function makeGameIdScreen() {
     "img/buttons/start.png",
     function(touchData) {
       console.log("Start!");
-      updateGame(); // start polling
+      updateGame(); 
     }
   );
 
@@ -225,6 +216,15 @@ function makeBetScreen(model) {
 }
 
 //--- HELPER FUNCTIONS ----//
+
+function leaveGame() {
+  if (window.pollTimeout) {
+    clearTimeout(window.pollTimeout);
+  }
+  window.gameID = null;
+  window.localStorage.removeItem('gameID');
+  checkHomeScreen();
+}
 
 function addLogo() {
   var logoSprite = new PIXI.Sprite.fromImage("img/logosIcons/logoHome.png");
