@@ -77,19 +77,11 @@ function repositionOpponents(opponentList) {
   var len = opponentList.length;
 
   if (len == 1) {
-    makeNewViewOpponent(opponentList[0], innerWidth/2,innerHeight/2, 0.2, 0.2);
+    makeNewViewOpponent(opponentList[0], innerWidth/1.9, innerHeight/2.1, 0.2, 0.2);
   } else if (len == 2) {
     makeNewViewOpponent(opponentList[0], innerWidth/5, innerHeight/2, 0.18, 0.18);
     makeNewViewOpponent(opponentList[1], innerWidth*5/6, innerHeight/2, 0.18, 0.18);
   }
-  //} else if (len == 3) {
-
-  //} else if (len == 4) {
-
-  // }
-  // else {
-  //    console.log("too many players!")
-  // }
 }
 
 function createGameStateView(modelGameState) {
