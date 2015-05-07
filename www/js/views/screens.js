@@ -247,6 +247,18 @@ function addButton(placement, imagePath, tapCallback) {
   window.stage.addChild(button);
 }
 
+//Credit to http://www.html5gamedevs.com/topic/3114-question-about-rectangle-drawing/
+function rectangle( x, y, width, height, backgroundColor, borderColor, borderWidth ) { 
+ var box = new PIXI.Graphics();
+ box.beginFill(backgroundColor);
+ box.lineStyle(borderWidth , borderColor);
+ box.drawRoundedRect(0, 0, width - borderWidth, height - borderWidth);
+ box.endFill();
+ box.position.x = x + borderWidth/2;
+ box.position.y = y + borderWidth/2;
+ return box;
+};
+
 function positionAndAddText(text, parent, x, y) {
   text.anchor = {x: 0.5, y:0.5};
   text.position.x = x;

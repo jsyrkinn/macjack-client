@@ -117,6 +117,7 @@ function createGameStateView(modelGameState) {
 
     //TODO: Add dark pop up box around these buttons and text
     if (modelGameState.finished) {
+      stage.addChild(rectangle(window.innerWidth/11.9, window.innerHeight/2.9, 270, 180, 0x323232, 0x323232, 10));
       newRoundText = new PIXI.Text("End of round. \n Would you like to play again?", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
       positionAndAddText(newRoundText, window.stage, window.innerWidth/2, window.innerHeight/2.5)
 
@@ -124,7 +125,7 @@ function createGameStateView(modelGameState) {
       addButton(
         {   scale: {x:0.8, y:0.8},
            anchor: {x:0.0, y:0.0},
-         position: {x:innerWidth/2.8, y:innerHeight/1.85}  },
+         position: {x:innerWidth/2.8, y:innerHeight/1.8}  },
         "img/buttons/quit.png",
         function(touchData){
           leaveGame();
