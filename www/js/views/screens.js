@@ -136,10 +136,10 @@ function makeGameIdScreen() {
 
   // leave game button
   addButton(
-    {   scale: {x:0.3, y:0.3},
+    {   scale: {x:0.4, y:0.4},
        anchor: {x:0.0, y:0.0},
-     position: {x:0.0, y:0.0}  },
-    "img/buttons/exitButtonBlue.png",
+     position: {x:10, y:25}  },
+    "img/buttons/back.png",
     function(touchData){
       leaveGame();
     }
@@ -165,10 +165,10 @@ function makeJoinScreen() {
 
   // leave game button
   addButton(
-    {   scale: {x:0.3, y:0.3},
+    {   scale: {x:0.4, y:0.4},
        anchor: {x:0.0, y:0.0},
-     position: {x:0.0, y:0.0}  },
-    "img/buttons/exitButtonBlue.png",
+     position: {x:10, y:25}  },
+    "img/buttons/back.png",
     function(touchData){
       leaveGame();
     }
@@ -213,10 +213,10 @@ function makeBetScreen(model) {
 
     // leave game button
     addButton(
-      {   scale: {x:0.3, y:0.3},
+      {   scale: {x:0.4, y:0.4},
          anchor: {x:0.0, y:0.0},
-       position: {x:0.0, y:0.0}  },
-      "img/buttons/exitButtonBlue.png",
+       position: {x:10, y:25}  },
+      "img/buttons/back.png",
       function(touchData){
         leaveGame();
       }

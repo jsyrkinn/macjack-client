@@ -66,6 +66,12 @@ function addTouchHandlerToStage() {
   }
 }
 
+function addGameIDText(){
+    var gameIDText = new PIXI.Text("Game ID: ", {font:"14px 'Poiret One' bold", fill:"#f3f3f3"});
+    var gameIDNumberText = new PIXI.Text(window.gameID, {font:"14px 'Poiret One' bold", fill:"#f6b26b"});
+    positionAndAddText(gameIDText, window.stage, window.innerWidth/10, window.innerHeight/19);
+    positionAndAddText(gameIDNumberText, window.stage, window.innerWidth/10.7, window.innerHeight/12.5);
+}
 
 function repositionOpponents(opponentList) {
   var len = opponentList.length;
@@ -81,9 +87,9 @@ function repositionOpponents(opponentList) {
   //} else if (len == 4) {
 
   // }
-  else {
-     console.log("too many players!")
-  }
+  // else {
+  //    console.log("too many players!")
+  // }
 }
 
 function createGameStateView(modelGameState) {
@@ -98,24 +104,19 @@ function createGameStateView(modelGameState) {
     window.betGoing = false;
     stopSpinner();
 
-    if (window.textBox) { // bet textbox already exists
-      window.textBox.parentNode.remove(); // should remove form
+    if (window.textBox) { //bet textbox already exists
+      window.textBox.parentNode.remove(); 
       window.textBox = null;
     }
 
     window.stage.removeChildren();
 
+    addGameIDText();
 
-    var gameIDText = new PIXI.Text("Game ID: ", {font:"14px 'Poiret One' bold", fill:"#f3f3f3"});
-    var gameIDNumberText = new PIXI.Text(window.gameID, {font:"14px 'Poiret One' bold", fill:"#f6b26b"});
-    positionAndAddText(gameIDText, window.stage, window.innerWidth/10, window.innerHeight/19);
-    positionAndAddText(gameIDNumberText, window.stage, window.innerWidth/10.7, window.innerHeight/12.5);
-
+    //Making the dealer, player, and opponents
     makeNewViewDealer(modelGameState.dealerHand, window.innerWidth/2.4, window.innerHeight/5.5);
-
-    opponents = modelGameState.opponents;
+    var opponents = modelGameState.opponents;
     repositionOpponents(opponents);
-
     var player = modelGameState.player;
     makeNewViewPlayer(player, window.innerWidth/2, window.innerHeight-125);
 
@@ -132,10 +133,10 @@ function createGameStateView(modelGameState) {
 
       // leave game button
       addButton(
-        {   scale: {x:0.3, y:0.3},
+        {   scale: {x:0.8, y:0.8},
            anchor: {x:0.0, y:0.0},
-         position: {x:0.0, y:0.0}  },
-        "img/buttons/exitButtonBlue.png",
+         position: {x:innerWidth/2.8, y:innerHeight/1.85}  },
+        "img/buttons/quit.png",
         function(touchData){
           leaveGame();
         }
