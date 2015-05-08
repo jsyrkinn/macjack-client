@@ -11,13 +11,13 @@ function CardPile(hand) {
     this.cards.forEach(function(card) {
       for (var i=totals.length-1; i >= 0; i--) {
         if (card.rank == 1) { //Card is an ace.
-          if (totals.indexOf(totals[i]+1) == -1) { // The new total is not in the totals arrray.
+          if (totals.indexOf(totals[i]+1) == -1) { //The new total is not in the totals arrray.
             totals.push(totals[i] + 1);
           }
           totals[i] += 11;
-        } else if (card.rank < 10) { // Card is a number card.
+        } else if (card.rank < 10) { //Card is a number card.
           totals[i] += card.rank;
-        } else { // Card is a face card.
+        } else { //Card is a face card.
           totals[i] += 10;
         }
         if (totals[i] > 21) {
