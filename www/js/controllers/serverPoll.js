@@ -1,4 +1,4 @@
-var serverIP = "141.140.159.23";
+var serverIP = "141.140.193.53";
 
 function getClientAuth(name) {
     console.log("clientAuth not set, requesting from server...")
@@ -7,8 +7,7 @@ function getClientAuth(name) {
 
     signupRequest.onload = function() {
       stopSpinner();
-      if (this.status >= 200 && this.status < 400) {
-        // Success!
+      if (this.status >= 200 && this.status < 400) { //Successful response from server
         var res = JSON.parse(this.response);
         window.clientAuth = res.auth;
         window.clientID = res.playerID;
@@ -17,10 +16,12 @@ function getClientAuth(name) {
       }
       checkHomeScreen();
     };
+
     signupRequest.onerror = function() {
       stopSpinner();
       console.log('Connection Failed');
     };
+
     signupRequest.send();
     startSpinner();
 };
