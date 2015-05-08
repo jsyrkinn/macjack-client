@@ -146,7 +146,7 @@ function makeGameIdScreen() {
 
   window.stage.removeChildren();
   console.log("Display Game ID!")
-  gameIDInstructions = new PIXI.Text("Here is your game code. \n Share this with your friends \n so that they can join your game!", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
+  var gameIDInstructions = new PIXI.Text("Here is your game code. \n Share this with your friends \n so that they can join your game!", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
   positionAndAddText(gameIDInstructions, window.stage, window.innerWidth/2, window.innerHeight/3);
 
   var gameIDText = new PIXI.Text(window.gameID, {font:"100px 'Poiret One'", fill:"#f3f3f3"});
@@ -179,6 +179,9 @@ function makeGameIdScreen() {
 function makeJoinScreen() {
   window.stage.removeChildren(); // remove all sprites from stage
   addLogo();
+  var joinGameIDText = new PIXI.Text("Enter your game code below", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+  positionAndAddText(joinGameIDText, window.stage, window.innerWidth/2, window.innerHeight/2);
+
   addTextBox("gameid", "number", validateAndSubmitGameId);
 
   // Submit Button
