@@ -1,5 +1,9 @@
 # macjack-client
 
+***Introduction***
+
+Welcome! MacJack is a Macalester College-themed blackjack game. This app provides a way for people to play a game of blackjack together without having an actual deck of cards. There is a virtual dealer for users to play against and has room for up to 3 players. 
+
 ***Requirements and Installation***
 
 This app requires cordova phonegap, node, and the phonegap app in order to run.
