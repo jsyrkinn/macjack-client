@@ -17,8 +17,7 @@ function checkHomeScreen() {
     if (!window.gameID) {
       makeReturningHomeScreen();
     } else {
-      // rejoining existing game
-      updateGame();
+      updateGame();  // rejoining existing game
     }
   }
 }
@@ -26,7 +25,7 @@ function checkHomeScreen() {
 //---- HOME MENU - FIRST TIME ----//
 
 function makeFirstTimeHomeScreen() {
-  window.stage.removeChildren(); // remove all sprites from stage
+  window.stage.removeChildren(); // creating blank stage
   addLogo();
 
   introText1 = new PIXI.Text("Welcome!", {font:"40px 'Poiret One'", fill:"#f3f3f3", align: "center"});
@@ -36,7 +35,6 @@ function makeFirstTimeHomeScreen() {
   introText3 = new PIXI.Text("Have fun!", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
   positionAndAddText(introText3, window.stage, window.innerWidth/2, window.innerHeight/1.4);
 
-  // Sign up Button
   addButton(
     {  anchor: {x:0.5, y:0.0},
      position: {x:window.innerWidth/2, y:window.innerHeight/1.3}  },
@@ -67,8 +65,6 @@ function makeInstructionsScreen() {
   );
 }
 
-
-
 function makeSignUpScreen() {
   window.stage.removeChildren(); // remove all sprites from stage
   addLogo();
@@ -77,7 +73,6 @@ function makeSignUpScreen() {
   signUpText = new PIXI.Text("Enter your first name below", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
   positionAndAddText(signUpText, window.stage, window.innerWidth/2, window.innerHeight/2.1);
 
-  // Submit Button
   addButton(
     {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
     "img/buttons/submit.png",
@@ -86,6 +81,7 @@ function makeSignUpScreen() {
       validateAndSubmitName();
     }
   );
+
   addButton(
     {   scale: {x:0.4, y:0.4},
        anchor: {x:0.0, y:0.0},
@@ -96,7 +92,6 @@ function makeSignUpScreen() {
     }
   );
 }
-
 
 //---- HOME MENU - RETURNING (HAS AUTH) ----//
 
@@ -114,7 +109,6 @@ function makeReturningHomeScreen() {
     }
   );
 
-  // Join Game Button
   addButton(
     {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
     "img/buttons/joinGame.png",
@@ -126,10 +120,10 @@ function makeReturningHomeScreen() {
 
   // Delete LocalStorage Button -- FOR DEBUGGING
   addButton(
-    {   scale: {x:0.3, y:0.3},
+    {   scale: {x:0.4, y:0.4},
        anchor: {x:0.0, y:0.0},
-     position: {x:0.0, y:0.0}  },
-    "img/buttons/exitButtonBlue.png",
+     position: {x:0.0, y:20}  },
+    "img/buttons/back.png",
     function(touchData){
       console.log("Delete LocalStorage!");
       window.localStorage.removeItem('clientAuth');
@@ -161,7 +155,6 @@ function makeGameIdScreen() {
     }
   );
 
-  // leave game button
   addButton(
     {   scale: {x:0.4, y:0.4},
        anchor: {x:0.0, y:0.0},
@@ -172,7 +165,6 @@ function makeGameIdScreen() {
     }
   );
 }
-
 
 //---- JOIN GAME DISPLAY ----//
 
@@ -184,7 +176,6 @@ function makeJoinScreen() {
 
   addTextBox("gameid", "number", validateAndSubmitGameId);
 
-  // Submit Button
   addButton(
     {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
     "img/buttons/submit.png",
@@ -194,7 +185,6 @@ function makeJoinScreen() {
     }
   );
 
-  // leave game button
   addButton(
     {   scale: {x:0.4, y:0.4},
        anchor: {x:0.0, y:0.0},
@@ -206,11 +196,9 @@ function makeJoinScreen() {
   );
 }
 
-
 function betTurnSignal(model){
   betText = new PIXI.Text("Place your bet below. \n You have $" + model.player.money + " left", {font:"30px 'Poiret One'", fill:"#f3f3f3", align: "center"});
   positionAndAddText(betText, window.stage, window.innerWidth/2, window.innerHeight/2.5);
-
 }
 
 function makeBetScreen(model) {
@@ -228,7 +216,6 @@ function makeBetScreen(model) {
       }
     );
 
-    // leave game button
     addButton(
       {   scale: {x:0.4, y:0.4},
          anchor: {x:0.0, y:0.0},
@@ -280,8 +267,7 @@ function rectangle( x, y, width, height, backgroundColor, borderColor, borderWid
  box.lineStyle(borderWidth , borderColor);
  box.drawRect(0, 0, width - borderWidth, height - borderWidth);
  box.endFill();
- box.position.x = x + borderWidth/2;
- box.position.y = y + borderWidth/2;
+ box.position = {x: x + borderWidth/2, y: y + borderWidth/2};
  return box;
 };
 

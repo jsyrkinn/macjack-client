@@ -49,11 +49,4 @@ function ViewDealer(x,y,dealerHand) {
       nameText = new PIXI.Text("DEALER", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
       positionAndAddText(nameText, this.container, 28, -73);
   }
-
-  this.updatePile = function(newPile) {
-    //TODO: check for updates and update when there is a change - take this function out?
-    //Do this to pile itself, don't call updatePile
-    // show face down card if there is only one face up card
-
-  }
 }
