@@ -27,7 +27,7 @@ function ViewOpponent(opponent, x, y, scaleX, scaleY) {
     for (var i = 0; i < cards.length; i++) {
       var cardSprite = new CardSprite(cards[i], cardSpritesContainer);
 
-      var offset = (((cards.length-1)*50)+cardSprite.sprite.width)/1.5;
+      var offset = (((cards.length-1)*50)+cardSprite.sprite.width)/2;
 
       cardSprite.sprite.scale = {x: scaleX, y: scaleY};
 
