@@ -30,6 +30,7 @@ function setupNewGame() {
   var newgameRequest = new XMLHttpRequest();
   newgameRequest.open( "POST", 'http://' + serverIP + '/games/newgame.json', true );
   newgameRequest.setRequestHeader('X-auth-code', window.clientAuth);
+  newgameRequest.setRequestHeader('Cache-Control', "no-cache");
 
   newgameRequest.onload = function() {
     stopSpinner();
@@ -56,6 +57,7 @@ function sendJoinGame(gameID) {
   var joinGameRequest = new XMLHttpRequest();
   joinGameRequest.open( "POST", 'http://' + serverIP + '/games/'+gameID+'/join.json', true );
   joinGameRequest.setRequestHeader('X-auth-code', window.clientAuth);
+  joinGameRequest.setRequestHeader('Cache-Control', "no-cache");
 
   joinGameRequest.onload = function() {
     stopSpinner();
@@ -81,6 +83,7 @@ function sendBet(amount) {
   var betRequest = new XMLHttpRequest();
   betRequest.open( "POST", 'http://' + serverIP + '/games/'+window.gameID+'/bet.json?amount='+amount, true );
   betRequest.setRequestHeader('X-auth-code', window.clientAuth);
+  betRequest.setRequestHeader('Cache-Control', "no-cache");
 
   betRequest.onload = function() {
     stopSpinner();
@@ -102,6 +105,7 @@ function sendHit() {
   var hitRequest = new XMLHttpRequest();
   hitRequest.open( "POST", 'http://' + serverIP + '/games/'+window.gameID+'/hit.json', true );
   hitRequest.setRequestHeader('X-auth-code', window.clientAuth);
+  hitRequest.setRequestHeader('Cache-Control', "no-cache");
 
   hitRequest.onerror = function() {
     console.log('Connection Failed - Hit not sent');
@@ -114,6 +118,7 @@ function sendStay() {
   var hitRequest = new XMLHttpRequest();
   hitRequest.open( "POST", 'http://' + serverIP + '/games/'+window.gameID+'/stay.json', true );
   hitRequest.setRequestHeader('X-auth-code', window.clientAuth);
+  hitRequest.setRequestHeader('Cache-Control', "no-cache");
 
   hitRequest.onerror = function() {
     console.log('Connection Failed - Stay not sent');
@@ -125,6 +130,7 @@ function sendContinue() {
   var continueRequest = new XMLHttpRequest();
   continueRequest.open( "POST", 'http://' + serverIP + '/games/'+window.gameID+'/continue.json', true );
   continueRequest.setRequestHeader('X-auth-code', window.clientAuth);
+  continueRequest.setRequestHeader('Cache-Control', "no-cache");
 
   continueRequest.onerror = function() {
     console.log('Connection Failed - Continue not sent');
@@ -138,6 +144,7 @@ function updateGame() {
   var updateRequest = new XMLHttpRequest();
   updateRequest.open("GET", 'http://' + serverIP + '/games/'+window.gameID+'/state.json', true );
   updateRequest.setRequestHeader('X-auth-code', window.clientAuth);
+  updateRequest.setRequestHeader('Cache-Control', "no-cache");
 
   updateRequest.onload = function() {
     poll();
