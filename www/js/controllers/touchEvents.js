@@ -15,9 +15,9 @@ function TouchHandler() {
     var endY = touchData.global.y;
     var dist = Math.abs(endX-this.startX);
     var tot21 = 0;
-    if (dist < 10) { //Player Hit
+    if (dist < 10) { //Player tapped (hit)
       sendHit();
-    } else if (dist > 60) { // Player Stayed
+    } else if (dist > 60) { // Player swiped (stayed)
       sendStay();
     }
   }
