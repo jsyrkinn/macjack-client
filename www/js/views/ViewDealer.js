@@ -41,12 +41,12 @@ function ViewDealer(x,y,dealerHand) {
   }
 
   this.renderDealerSum = function() {
-      sumText = new PIXI.Text(this.pile.sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+      var sumText = new PIXI.Text(this.pile.sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
       positionAndAddText(sumText, this.container, 80, 77);
   }
 
   this.renderDealerName = function() {
-      nameText = new PIXI.Text("DEALER", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+      var nameText = new PIXI.Text("DEALER", {font:"20px 'Poiret One'", fill:"#f3f3f3"});
       positionAndAddText(nameText, this.container, 28, -73);
   }
 }

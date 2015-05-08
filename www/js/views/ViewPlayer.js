@@ -34,7 +34,7 @@ function ViewPlayer(x,y, player) {
   }
 
   this.renderPlayerSum = function() {
-    sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
+    var sumText = new PIXI.Text(this.piles[0].sumTotal(), {font:"20px 'Poiret One'", fill:"#f3f3f3"});
     positionAndAddText(sumText, this.container, 52, 77);
   }
 

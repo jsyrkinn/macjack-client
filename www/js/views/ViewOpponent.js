@@ -23,16 +23,12 @@ function ViewOpponent(opponent, x, y, scaleX, scaleY) {
     this.container.addChild(cardSpritesContainer);
 
     var cards = this.piles[0].cards;
-
     for (var i = 0; i < cards.length; i++) {
       var cardSprite = new CardSprite(cards[i], cardSpritesContainer);
-
       var offset = (((cards.length-1)*50)+cardSprite.sprite.width)/2;
 
       cardSprite.sprite.scale = {x: scaleX, y: scaleY};
-
       cardSprite.sprite.anchor = {x: 0, y: 0.5}
-
       cardSprite.sprite.position.x = (i*50)-offset;
       cardSprite.sprite.position.y = 0;
 
