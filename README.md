@@ -31,7 +31,6 @@ In order to run the app, follow these instructions:
 
 Optional step:
 
-If you would like run and test the app on your own server follow this additional step. Otherwise proceed to step 3: 
-Open macjack-client/www/js/controllers/serverPoll.js. Change the first line of the code to reflect your current IP       
+If you would like run and test the app on your own server, change the first line of the code in serverpoll.js to reflect your current IP       
 address. For instance, if your IP address is “141.140.159.23:3000”, then the first line should read 
-    var serverIP = "141.140.159.23";
+        var serverIP = "141.140.159.23";
