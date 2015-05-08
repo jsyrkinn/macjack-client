@@ -20,14 +20,6 @@ In order to run the app, follow these instructions:
 1. The client repositories can be found at https://github.com/jsyrkinn/macjack-client. Check out and pull this code.
    Be sure you have downloaded the phonegap mobile app and install phonegap onto your desktop (links and directions above).
 
----Optional---
-
-If you would like run and test the app on your own server follow this additional step. Otherwise proceed to step 3: 
-Open macjack-client/www/js/controllers/serverPoll.js. Change the first line of the code to reflect your current IP       
-address. For instance, if your IP address is “141.140.159.23:3000”, then the first line should read 
-    var serverIP = "141.140.159.23";
---------------
-
 2. Open a terminal window and navigate to the macjack-client folder. Run the client by typing ‘phonegap serve’
 
 3. Open another terminal window and navigate to the macjack-server folder. Run the server by typing ‘node server.js’ (Be sure to    follow the server README instructions as well).
@@ -37,4 +29,9 @@ address. For instance, if your IP address is “141.140.159.23:3000”, then the
 
 5. The app will now be running. Enjoy!
 
+Optional step:
 
+If you would like run and test the app on your own server follow this additional step. Otherwise proceed to step 3: 
+Open macjack-client/www/js/controllers/serverPoll.js. Change the first line of the code to reflect your current IP       
+address. For instance, if your IP address is “141.140.159.23:3000”, then the first line should read 
+    var serverIP = "141.140.159.23";
