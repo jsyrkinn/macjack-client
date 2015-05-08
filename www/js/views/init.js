@@ -37,7 +37,7 @@ function makeNewViewOpponent(opponent, x, y, scaleX, scaleY) {
   viewOpponent.renderOpponentSum();
 
   if (opponent.isCurrentPlayer){
-  viewOpponent.renderCurrentPlayerSignal();
+    viewOpponent.renderCurrentPlayerSignal();
   }
 
   return viewOpponent
@@ -57,8 +57,7 @@ function makeNewViewDealer(dealerHand, x, y) {
 
 function addTouchHandlerToStage() {
   if (window.touchHandler) {
-    if (window.stage.children.indexOf(window.touchHandler.touchHandler) < 0) {
-      // touchHandler was removed, add it back...
+    if (window.stage.children.indexOf(window.touchHandler.touchHandler) < 0) {  
       window.stage.addChild(window.touchHandler.touchHandler);
     }
   } else {
@@ -91,8 +90,7 @@ function createGameStateView(modelGameState) {
     } else {
       makeBetScreen(modelGameState);
     }
-  } else {
-    //betting is finished
+  } else {  //betting is finished
     window.betGoing = false;
     stopSpinner();
 
@@ -112,16 +110,11 @@ function createGameStateView(modelGameState) {
     var player = modelGameState.player;
     makeNewViewPlayer(player, window.innerWidth/2, window.innerHeight-125);
 
-
-
-
-    //TODO: Add dark pop up box around these buttons and text
-    if (modelGameState.finished) {
+    if (modelGameState.finished) { 
       stage.addChild(rectangle(0, window.innerHeight/2.9, 1000, 180, 0x42494E, 0x42494E, 10));
       newRoundText = new PIXI.Text("End of round. \n Would you like to play again?", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
       positionAndAddText(newRoundText, window.stage, window.innerWidth/2, window.innerHeight/2.5)
 
-      // leave game button
       addButton(
         {   scale: {x:0.8, y:0.8},
            anchor: {x:0.0, y:0.0},
@@ -132,7 +125,6 @@ function createGameStateView(modelGameState) {
         }
       );
 
-      // add continue button
       addButton(
         {  position: {x:window.innerWidth/2, y:window.innerHeight/2}  },
         "img/buttons/newRound.png",
