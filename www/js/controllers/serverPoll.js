@@ -1,9 +1,9 @@
-var serverIP = "141.140.159.23";
+var serverIP = "nodejs-jammf.rhcloud.com:80";
 
 function getClientAuth(name) {
     console.log("clientAuth not set, requesting from server...")
     var signupRequest = new XMLHttpRequest();
-    signupRequest.open( "POST", 'http://' + serverIP + ':1337/signup.json?name='+name, true );
+    signupRequest.open( "POST", 'http://' + serverIP + '/signup.json?name='+name, true );
 
     signupRequest.onload = function() {
       stopSpinner();
@@ -27,7 +27,7 @@ function getClientAuth(name) {
 
 function setupNewGame() {
   var newgameRequest = new XMLHttpRequest();
-  newgameRequest.open( "POST", 'http://' + serverIP + ':1337/games/newgame.json', true );
+  newgameRequest.open( "POST", 'http://' + serverIP + '/games/newgame.json', true );
   newgameRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   newgameRequest.onload = function() {
@@ -53,7 +53,7 @@ function setupNewGame() {
 
 function sendJoinGame(gameID) {
   var joinGameRequest = new XMLHttpRequest();
-  joinGameRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+gameID+'/join.json', true );
+  joinGameRequest.open( "POST", 'http://' + serverIP + '/games/'+gameID+'/join.json', true );
   joinGameRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   joinGameRequest.onload = function() {
@@ -78,7 +78,7 @@ function sendJoinGame(gameID) {
 function sendBet(amount) {
   window.betGoing = true;
   var betRequest = new XMLHttpRequest();
-  betRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/bet.json?amount='+amount, true );
+  betRequest.open( "POST", 'http://' + serverIP + '/games/'+window.gameID+'/bet.json?amount='+amount, true );
   betRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   betRequest.onload = function() {
@@ -99,7 +99,7 @@ function sendBet(amount) {
 
 function sendHit() {
   var hitRequest = new XMLHttpRequest();
-  hitRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/hit.json', true );
+  hitRequest.open( "POST", 'http://' + serverIP + '/games/'+window.gameID+'/hit.json', true );
   hitRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   hitRequest.onerror = function() {
@@ -111,7 +111,7 @@ function sendHit() {
 
 function sendStay() {
   var hitRequest = new XMLHttpRequest();
-  hitRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/stay.json', true );
+  hitRequest.open( "POST", 'http://' + serverIP + '/games/'+window.gameID+'/stay.json', true );
   hitRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   hitRequest.onerror = function() {
@@ -122,7 +122,7 @@ function sendStay() {
 
 function sendContinue() {
   var continueRequest = new XMLHttpRequest();
-  continueRequest.open( "POST", 'http://' + serverIP + ':1337/games/'+window.gameID+'/continue.json', true );
+  continueRequest.open( "POST", 'http://' + serverIP + '/games/'+window.gameID+'/continue.json', true );
   continueRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   continueRequest.onerror = function() {
@@ -135,7 +135,7 @@ var gameState = {movenumber: -1};
 
 function updateGame() {
   var updateRequest = new XMLHttpRequest();
-  updateRequest.open("GET", 'http://' + serverIP + ':1337/games/'+window.gameID+'/state.json', true );
+  updateRequest.open("GET", 'http://' + serverIP + '/games/'+window.gameID+'/state.json', true );
   updateRequest.setRequestHeader('X-auth-code', window.clientAuth);
 
   updateRequest.onload = function() {
