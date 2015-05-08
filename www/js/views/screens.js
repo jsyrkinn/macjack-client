@@ -150,7 +150,7 @@ function makeGameIdScreen() {
   positionAndAddText(gameIDInstructions, window.stage, window.innerWidth/2, window.innerHeight/3);
 
   var gameIDText = new PIXI.Text(window.gameID, {font:"100px 'Poiret One'", fill:"#f3f3f3"});
-  positionAndAddText(gameIDText, window.stage, window.innerWidth/2, window.innerHeight/2);
+  positionAndAddText(gameIDText, window.stage, window.innerWidth/2, window.innerHeight/2.1);
 
   addButton(
     {  position: {x:window.innerWidth/2, y:window.innerHeight*0.75}  },
