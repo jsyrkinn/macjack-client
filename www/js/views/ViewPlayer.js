@@ -2,19 +2,12 @@ function ViewPlayer(x,y, player) {
 
   this.playerName = player.playerName;
   this.money = player.money;
-  this.piles = [];
-
-  viewPlayer = this;
+  this.piles = player.piles;
 
   this.container = new PIXI.DisplayObjectContainer();
   this.container.pivot = {x: 0.5, y: 0.5};
   this.container.position = {x: x, y: y};
   window.stage.addChild(this.container);
-
-  player.hands.forEach(function(hand) {
-    cardPile = new CardPile(hand)
-    viewPlayer.piles.push(cardPile);
-  });
 
   this.renderPile = function() {
     var cardSpritesContainer = new PIXI.DisplayObjectContainer();

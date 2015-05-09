@@ -2,19 +2,12 @@ function ViewOpponent(opponent, x, y, scaleX, scaleY) {
 
   this.playerName = opponent.playerName;
   this.money = opponent.money;
-  this.piles = [];
-
-  viewOpponent = this;
+  this.piles = opponent.piles;
 
   this.container = new PIXI.DisplayObjectContainer();
   this.container.pivot = {x: 0.5, y: 0.5};
   this.container.position = {x: x, y: y};
   window.stage.addChild(this.container);
-
-  opponent.hands.forEach(function(hand) {
-    cardPile = new CardPile(hand, window.stage);
-    viewOpponent.piles.push(cardPile);
-  });
 
   this.renderPile = function() {
     var cardSpritesContainer = new PIXI.DisplayObjectContainer();

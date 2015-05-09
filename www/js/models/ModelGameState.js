@@ -8,6 +8,12 @@ function ModelGameState(gameState) {
   gameState.players[gameState.currentPlayer].isCurrentPlayer = true;
 
   gameState.players.forEach(function(player) {
+    player.piles = [];
+    player.hands.forEach(function(hand) {
+      cardPile = new CardPile(hand);
+      player.piles.push(cardPile);
+    });
+
     if (player.playerID == window.clientID) {
       model.player = player;
     } else {
