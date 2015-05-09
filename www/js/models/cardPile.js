@@ -11,7 +11,7 @@ function CardPile(hand) {
     this.cards.forEach(function(card) {
       for (var i=totals.length-1; i >= 0; i--) {
         if (card.rank == 1) { //Card is an ace.
-          if (totals.indexOf(totals[i]+1) == -1) { //The new total is not in the totals arrray.
+          if (totals.indexOf(totals[i]+1) == -1) { //The new total is not in the totals array.
             totals.push(totals[i] + 1);
           }
           totals[i] += 11;
