@@ -1,16 +1,3 @@
-// create an new instance of a pixi stage
-var interactive = true
-window.stage = new PIXI.Stage(0x5F6870, interactive);
-
-// create a renderer instance.
-var renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, {resolution:2});
-
-// add the renderer view element to the DOM
-document.body.appendChild(renderer.view);
-
-checkHomeScreen();
-
-
 function makeNewViewPlayer(player, x, y) {
   viewPlayer = new ViewPlayer(x, y, player);
 
@@ -24,9 +11,8 @@ function makeNewViewPlayer(player, x, y) {
     viewPlayer.renderCurrentPlayerSignal();
   }
 
-  return viewPlayer
+  return viewPlayer;
 }
-
 
 function makeNewViewOpponent(opponent, x, y, scaleX, scaleY) {
   viewOpponent = new ViewOpponent(opponent, x, y, scaleX, scaleY);
@@ -40,9 +26,8 @@ function makeNewViewOpponent(opponent, x, y, scaleX, scaleY) {
     viewOpponent.renderCurrentPlayerSignal();
   }
 
-  return viewOpponent
+  return viewOpponent;
 }
-
 
 function makeNewViewDealer(dealerHand, x, y) {
   viewDealer = new ViewDealer(x, y, dealerHand);
@@ -51,13 +36,12 @@ function makeNewViewDealer(dealerHand, x, y) {
   viewDealer.renderDealerSum();
   viewDealer.renderDealerName();
 
-  return viewDealer
+  return viewDealer;
 }
-
 
 function addTouchHandlerToStage() {
   if (window.touchHandler) {
-    if (window.stage.children.indexOf(window.touchHandler.touchHandler) < 0) {  
+    if (window.stage.children.indexOf(window.touchHandler.touchHandler) < 0) {
       window.stage.addChild(window.touchHandler.touchHandler);
     }
   } else {
@@ -95,7 +79,7 @@ function createGameStateView(modelGameState) {
     stopSpinner();
 
     if (window.textBox) { //bet textbox already exists
-      window.textBox.parentNode.remove(); 
+      window.textBox.parentNode.remove();
       window.textBox = null;
     }
 
@@ -110,7 +94,7 @@ function createGameStateView(modelGameState) {
     var player = modelGameState.player;
     makeNewViewPlayer(player, window.innerWidth/2, window.innerHeight-125);
 
-    if (modelGameState.finished) { 
+    if (modelGameState.finished) {
       stage.addChild(rectangle(0, window.innerHeight/2.9, 1000, 180, 0x42494E, 0x42494E, 10));
       newRoundText = new PIXI.Text("End of round. \n Would you like to play again?", {font:"20px 'Poiret One'", fill:"#f3f3f3", align: "center"});
       positionAndAddText(newRoundText, window.stage, window.innerWidth/2, window.innerHeight/2.5)
@@ -138,44 +122,3 @@ function createGameStateView(modelGameState) {
     }
   }
 };
-
-function stopSpinner() {
-  window.showSpinner = false;
-  window.spinners.forEach(function(spinner) {
-    window.stage.removeChild(spinner);
-  });
-}
-
-function startSpinner() {
-  window.showSpinner = true;
-  window.spinners.forEach(function(spinner) {
-    window.stage.addChild(spinner);
-  });
-}
-
-window.spinners = [];
-var numSpinners = 5;
-
-for (i = 0; i < numSpinners; i++) {
-  var spinner = new PIXI.Sprite.fromImage("img/buttons/exitButtonBlue.png");
-  spinner.position = {x: window.innerWidth/2, y: window.innerHeight/2};
-  spinner.anchor = {x: 0.5, y: 0.5};
-  spinner.scale = {x: 0.5, y:0.5};
-  window.spinners.push(spinner);
-}
-
-requestAnimFrame( animate );
-
-function animate() {
-  requestAnimFrame( animate );
-
-  if (window.showSpinner) {
-    for (i = 0; i < window.spinners.length; i++) {
-      window.spinners[i].rotation += 0.009*i+0.01;
-    }
-    if (window.stage.children.indexOf(window.spinners[0]) < 0) {
-      stopSpinner();
-    }
-  }
-  renderer.render(window.stage);
-}
