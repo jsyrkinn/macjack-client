@@ -118,20 +118,20 @@ function makeReturningHomeScreen() {
     }
   );
 
-  // Delete LocalStorage Button -- FOR DEBUGGING AND TESTING SIGN UP/AUTH FUNCTIONALITY
-//   addButton(
-//     {   scale: {x:0.4, y:0.4},
-//       anchor: {x:0.0, y:0.0},
-//     position: {x:10, y:20}  },
-//     "img/buttons/back.png",
-//     function(touchData){
-//       console.log("Delete LocalStorage!");
-//       window.localStorage.removeItem('clientAuth');
-//       window.localStorage.removeItem('clientID');
-//       window.localStorage.removeItem('gameID');
-//       checkHomeScreen();
-//     }
-//   );
+  // Delete LocalStorage Button -- Allows a user to navigate back to the sign up screen
+  addButton(
+    {   scale: {x:0.4, y:0.4},
+      anchor: {x:0.0, y:0.0},
+    position: {x:10, y:20}  },
+    "img/buttons/back.png",
+    function(touchData){
+      console.log("Delete LocalStorage!");
+      window.localStorage.removeItem('clientAuth');
+      window.localStorage.removeItem('clientID');
+      window.localStorage.removeItem('gameID');
+      checkHomeScreen();
+    }
+  );
 }
 
 //---- GAME ID DISPLAY ----//
