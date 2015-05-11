@@ -2,7 +2,7 @@
 
 ***Introduction***
 
-Welcome! MacJack is a Macalester College-themed blackjack game. This app provides a way for people to play a game of blackjack together without having an actual deck of cards. There is a virtual dealer for users to play against and has room for up to 3 players. 
+Welcome! MacJack is a Macalester College-themed blackjack game. This app provides a way for people to play a game of blackjack together without having an actual deck of cards. There is a virtual dealer for users to play against and has room for up to 3 players.
 
 ***Requirements and Installation***
 
@@ -10,8 +10,8 @@ This app requires cordova phonegap, node, and the phonegap app in order to run.
 
 1. Phonegap desktop and mobile apps
   - Follow the instructions for installation here: (http://phonegap.com/install/, http://app.phonegap.com/)
-2. Node 
-  - Follow the instructions for installation here: (https://nodejs.org/download/) 
+2. Node
+  - Follow the instructions for installation here: (https://nodejs.org/download/)
 
 ***Configuration***
 
@@ -31,6 +31,7 @@ In order to run the app, follow these instructions:
 
 Optional step:
 
-If you would like run and test the app on your own server, change the first line of the code in serverpoll.js to reflect your current IP       
-address. For instance, if your IP address is “141.140.159.23:3000”, then the first line should read 
-        var serverIP = "141.140.159.23";
+If you would like run and test the app on your own server, change the first line of the code in serverpoll.js to reflect your current IP
+address. For instance, if your IP address is “141.140.159.23:3000”, then the first line should read
+        var serverIP = "141.140.159.23:80";
+        for port 80.
